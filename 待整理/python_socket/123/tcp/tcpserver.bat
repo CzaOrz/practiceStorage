@@ -1,3 +1,0 @@
-python tcpserver.py
-
-pause

@@ -1,3 +1,0 @@
-python client.py
-
-pause

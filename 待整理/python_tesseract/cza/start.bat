@@ -1,3 +1,0 @@
-python FirstPrediction.py
-
-pause

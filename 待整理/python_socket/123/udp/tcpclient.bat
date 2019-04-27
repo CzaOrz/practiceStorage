@@ -1,3 +1,0 @@
-python tcpclient.py
-
-pause
