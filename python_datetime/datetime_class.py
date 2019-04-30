@@ -1,48 +1,51 @@
 import re
 import datetime
 
-min_t = [1970, 1, 1, 0, 0, 0]
-max_t = [2100, 12, 31, 23, 59, 59]
+MIN_T = [1970, 1, 1, 0, 0, 0]
+MAX_T = [2100, 12, 31, 23, 59, 59]
 
 
 class TimeManager(object):
-    _now = datetime.datetime.now()
-    _timestamp = _now.timestamp()
-    _time = None
-
-    def __init__(self, _datetime=None):
-        self._time = _datetime
+    def __init__(self, data=None):
+        if isinstance(data, datetime.datetime):
+            self._string = self.time2str(data)
+        elif isinstance(data, str):
+            self._datetime = self.str2time(data)
+        else:
+            raise Exception("input error!")
 
     @classmethod
-    def from_time(cls, _datetime):
-        return cls(_datetime)
+    def from_str(cls, string):
+        cls._string = string
+        return cls(string)
 
-    @property
-    def now(self):
-        return self._now
-
-    @now.setter
-    def now(self, now_time):
-        self._now = now_time
-
-    @property
-    def timestamp(self):
-        return self._timestamp
-
-    @timestamp.setter
-    def timestamp(self, _timestamp):
-        self._timestamp = _timestamp
+    @classmethod
+    def from_time(cls, datetime):
+        cls._datetime = datetime
+        return cls(datetime)
 
     @property
     def time(self):
-        return self._time
+        return self._datetime
 
     @time.setter
     def time(self, _time):
-        self._time = _time
+        self._time = _datetime
 
-    def time2str(self, _datetime):
-        return datetime.datetime.strftime(_datetime, "%Y-%m-%d %h:%m:%s")
+    @property
+    def string(self):
+        return self._string
+
+    @string.setter
+    def string(self, _string):
+        self._string = _string
+
+    def _time2str(self, _datetime=None):
+        return datetime.datetime.strftime(_datetime, "%Y-%m-%d %H:%M:%S.%f")
+
+    def time2str(self, _datetime=None):
+        _datetime = _datetime if _datetime else self._datetime
+        return self._time2str(_datetime)
 
     def _str2time(self, string=None, format=None, **kwargs):
         res = None
@@ -60,28 +63,34 @@ class TimeManager(object):
             res = self._str2time(string, '%Y%m%d')
         else:
             reRule = """(\d{4}|\d{2})[^\d]*(\d*)[^\d]*(\d*)[^\d]*(\d*)[^\d]*(\d*)[^\d]*(\d*)"""
-            ts = re.search(reRule, string)
-            res = min_t[:]
+            timeGroup = re.search(reRule, string)
+            res = MIN_T[:]
             for i in range(6):
-                g = ts.group(i + 1)
-                if g:
-                    g = '20' + g if i == 0 and len(g) == 2 else g
-                    t = int(g)
-                    if t > max_t[i] or t < min_t[i]:
+                groupValue = timeGroup.group(i + 1)
+                if groupValue:
+                    groupValue = '20' + groupValue if i == 0 and len(groupValue) == 2 else groupValue
+                    t = int(groupValue)
+                    if t > MAX_T[i] or t < MIN_T[i]:
                         break
                     res[i] = t
             res = self._str2time(args=res)
         return res
 
-    def add(self, _datetime, **kwargs):
-        return _datetime + datetime.timedelta(**kwargs)
+    def add(self, **kwargs):
+        self._datetime = self._datetime + datetime.timedelta(**kwargs)
+        return self
 
 
 if __name__ == "__main__":
-    print(TimeManager().str2time('2018-01-05'))
-    print(TimeManager().str2time('2018-01-05:12.10.50'))
-    print(TimeManager().str2time('18-01-05'))
-    print(TimeManager().str2time('20190429'))
-    print(TimeManager().str2time('today is 2019 and mon  4, the day 29'))
+    # create by string
+    TM = TimeManager.from_str('hello, cza 1995-09-17')
+    print('TMS', TM.string)
+    print('TMS', TM.time)
+    print('TMS', TM.time2str())
+    print('TMS', TM.add(days=1).add(hours=1).time)
+    # create by datetime.datetime
     now = datetime.datetime.now()
-    print(TimeManager.from_time(now).add(now, days=1))
+    TM = TimeManager.from_time(now)
+    print('TMT', TM.time)
+    print('TMT', TM.string)
+    print('TMT', TM.add(days=1).add(hours=1).time)
