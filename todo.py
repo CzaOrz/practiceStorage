@@ -33,6 +33,7 @@ __FILE__ = "Unfinished Schedule"
 2019.11.08 - https://zh.d2l.ai/chapter_preface/preface.html  学习好文
 2019.11.08 - https://github.com/apachecn/AiLearning  超级学习好文
 2019.11.12 - 用python手写队列、单向链表，双向链表，二叉树这些。可以作为数据结构那一栏
+2019.11.15 - https://www.jiqizhixin.com/articles/2018-10-17-20 好文
 """
 
 """DONE!
