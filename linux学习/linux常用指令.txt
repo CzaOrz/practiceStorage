@@ -1,0 +1,45 @@
+创建新用户：adduser xxxxx   >>> 就这么简单吗，whats???
+
+nohup ..待执行指令.. &   >  >> 这个是日志输出
+
+#由端口号port(8000)查看进程id
+netstat -anp |grep 8000
+netstat -tunlp|grep 8000
+lsof -i:8000.
+ps -aux | grep 8102
+
+ps:
+-t (tcp)仅显示tcp相关选项
+-u (udp)仅显示udp相关选项
+-n 拒绝显示别名，能显示数字的全部转化成数字
+-l 仅列出有Listen(监听)的服务状态
+-p 显示建立相关链接的程序名
+-a 列出所有的服务状态，默认是连接的
+"""
+#用于显示tcp，udp的端口和进程等相关情况
+netstat -tunlp
+#杀死指定进程根据pid(进程id)：
+kill pid
+#强制杀死指定进程根据pid(进程id)：
+kill -9 pid
+
+
+ssh-keygen -t rsa -C "972542655@qq.com"
+cat ~/.ssh/id_rsa.pub
+
+
+
+virtualenv py3env -p python3
+source py3env/bin/activate
+deactivate
+
+cd /etc/rsyslog.d
+sudo vi 50-default.conf  -- 修改配置cron的日志
+sudo service rsyslog restart
+sudo service cron restart
+
+sudo apt-get install postfix
+sudo service postfix start
+sudo service postfix stop  -- 邮件模块
+
+cd /va/mail  查看邮件

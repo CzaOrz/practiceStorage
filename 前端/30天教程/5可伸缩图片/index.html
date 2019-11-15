@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>day five</title>
+  <style>
+html {
+  box-sizing: border-box;
+  background: #ffc600;
+  font-family:'helvetica neue';
+  font-size: 20px;
+  font-weight: 200;
+}
+body {
+  margin: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.panels {
+  min-height:100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.panel {
+  background:#6B0F9C;
+  box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
+  color:white;
+  text-align: center;
+  align-items:center;
+  /* Safari transitionend event.propertyName === flex */
+  /* Chrome + FF transitionend event.propertyName === flex-grow */
+  transition:
+    font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+    flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+    background 0.2s;
+  font-size: 20px;
+  background-size:cover;
+  background-position:center;
+  flex: 1;  /* 规定图片为原本尺寸大小 */
+  justify-content: center;  /* 这些都是一些对齐方式 */
+  display: flex;
+  flex-direction: column;  /* 纵向对齐 */
+}
+
+
+.panel1 { background-image:url(./img/1.jpg); }
+.panel2 { background-image:url(./img/2.jpg); }
+.panel3 { background-image:url(./img/3.jpg); }
+.panel4 { background-image:url(./img/4.jpg); }
+.panel5 { background-image:url(./img/5.jpg); }
+
+/* Flex Items */
+.panel > * {
+  margin:0;
+  width: 100%;
+  transition:transform 0.5s;   /* 这个似乎值关系到上下文字的出现 */
+  flex: 1 0 auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 从这开始，就是要定义一些可以执行的动作了 */
+.panel > *:first-child { transform: translateY(-100%); }
+.panel.open-active > *:first-child { transform: translateY(0); }
+.panel > *:last-child { transform: translateY(100%); }
+.panel.open-active > *:last-child { transform: translateY(0); }
+
+.panel p {
+  text-transform: uppercase;  /* 全部大写 */
+  font-family: 'Amatic SC', cursive;
+  text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+  font-size: 1em;
+}
+.panel p:nth-child(2) {
+  font-size: 3em;  /* 这两个数据都输初始化的时候的状态把 */
+}
+/* 这个是定义的动画之后的终点属性 */
+.panel.open {
+  flex: 5;  /* 果然，这个元素就是控制着图片的大小，可以按照某种比例进行放缩，不错 */
+  font-size:30px;  /* 中间那个字，点击之后会变大 */
+}
+
+</style>
+</head>
+
+<body>
+<div class="panels">
+    <div class="panel panel1">
+      <p>Hey</p>
+      <p>Let's</p>
+      <p>Dance</p>
+    </div>
+    <div class="panel panel2">
+      <p>Give</p>
+      <p>Take</p>
+      <p>Receive</p>
+    </div>
+    <div class="panel panel3">
+      <p>Experience</p>
+      <p>It</p>
+      <p>Today</p>
+    </div>
+    <div class="panel panel4">
+      <p>Give</p>
+      <p>All</p>
+      <p>You can</p>
+    </div>
+    <div class="panel panel5">
+      <p>Life</p>
+      <p>In</p>
+      <p>Motion</p>
+    </div>
+</div>
+
+
+<script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen() {
+        console.log('Hello');  // 点击一次会触发
+        this.classList.toggle('open');  // 这句话的意思是会 toggle【切换】 class类型，也就是添加删除
+    }
+
+    function toggleActive(e) {
+        //console.log(e.propertyName);  // 顺序：font-size、flex-grow、transform两次
+        if (e.propertyName.includes('flex')) {
+            // console.log(e.propertyName);  // 实际上只会执行一个 flex-grow 属性
+            this.classList.toggle('open-active');
+        }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));  // 单击绑定 函数
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));  // 每次transition结束后会触发 相关函数
+</script>
+</body>
