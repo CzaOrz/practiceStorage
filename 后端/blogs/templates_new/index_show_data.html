@@ -1,0 +1,162 @@
+{% extends '_顶部_.html' %}
+
+
+{% block title %}show data{% endblock %}
+
+
+{% block base2_content %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="index-canvas1" style="height: 400px;"></div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="index-canvas2" style="height: 400px;"></div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td><div class="text-center" style="overflow: hidden;"><a href="/resume"><img class="img-responsive" src="/static/img/简介.jpg"></a></div></td>
+                <td><div class="text-center" style="overflow: hidden;"><a href="/blogs"><img class="img-responsive" src="/static/img/补给站.png"></a></div></td>
+                <td><div class="text-center" style="overflow: hidden;"><a href="/show/spider/data"><img class="img-responsive" src="/static/img/spider.png"></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="text-center" style="overflow: hidden;"><a href="/monitor"><img class="img-responsive" src="/static/img/ea1.png"></a></div></td>
+                <td><div class="text-center" style="overflow: hidden;"><a href="/color_choose"><img class="img-responsive" src="/static/img/ea2.png"></a></div></td>
+                <td><div class="text-center" style="overflow: hidden;"><a href="javascript:void(0)"><img class="img-responsive" src="/static/img/ea3.png"></a></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<style>
+img:hover {
+    transition: transform.4s ease-out;
+    transform: scale(1.2);
+}
+</style>
+<!--<div class="container-flow">-->
+    <!--<table class="table table-bordered">-->
+    <!--<tbody>-->
+        <!--<tr>-->
+            <!--<td><div class="text-center"><a href="/resume"><img src="/static/img/简介.jpg" style="width:240px; height: 120px;"></a></div></td>-->
+            <!--<td><div class="text-center"><a href="/blogs"><img src="/static/img/补给站.png" style="width:240px; height: 120px;"></a></div></td>-->
+            <!--<td><div class="text-center"><a href="/show/spider/data"><img src="/static/img/spider.png" style="width:240px; height: 120px;"></a></div></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td><div class="text-center"><a href="/monitor"><img src="/static/img/ea1.png" style="width:240px; height: 120px;"></a></div></td>-->
+            <!--<td><div class="text-center"><a href="javascript:void(0)"><img src="/static/img/ea2.png" style="width:240px; height: 120px;"></a></div></td>-->
+            <!--<td><div class="text-center"><a href="javascript:void(0)"><img src="/static/img/es3.png" style="width:240px; height: 120px;"></a></div></td>-->
+        <!--</tr>-->
+    <!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+{% endblock %}
+
+{% block base2_footer %}
+<style>
+    body {
+        background-color: #EEEEEE;
+    }
+</style>
+<script>
+var dom = document.getElementById("index-canvas1");
+var myChart1 = echarts.init(dom);
+myChart1.setOption({
+    title: {
+        text: '补给站'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    xAxis: {
+        type: 'category',
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [],
+        type: 'line'
+    }]
+});
+myChart1.showLoading();
+$.get('/api/get/blogs/statistic').done(function(data){
+    myChart1.hideLoading();
+    myChart1.setOption({
+        xAxis: {
+            data: data.times
+        },
+        series: [{
+            data: data.nums
+        }]
+    });
+})
+</script>
+<script>
+var dom = document.getElementById("index-canvas2");
+var myChart2 = echarts.init(dom);
+myChart2.setOption({
+    title: {
+        text: '在线爬虫'
+    },
+    legend: {
+        orient: 'horizontal',
+        x: 'right'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    xAxis: {
+        type: 'category',
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    dataZoom: [
+        {
+            show: true,
+            realtime: true,
+            start: 25,
+            end: 100
+        },
+        {
+            type: 'inside',
+            realtime: true,
+            start: 5,
+            end: 95
+        }
+    ],
+    series: [{
+        data: [],
+        type: 'line'
+    }]
+});
+myChart2.showLoading();
+ajax_data = [
+    {'housePrice': 'ziru'},
+    {'job': 'boss'},
+    {'zufang': 'fangtx'}
+];
+$.get('/api/get/multi/statistic', {
+    dbNames_and_collectionNames: JSON.stringify(ajax_data),
+    limit: 15
+}).done(function(data){
+    myChart2.hideLoading();
+    myChart2.setOption({
+        xAxis: {
+            data: data.times
+        },
+        series: [
+            data.nums[0],
+            data.nums[1],
+            data.nums[2]
+        ]
+    });
+})
+</script>
+{% endblock %}

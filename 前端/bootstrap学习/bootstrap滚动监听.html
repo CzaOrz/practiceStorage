@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>czaOrz</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+<!--滚动监听：需要流程 .nav -> ul -> li -> a，还有监控需要data-spy="scroll"属性-->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div data-spy="scroll" data-target="#TEST" style="position: relative;height: 300px;overflow: auto;">
+  <h3 id ="one">one</h3>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <p>oneoneoneoneone</p>
+  <h3 id ="two">two</h3>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <p>twotwotwotwotwo</p>
+  <h3 id ="three">three</h3>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+  <p>threethreethree</p>
+</div>
+        </div>
+        <div class="col-xs-3">
+            <div id="TEST" style="position: fixed; top: 50%; transform: translateY(-50%);">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#one">one</a></li>
+                    <li><a href="#two">two</a></li>
+                    <li><a href="#three">three</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

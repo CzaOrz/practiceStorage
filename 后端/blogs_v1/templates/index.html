@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>czaOrz</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/public.css" />
+<style>
+    /* 上半部分 */
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    body {
+        position: relative;
+        overflow: hidden;
+        background: #F5F5F5;
+        padding-top: 50px;
+        padding-bottom: 70px;
+        overflow-x:hidden;
+    }
+    .top-hidden {
+         -webkit-animation: topHidden .6s ease both;
+         -moz-animation: topHidden .6s ease both;
+        animation: topHidden .6s ease both;
+    }
+    .bottom-show {
+         -webkit-animation: bottomShow .6s ease both;
+         -moz-animation: bottomShow .6s ease both;
+        animation: bottomShow .6s ease both;
+    }
+    .index-top-container {
+        position: absolute;
+        width: 100%;
+    }
+    .index-top {
+        font-family: 'helvetica neue';
+        font-size: 20px;
+        font-weight: 200;
+        overflow: hidden;
+        visibility: visible;
+    }
+    .top-panels {
+        min-height: 100vh;
+        display: flex;
+    }
+    .panel {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color:white;
+        margin-bottom: 0;
+        background-size: cover;
+        background-position: center;
+        box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
+        transition:
+            font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+            flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+            background 0.2s;
+    }
+    .panel > * {
+        display: flex;
+        flex: 1 0 auto;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        transition: transform 0.5s;
+    }
+    .panel p {
+        text-transform: uppercase;
+        font-family: 'Amatic SC', cursive;
+        text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+        font-size: 1em;
+    }
+    .panel.open {
+        flex: 3;
+        font-size: 30px;
+    }
+    .panel a:link { color: white; cursor:pointer; }
+    .panel a:visited { color: white; }
+    .panel > *:last-child:hover { color: black; text-decoration: none; }
+    .panel > *:nth-child(1) { font-size: 20px; }
+    .panel > *:nth-child(3) { font-size: 20px; }
+    .panel > *:first-child { transform: translateY(-150%); }
+    .panel > *:last-child  { transform: translateY(150%); }
+    .panel.open-active > *:first-child { transform: translateY(0); }
+    .panel.open-active > *:last-child  { transform: translateY(0); }
+    .panel1 { background: linear-gradient(#F8BBD0, #C5CAE9); }
+    .panel2 { background: linear-gradient(#FFF9C4, #C5CAE9); }
+    .panel3 { background: linear-gradient(#E1BEE7, #C5CAE9); }
+    .panel4 { background: linear-gradient(#B2DFDB, #C5CAE9); }
+    .panel5 { background: linear-gradient(#BCAAA4, #C5CAE9); }
+    /* 下半部分 */
+    .index-bottom {
+        position: absolute;
+        width: 100%;
+        visibility: hidden;
+        padding-top: 10px;
+        display: none;
+    }
+    .canvas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .canvas-container > * {
+        background: white;
+        height: 300px;
+        width: 800px;
+        /*margin: 10px;
+        padding: 10px;*/
+    }
+    @-webkit-keyframes topHidden {
+        from { -webkit-transform: translateY(0); }
+        to { -webkit-transform: translateY(-100%); }
+    }
+    @-moz-keyframes topHidden {
+        from { -webkit-transform: translateY(0); }
+        to { -webkit-transform: translateY(-100%); }
+    }
+    @keyframes topHidden {
+        from { -webkit-transform: translateY(0); }
+        to { -webkit-transform: translateY(-100%); }
+    }
+    @-webkit-keyframes bottomShow {
+        from { transform: translateY(100%); }
+        to { -webkit-transform: translateY(0); }
+    }
+    @-moz-keyframes bottomShow {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+    }
+    @keyframes bottomShow {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+    }
+    .canvas-container > * { border-radius: 10px; }
+</style>
+</head>
+<body>
+{% include '_config/顶部导航栏.html' %}
+<div class="container-fluid" id="INDEX-CONTAINER">
+    <div class="row">
+        <div class="index-top-container">
+            <div class="index-top">
+                <div class="top-panels">
+                    <div class="panel panel1">
+                        <p>数据展示</p>
+                        <p class="panel-toggle">data</p>
+                        <a href="javascript:void(0)" @click="toBottom"><p>enter&nbsp;</p></a>
+                    </div>
+                    <div class="panel panel2">
+                        <p>爬虫</p>
+                        <p class="panel-toggle">spider</p>
+                        <a href="javascript:void(0)"><p>enter&nbsp;</p></a>
+                    </div>
+                    <div class="panel panel3">
+                        <p>博客</p>
+                        <p class="panel-toggle">blog</p>
+                        <a href="/blog/blogs"><p>enter&nbsp;</p></a>
+                    </div>
+                    <div class="panel panel4">
+                        <p>工具</p>
+                        <p class="panel-toggle">tools</p>
+                        <a href="javascript:void(0)"><p>enter&nbsp;</p></a>
+                    </div>
+                    <div class="panel panel5">
+                        <p>简介</p>
+                        <p class="panel-toggle">resume</p>
+                        <a href="javascript:void(0)"><p>enter&nbsp;</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="index-bottom">
+            <div class="canvas-container">
+                <div id="index-canvas4"></div><br>
+                <div id="index-canvas3"></div><br>
+                <div id="index-canvas2"></div><br>
+                <div id="index-canvas1"></div>
+            </div>
+            {% include '_config/底部导航栏.html' %}
+        </div>
+    </div>
+</div>
+<script src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js"></script>
+<script src="/static/js/public.js"></script>
+<script>
+    $(function(){
+        function toggleOpen() {
+            this.parentElement.classList.toggle('open');
+        }
+        function toggleOenActive(e) {
+            if (e.propertyName.includes('flex')) {
+                this.classList.toggle('open-active');
+            }
+        }
+        new Vue({
+            el: '#INDEX-CONTAINER',
+            mounted(){
+                const
+                    panels_toggle = document.querySelectorAll('.panel-toggle'),
+                    panels = document.querySelectorAll('.panel'),
+                    ajax_data_f = [
+                        {'housePrice': 'ziru'},
+                        {'job': 'boss'},
+                        {'zufang': 'fangtx'}
+                    ],
+                    ajax_data = {
+                        dbNames_and_collectionNames: JSON.stringify(ajax_data_f),
+                        limit: 15
+                    },
+                    dataZoom = [
+                        {
+                            show: true,
+                            realtime: true,
+                            start: 25,
+                            end: 100
+                        },
+                        {
+                            type: 'inside',
+                            realtime: true,
+                            start: 5,
+                            end: 95
+                        }
+                    ];
+                panels_toggle.forEach(panel => panel.addEventListener('click', toggleOpen));
+                panels.forEach(panel => panel.addEventListener('transitionend', toggleOenActive));
+                gotoTop('.container-fluid', 300);
+                this.drawCanvas('index-canvas1', '/api/get/blogs/statistic', {}, '补给站', []);
+                this.drawCanvas('index-canvas2', '/api/get/multi/statistic', ajax_data, '在线爬虫', dataZoom);
+                this.drawCanvas('index-canvas3', '/api/get/multi/statistic/github_info', {}, 'github-commits', []);
+                this.drawCanvas('index-canvas4', '/api/get/multi/statistic/github_info', {}, 'github-commits', []);
+            },
+            methods: {
+                drawCanvas: function(id, api, api_data, text, dataZoom) {
+                    const dom = document.getElementById(id);
+                    const myChart = echarts.init(dom);
+                    myChart.setOption({
+                        title: { text: text },
+                        tooltip: { trigger: 'axis' },
+                        xAxis: {
+                            type: 'category',
+                            data: []
+                        },
+                        yAxis: { type: 'value' },
+                        dataZoom: dataZoom,
+                        series: {
+                            data: [],
+                            type: 'line'
+                        }
+                    });
+                    myChart.showLoading();
+                    getJSON(api, api_data, function(data){
+                        myChart.hideLoading();
+                        myChart.setOption({
+                            xAxis: data.timeline,
+                            series: data.dataSet
+                        });
+                    })
+                },
+                toBottom: function(){
+                    var
+                        top_content_container = document.querySelector('.index-top-container'),
+                        top_content = document.querySelector('.index-top'),
+                        bottom_content = document.querySelector('.index-bottom');
+                    bottom_content.style.visibility = 'visible';
+                    bottom_content.style.display = 'block';
+                    top_content_container.classList.toggle('top-hidden');
+                    bottom_content.classList.toggle('bottom-show');
+                    function recoverBodyToAuto() { document.body.style.overflow = 'auto'; };
+                    bottom_content.addEventListener('animationend', recoverBodyToAuto);
+                }
+            }
+        })
+    })
+
+</script>
+</body>
+</html>
