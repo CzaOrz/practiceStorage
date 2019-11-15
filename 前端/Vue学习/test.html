@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>test for Vue</title>
+</head>
+<body>
+<div id="test"><input type="text" @keyup.esc="TestKeyUp"></div>
+<a class="navbar-brand" href="#" type="button" data-toggle="modal" data-target="#IOCO">IOCO</a>
+<div id="heihei">
+    <div class="modal fade" id="IOCO" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="TTTTT"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">IOCO</h4>
+                <h6>Institution Of Computer Organization</h6>
+            </div>
+            <div class="modal-body">
+                <div class="jumbotron">
+                    <div class="container">
+                        <p><strong>作者: </strong>czaOrz</p>
+                        <p><strong>邮箱: </strong>chenziangsg@163.com</p>
+                        <p><strong>联系方式: </strong>15607173521</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <ul class="pager" style="margin:-5px;">
+                    <li><a href="/">进入首页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $('#heihei').on('show.bs.modal', function () {
+        alert('hello')
+    })
+    test = new Vue({
+        el: '#IOCO',
+        methods: {
+            TestKeyUp: function() {
+                alert('hello world');
+            }
+        }
+    })
+</script>
+</body>
+</html>
