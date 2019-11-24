@@ -37,6 +37,7 @@ __FILE__ = "Unfinished Schedule"
 2019.11.19 - https://zh.d2l.ai/chapter_preface/preface.html 二次强调好文
 2019.11.21 - 小程序 这个确实非常重要啊，只是到底是个什么样的呢
 2019.11.24 - 微信小程序用的js写的，那么目前我需要的技术栈就是以python为主（爬虫、后端、算法），然后加上一个前端JS（html、css、微信小程序、网页游戏）
+2019.11.25 - 异步还是需要从concorrent开始学起。然后是asyncio的一些基本调度流程。然后再是tornado的异步执行流程
 """
 
 """DONE!
