@@ -1,4 +1,4 @@
-# -coding: utf-8 -
+# -*- coding: utf-8 -*-
 import cv2
 import pytesseract
 """
@@ -10,6 +10,7 @@ def _get_dynamic_binary_image(img_name):
     im = cv2.imread(img_name)
     im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     th1 = cv2.adaptiveThreshold(im, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 1)
+    cv2.imwrite('cza.jpg', th1)  # 保留原始初始值
     return th1
 
 #去除边框
@@ -22,9 +23,6 @@ def clear_border(img):
             if x < 2 or x > h - 2:
                 img[x, y] = 255
     return img,h,w
-
-
-
 # 干扰线降噪
 def interference_line(img,h,w):
     for y in range(1, w - 1):
@@ -41,7 +39,6 @@ def interference_line(img,h,w):
             if count > 2:
                 img[x, y] = 255
     return img
-
 #点降噪
 def interference_point(img,img_name):
     # todo 判断图片的长宽度下限
@@ -138,9 +135,23 @@ def interference_point(img,img_name):
                   img[x, y] = 0
     cv2.imwrite(filename, img)
     return img
-
 #字符的切割问题，涉及到算法，以后研究
-
+def test(img):
+    """
+    0    黑色
+    255  白色
+    """
+    h, w = img.shape
+    for y in range(1, w-1):
+        for x in range(1, h-1):
+            if not img[x, y] and not img[x, y-1] and not img[x, y+1] and not img[x-1, y] and not img[x+1, y]:
+                img[x, y] = img[x, y-1] = img[x, y+1] = img[x+1, y] = img[x-1, y] = 1
+                # img[x, y] = 1
+    for y in range(1, w-1):
+        for x in range(1, h-1):
+            if img[x, y] == 0:
+                img[x, y] = 255
+    cv2.imwrite('test1_img.jpg', img)  # 保留原始初始值
 
 
 def show(img):
@@ -151,18 +162,19 @@ def show(img):
 
 
 if __name__ == '__main__':
-    img = './856835.jpg'
-    im = _get_dynamic_binary_image(img)
-    Im, h, w = clear_border(im)
-    im =interference_line(Im, h, w)
-    IM = interference_point(im,img)
-    text = pytesseract.image_to_string(IM, lang='eng')
-    print(text, '?????')
-    image=show(im)
+    img = './722h4a.jpg'  # h47c2c 856835 722h4a
+    im = _get_dynamic_binary_image(img)  # 二值化
+    Im, h, w = clear_border(im)  # 去边框?
+    # im =interference_line(Im, h, w)  # 去直线?
+    # IM = interference_point(im,img)  # 去点?
+    # text = pytesseract.image_to_string(IM, lang='eng')
+    # print(text, '?????')
+    test(im)
+    # image=show(im)
 
     # from minitools.baidu.ocr import BaiDuOcr
     # aa = BaiDuOcr()
-    # with open('h47c2c.jpg', 'rb') as f:  # h47c2c 856835
+    # with open('test1_img.jpg', 'rb') as f:  # h47c2c 856835 test1_img
     #     print(aa.webImage2word(f.read()))
 
 
