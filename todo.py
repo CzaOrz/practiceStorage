@@ -224,7 +224,7 @@ js转化平台          http://tool.oschina.net/codeformat/js
 JS                  https://github.com/SUNNERCMS/30daysJavascript
 17素材网            https://www.17sucai.com/
 JS前端              https://github.com/phodal/sherlock
-
+查看下载量          https://pepy.tech/project/pywss
 """
 
 """不错的个人网站
