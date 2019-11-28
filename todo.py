@@ -43,6 +43,7 @@ __FILE__ = "Unfinished Schedule"
 2019.11.26 - 分布式爬虫的设计方式。首先考虑基于scrapy的问题
 2019.11.26 - Flask里面的全局对象怎么实现的，好屌啊
 2019.11.27 - 由 socketserver => http => werkzeug 一步一步的看，后端是如何实现的
+2049.11.29 - Flask是如何保证每一个线程对 线程本地数据 正确额push/pop的，所谓的stack...
 """
 
 """DONE!
