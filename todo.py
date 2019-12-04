@@ -237,6 +237,7 @@ JS前端              https://github.com/phodal/sherlock
 专注机器学习、爬虫        http://www.lining0806.com/
 爬虫写的很秀              https://github.com/FanhuaandLuomu
 Jack Cui                  https://cuijiahua.com/blog/ml/
+hongweipeng             https://www.hongweipeng.com/
 """
 
 """645948
