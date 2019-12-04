@@ -74,3 +74,12 @@ UPDATE students SET score = 59;
 --DELETE
 DELETE FROM students WHERE name = 'cza';
 DELETE FROM students;
+
+
+DROP database if EXISTS cza_test;
+CREATE database cza_test;
+use cza_test;
+CREATE TABLE students (
+    `test_datetime` DATETIME NOT NULL
+) engine=innodb default charset=utf8;
+
