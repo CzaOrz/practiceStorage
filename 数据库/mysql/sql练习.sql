@@ -1,19 +1,20 @@
 -- sql practice
 
 -- SELECT
--- FROM <left_table>
--- ON <join_condition>
+-- INSERT
+-- UPDATE
+-- DELETE
 -- WHERE <where_condition>
 -- GROUP BY <group_by_list>
 -- HAVING <having_condition>
---DISTINCT <select_list>
---ORDER BY <order_by_condition>
---LIMIT <limit_number>
+-- DISTINCT <select_list>
+-- ORDER BY <order_by_condition>
+-- LIMIT <limit_number> OFFSET <offset_number>
 
--- INNER JOIN只返回同时存在于两张表的行数据
--- RIGHT OUTER JOIN返回右表都存在的行
--- LEFT OUTER JOIN则返回左表都存在的行
--- FULL OUTER JOIN 它会把两张表的所有记录全部选择出来
+-- INNER JOIN 只返回同时存在于两张表的行数据
+-- RIGHT OUTER JOIN 返回右表都存在的行
+-- LEFT OUTER JOIN 返回左表都存在的行
+-- FULL OUTER JOIN 返回两张表的所有记录
 
 /* students
 id	class_id	name	gender	score
@@ -28,6 +29,7 @@ id	class_id	name	gender	score
 9	3	        小王	M	    89
 10	3	        小丽	F	    88
 */
+
 /* classes
 id	name
 1	一班
@@ -35,3 +37,10 @@ id	name
 3	三班
 4	四班
 */
+
+
+-- SELECT
+SELECT * FROM students;
+SELECT COUNT(*) sum FROM students;
+SELECT class_id std_id FROM students WHERE gender = 'M';
+SELECT * FROM students ORDER BY score DESC; -- ??? why not not work
