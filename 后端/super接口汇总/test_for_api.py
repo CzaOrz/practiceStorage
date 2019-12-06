@@ -37,6 +37,9 @@ def test15(): print(requests.get(f"{URL}15", cookies={'cza': 'cza-is-sg', 'orz':
 def test16(): print(requests.get(f"{URL}16", cookies={'cza': 'cza-is-sg', 'orz': 'cza-is-sg'}).status_code)
 
 
+def test17(): print(requests.options(f"{URL}17", cookies={'cza': 'cza-is-sg', 'orz': 'cza-is-sg'}).headers)
+
+
 if __name__ == '__main__':
     # test4()
     # test5()
@@ -46,5 +49,6 @@ if __name__ == '__main__':
     # test9()
     # test10()
     # test14()
-    test15()
+    # test15()
     # test16()
+    test17()

@@ -132,5 +132,16 @@ def api_16_before_request_1():
     return resp
 
 
+@app.route('/17', methods=['OPTIONS'])
+def api_17():
+    headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST'
+    }
+    return make_response((jsonify({'error_code': 0}), 200, headers))
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8888, debug=False)
