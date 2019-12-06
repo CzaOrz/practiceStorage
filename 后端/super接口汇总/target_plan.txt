@@ -14,6 +14,13 @@ GET/POST/OPTIONS/multi_path/args/form/json/cookie/session/return_404/return_temp
 10、POST请求 -> 返回404 无模板渲染
 11、POST请求 -> 返回404 附带指定重定向代码
 
-12、GET请求 -> 返回模板且渲染
+12、GET请求 -> 返回模板且渲染, 包括js/css等文件的加载
 13、GET请求 -> 重定向到目标网页模板且渲染
 
+14、POST请求 -> 上传某个附件, 指定名字可以直接保存
+
+15、session会话, 在不同请求之间存储信息
+
+16、中间件 -> 过滤没有携带cookie的请求, 返回404
+
+17、跨域请求OPTIONS
