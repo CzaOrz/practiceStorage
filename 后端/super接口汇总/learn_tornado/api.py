@@ -43,7 +43,7 @@ if __name__ == '__main__':
             (r"/01", API01),
             (r"/02/{0,1}([^/]*)?", API02),  # 似乎一不下心就被写成动态path了
             (r"/03", API03),
-            (r"/04", API04)
+            (r"/04", API04),
         ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
