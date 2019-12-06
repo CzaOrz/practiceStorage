@@ -50,6 +50,7 @@ __FILE__ = "Unfinished Schedule"
 2019.12.06 - 58同城的房价, 自如的房价, 就房价而言, 做一个回归预测分析模型, 我去, 那这个数据不得要近几个月的才行吗, 可以可以, 要尽快加入开发了, 不慌, 这个项目还是可以的
 2019.12.06 - 新闻分类的模型, 也可以写一个小项目
 2019.12.06 - 对于flask/django/tornado三种框架, 把所有可能用到的模式都写出来放在一个学习文件里, 最好还包括跨域请求怎么搞, 前端怎么发送, 然后文件怎么搞
+2019.12.06 - 接口汇总：GET/POST/OPTIONS/multi_path/args/form/json/cookie/session/return_404/return_template/template_drawing/return_json/return_str/redirect
 """
 
 """DONE!
