@@ -3,7 +3,7 @@ import requests
 URL = "http://127.0.0.1:8888/"
 
 
-def test4(): print(requests.post(f"{URL}04", data={'cz': 'cza'}).json())
+def test4(): print(requests.post(f"{URL}04", data={'cz': 'cza'}).text)
 
 
 def test5(): print(requests.post(f"{URL}05", json={'cz': 'cza'}).json())
@@ -41,7 +41,7 @@ def test17(): print(requests.options(f"{URL}17", cookies={'cza': 'cza-is-sg', 'o
 
 
 if __name__ == '__main__':
-    # test4()
+    test4()
     # test5()
     # test6()
     # test7()
@@ -51,4 +51,5 @@ if __name__ == '__main__':
     # test14()
     # test15()
     # test16()
-    test17()
+    # test17()
+
