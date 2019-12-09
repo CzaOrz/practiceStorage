@@ -24,5 +24,5 @@ if __name__ == '__main__':
     else:
         import subprocess
 
-        # subprocess.call(f"python {__file__} runserver 127.0.0.1:8888")
-        subprocess.call(f"python {__file__} shell")
+        subprocess.call(f"python {__file__} runserver 127.0.0.1:8888 --noreload")
+        # subprocess.call(f"python {__file__} shell")
