@@ -18,4 +18,10 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    if len(sys.argv) > 2:
+        main()
+    else:
+        import subprocess
+
+        subprocess.call(f"python {__file__} runserver 127.0.0.1:8888")
