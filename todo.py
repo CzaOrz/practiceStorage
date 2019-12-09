@@ -50,6 +50,7 @@ __FILE__ = "Unfinished Schedule"
 2019.12.06 - 对于flask/django/tornado三种框架, 把所有可能用到的模式都写出来放在一个学习文件里, 最好还包括跨域请求怎么搞, 前端怎么发送, 然后文件怎么搞
 2019.12.06 - 接口汇总：GET/POST/OPTIONS/multi_path/args/form/json/cookie/session/return_404/return_template/template_drawing/return_json/return_str/redirect
 2019.12.09 - tornado/flask流程走一遍就好
+2019.12.09 - Flask适用纯接口 django适用于简易页面 tornado就感觉都不太适用==
 """
 
 """DONE!
