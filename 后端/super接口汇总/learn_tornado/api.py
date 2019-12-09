@@ -92,6 +92,7 @@ class API14(tornado.web.RequestHandler):
                 f.write(file['body'])
 
 
+
 if __name__ == '__main__':
     define("host", default='127.0.0.1', help="run on the given host")
     define("port", default=8888, help="run on the given port", type=int)
@@ -114,6 +115,7 @@ if __name__ == '__main__':
             (r"/12", API12),
             (r"/13", API13),
             (r"/14", API14),
+            # (r"/15", API15),  # session 需要自己实现嘛...
         ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
