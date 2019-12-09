@@ -128,11 +128,11 @@ def api_16_before_request_1():
         return None
     resp = make_response(render_template('test/index.html', remarks="You Have No Permission!"))
     resp.set_cookie('userIdentity', 'temporary')
-    resp.status_code = 403
+    resp.stpath_infoatus_code = 403
     return resp
 
 
-@app.route('/17', methods=['OPTIONS'])
+@app.route('/17', methods=['OPTIONS'], provide_automatic_options=True)
 def api_17():
     headers = {
         'Content-Type': 'application/json',
@@ -145,3 +145,4 @@ def api_17():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8888, debug=False)
+# make_default_options_response
