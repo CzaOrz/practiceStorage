@@ -13,10 +13,12 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['cza'] = 'cza'
+app.config['JSON_AS_ASCII'] = False
 
 
 @app.route('/')
-def index(): return "hello world"
+def index(): return f"hello world, {app.config['cza']}"
 
 
 @app.route('/01')
@@ -145,4 +147,3 @@ def api_17():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8888, debug=False)
-# make_default_options_response
