@@ -51,6 +51,7 @@ __FILE__ = "Unfinished Schedule"
 2019.12.06 - 接口汇总：GET/POST/OPTIONS/multi_path/args/form/json/cookie/session/return_404/return_template/template_drawing/return_json/return_str/redirect
 2019.12.09 - tornado/flask流程走一遍就好
 2019.12.09 - Flask适用纯接口 django适用于简易页面 tornado就感觉都不太适用==
+2019.12.09 - Djnago和flask是一样的性质。django基于python原生库wsgiref，实现了一个WSGI应用，在服务启动后调用appHandler来处理请求-app只需要处理environ和start_response两个参数即可
 """
 
 """DONE!
