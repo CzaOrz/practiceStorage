@@ -3,16 +3,16 @@ import requests
 URL = "http://127.0.0.1:8888/"
 
 
-def test4(): print(requests.post(f"{URL}04", data={'cz': 'cza', 'cza': 'cza'}).text)
+def test4(): print(requests.post(f"{URL}04/", data={'cz': 'cza', 'cza': 'cza'}).text)
 
 
-def test5(): print(requests.post(f"{URL}05", json={'cz': 'cza'}).json())
+def test5(): print(requests.post(f"{URL}05/", json={'cz': 'cza'}).json())
 
 
-def test6(): print(requests.get(f"{URL}06", cookies={'cza': 'hei', 'man': 'are you ok'}).json())
+def test6(): print(requests.get(f"{URL}06/", cookies={'cza': 'hei', 'man': 'are you ok'}).json())
 
 
-def test7(): print(requests.post(f"{URL}07", cookies={'cza': 'hei', 'man': 'are you ok'}).json())
+def test7(): print(requests.post(f"{URL}07/", cookies={'cza': 'hei', 'man': 'are you ok'}).json())
 
 
 def test8(): print(requests.get(f"{URL}08").status_code)
@@ -26,7 +26,7 @@ def test9():
 def test10(): print(requests.post(f"{URL}10").text)
 
 
-def test11(): print(requests.post(f"{URL}11").text)
+def test11(): print(requests.post(f"{URL}11/").text)
 
 
 def test14():
@@ -55,8 +55,8 @@ if __name__ == '__main__':
     # test8()
     # test9()
     # test10()
-    # test11()
+    test11()
     # test14()
     # test15()
     # test16()
-    test17()
+    # test17()
