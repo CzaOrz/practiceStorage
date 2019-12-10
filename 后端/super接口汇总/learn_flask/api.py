@@ -21,12 +21,12 @@ app.config['JSON_AS_ASCII'] = False
 def index(): return f"hello world, {app.config['cza']}"
 
 
-@app.route('/01')
+@app.route('/01/')
 def api_01(): return "hello, this is api_01"
 
 
-@app.route('/02')  # 没有段代码, 就无法访问02接口了
-@app.route('/02/<multi_path>')
+@app.route('/02/')  # 没有段代码, 就无法访问02接口了
+@app.route('/02/<int:multi_path>/')  # 好吧-二者原来支持的程度差不多啊, 不过这玩意为什么后缀需要/斜杆呢
 def api_02(multi_path=None): return f"hello, this is {multi_path}"
 
 
