@@ -52,6 +52,7 @@ __FILE__ = "Unfinished Schedule"
 2019.12.09 - tornado/flask流程走一遍就好
 2019.12.09 - Flask适用纯接口 django适用于简易页面 tornado就感觉都不太适用==
 2019.12.09 - Djnago和flask是一样的性质。django基于python原生库wsgiref，实现了一个WSGI应用，在服务启动后调用appHandler来处理请求-app只需要处理environ和start_response两个参数即可
+2019.12.11 - minitools的scrapy模块需要添加一个全站爬的机制。还需要针对mongodb写一个pipeline，也就是存储的管道。置于直接存储就走feed uri，这个还可以
 """
 
 """DONE!
