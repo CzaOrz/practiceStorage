@@ -52,9 +52,10 @@ __FILE__ = "Unfinished Schedule"
 2019.12.09 - tornado/flask流程走一遍就好
 2019.12.09 - Flask适用纯接口 django适用于简易页面 tornado就感觉都不太适用==
 2019.12.09 - Djnago和flask是一样的性质。django基于python原生库wsgiref，实现了一个WSGI应用，在服务启动后调用appHandler来处理请求-app只需要处理environ和start_response两个参数即可
-2019.12.12 - 全站爬取的模块scrapy已经自带了，而且很强大。
+2019.12.12 - 全站爬取的模块scrapy已经自带了，而且很强大。 -- 我需要做的事情就是看能不能把这个模块在单独配置一下，写个可以直接用的就很nice
 2019.12.12 - mongodb的pipeline
-1219.12.12 - 直接存储在FEED_URI里面
+2019.12.12 - 直接存储在FEED_URI里面 -- 存储有点僵硬，如果中途断开就断开了，完整性也不能保证
+2019.12.12 - JOBDIR这个模块也是，不支持突然中断，只能支持自然结束==都自然结束了我还需要你干哈
 """
 
 """DONE!
