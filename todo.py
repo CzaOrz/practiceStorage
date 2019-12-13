@@ -45,9 +45,12 @@ __FILE__ = "Unfinished Schedule"
 2019.12.06 - 接口汇总：GET/POST/OPTIONS/multi_path/args/form/json/cookie/session/return_404/return_template/template_drawing/return_json/return_str/redirect
 2019.12.09 - tornado/flask流程走一遍就好
 2019.12.09 - Flask适用纯接口 django适用于简易页面 tornado就感觉都不太适用==
-2019.12.09 - Djnago和flask是一样的性质。django基于python原生库wsgiref，实现了一个WSGI应用，在服务启动后调用appHandler来处理请求-app只需要处理environ和start_response两个参数即可
+2019.12.09 - Django和flask是一样的性质。django基于python原生库wsgiref，实现了一个WSGI应用，在服务启动后调用appHandler来处理请求-app只需要处理environ和start_response两个参数即可
 2019.12.12 - 全站爬取的模块scrapy已经自带了，而且很强大。 -- 我需要做的事情就是看能不能把这个模块在单独配置一下，写个可以直接用的就很nice
-2019.12.13 - 感觉可以自己实现一个rabbit mq的逻辑，结合python实现分布式
+2019.12.13 - 感觉可以自己实现一个rabbit mq的逻辑，结合python实现分布式 - 主要是为了web-driver的里面的selenium如何自动分配任务，而不会被干掉，如何自动化添加新节点
+2019.12.13 - 需要重写一个schedule，持久化数据用的。本来是默认使用disk，但是必须是爬虫自动断开才能够使用
+2019.12.13 - minitools的scrapy是不是可以写一个一键生成脚本的文件呢，感觉一行就行了的那种，行不行呢 - 自己改自己的文件，感觉很神奇啊
+2019.12.13 - 25号深圳之旅前需要完成的项目。自如爬虫需要完成，（scrapy的项目，这个应该还好，比较简单。）|（然后是后台的搭建，使用django。）|（前端的显示也是一个大问题）|（如何实现房价预测，这个估计是加分题）
 """
 
 """DONE!
