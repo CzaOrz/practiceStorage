@@ -14,7 +14,7 @@
   "char_set": "0123456789abcdefghijklmnopqrstuvwxyz",
   "use_labels_json_file": false,
   "remote_url": "http://127.0.0.1:8888/captcha/",
-  "cycle_stop": 20000,
+  "cycle_stop": 10000,
   "acc_stop": 0.80,
   "cycle_save": 500,
   "enable_gpu": 1,
