@@ -9,7 +9,7 @@
   "model_save_dir": "model/",
   "image_width": 203,
   "image_height": 66,
-  "max_captcha": 7,
+  "max_captcha": 6,
   "image_suffix": "jpg",
   "char_set": "0123456789abcdefghijklmnopqrstuvwxyz",
   "use_labels_json_file": false,
