@@ -269,34 +269,9 @@ Courage is not the absence of fear, but rather the judgment that something else 
 你的压力来源于，无法自律的内心而只是假装努力，现状跟不上内心的欲望，所以你焦虑升值恐慌
 只靠理想的话，世界是无法运转的
 """
-
-"""2019.12.19 背
-web应用的本质。简单点就是用户发送http请求，服务器接收请求并根据请求作出对应的回应。比如返回一个html文件，那么此时服务器将html文件作为http响应的body发送给用户，或者说浏览器。浏览器接收到http响应，在浏览器端进行展示
-所以最简单的一个应用，就是提前将html文件准备好，用现成的http服务器接收请求并响应。Nginx等静态服务器就是做的这类事情
-WSGI接口。Web Server Gateway Interface。web服务器网关接口。他初步包装用户的http请求。以便提供web应用进行后续的处理。通常就是environ和start_response这两个参数（一个包含所有HTTP请求信息的dict对象，一个发送HTTP响应的函数。）
-只能调用一次start_response()函数。start_response()函数接收两个参数，一个是HTTP响应码，一个是一组list表示的HTTP Header（里面是子元素是tuple，tuple里面则是两个str）
-而webapp的返回值，就将作为此次http响应的body返回
-
-所以本质上我们的webapp只需要关注从environ字典中获取所需要的http请求信息，然后构造相关的回应，然后调用start_response发送响应header，最后返回body。我们的应用是不需要涉及到解析http请求部分的。
-
-HTTP是一种文本协议，也是用的最多网络通信协议。也就是用于用户端与服务器端之间的通信。一次HTTP请求包含请求头和body。其中请求头中前面两行比较重要
-GET / HTTP/1.1 请求方式+请求路径+协议版本 
-Host: www.baidu.com 表示请求的域名
-总结来说，一定有的是请求方式、请求路径、协议版本、请求域名
-
-HTTP响应包含响应头和body，其中比较重要的
-HTTP/1.1 200 OK 表示成功的响应
-Content-Type: text/html 表示类型
-总结就是：响应状态码，200成功，3xx为重定向，4xx表示客户端异常，5xx表示服务器端异常
-
-MVC：Model-View-Controller，也叫模型-视图-控制器
-python处理url的函数就是C，也就是负责业务逻辑。
-jinjia2中的{{name}}就是V，也就是负责显示逻辑，通过一些简单的替换变量。得到最终的显示页面
-而由业务逻辑，传递给显示逻辑的，部分，就是Model模型。
-
-协程。我们也可以叫微线程。
-我们常见的线程中，我们把函数叫做子程序。多个函数调用，也就是多个子程序的调用，必然是有顺序性，层级性。也就是A调用B，B里面调用了C，那么当C调用完后返回，接着B执行完后返回，最后才是A执行返回。 所以这是一种通过栈结构实现的。
-协程不同，也是在一个线程中，多个函数-子程序的调用，是可中断的，中断然后去执行其他函数。
-最常见的异步就是，一些阻塞IO。比如常见的读写IO和网络IO，遇到需要等待的任务，我们就中断然后注册一个回调函数，在任务完成后能够接着往下执行。
-协程利用python的yield语法，3.6之后正式上线了async和await，采用生成器的概念，函数能够在在需要的时候产生数据，或者中断，在有必要时候可以继承并继续执行
-"""
+from wsgiref.simple_server import make_server
+def test_app(environ, start_response):
+    start_response("200 fucking-man", [("Content-Type", "text/html")])
+    return [b"hello, funking man"]
+web = make_server("", 8888, test_app)
+web.serve_forever()
