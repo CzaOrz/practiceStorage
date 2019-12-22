@@ -269,9 +269,3 @@ Courage is not the absence of fear, but rather the judgment that something else 
 你的压力来源于，无法自律的内心而只是假装努力，现状跟不上内心的欲望，所以你焦虑升值恐慌
 只靠理想的话，世界是无法运转的
 """
-from wsgiref.simple_server import make_server
-def test_app(environ, start_response):
-    start_response("200 fucking-man", [("Content-Type", "text/html")])
-    return [b"hello, funking man"]
-web = make_server("", 8888, test_app)
-web.serve_forever()
