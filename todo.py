@@ -64,7 +64,7 @@ __FILE__ = "Unfinished Schedule"
             * 第三页爬虫节点展示，支持关闭节点。 -- 获取pid的方法倒是简单，from subprocess import Popen 即可
             * 第四页是调度管理，里面应该可以在线查看并编辑爬虫
             * 第五页爬虫日志管理
-            
+2019.12.25 - Nameko和celery和rabbitmq等，都是听都没有听过的东西
 """
 
 """DONE!
