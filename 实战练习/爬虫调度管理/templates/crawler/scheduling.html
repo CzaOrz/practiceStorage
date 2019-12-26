@@ -2,9 +2,365 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Crawler</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-default" id="nav-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-body" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="javascript:void(0)">CrawlerPage</a>
+		</div>
+		<div class="collapse navbar-collapse" id="nav-body">
+			<ul class="nav navbar-nav">
+                <li class="active" role="presentation"><a href="#page-1" aria-controls="page-1" role="tab" data-toggle="tab">数据展示</a></li>
+                <li role="presentation"><a href="#page-2" aria-controls="page-2" role="tab" data-toggle="tab">分析展示</a></li>
+                <li role="presentation"><a href="#page-3" aria-controls="page-3" role="tab" data-toggle="tab">节点管理</a></li>
+                <li role="presentation"><a href="#page-4" aria-controls="page-4" role="tab" data-toggle="tab">调度管理</a></li>
+                <li role="presentation"><a href="#page-5" aria-controls="page-5" role="tab" data-toggle="tab">日志管理</a></li>
+			</ul>
+            <form class="navbar-form navbar-right">
+                <a type="button" class="btn" data-toggle="modal" data-target="#WebSocket-Chat">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <span class="badge">[[ unread || '' ]]</span>
+                </a>
+            </form>
+		</div>
+	</div>
+</nav>
 
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="page-1" aria-labelledby="page-1-tab">
+        <div class="container-fluid" id="main-body-1">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                    <div class="list-group">
+                        <a href="javascript:void(0)" @click.prevent="choose_day(0)" class="list-group-item text-center">今天</a>
+                        <a href="javascript:void(0)" @click.prevent="choose_day(1)" class="list-group-item text-center">昨天</a>
+                        <a href="javascript:void(0)" @click.prevent="choose_day(2)" class="list-group-item text-center">前天</a>
+                        <a class=" list-group-item text-center">
+                            <div class="checkbox" style="margin: 0;"><label><input type="checkbox" value="true" v-model="just_choose_province">仅查看省区</label></div>
+                        </a>
+                        <a class=" list-group-item text-center">
+                            <div class="checkbox" style="margin: 0;"><label><input type="checkbox" value="true" v-model="news_radio">广播新闻更新</label></div>
+                        </a>
+                    </div>
+                    <div class="list-group">
+                        <a href="javascript:void(0)" @click.prevent="goto_top" class="list-group-item text-center">返回顶部</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="page-2" aria-labelledby="page-2-tab">
+        <div class="container-fluid" id="main-body-2">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">汇总表单</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">异常总次数</th>
+                                <th class="text-center">运维总次数</th>
+                                <th class="text-center">占比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="data in data_summary">
+                                <td class="text-center">[[ data[0] ]]</td>
+                                <td class="text-center">[[ data[1] ]]</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">[[ data[2] || '-']]</td>
+                            </tr>
+                            <tr v-for="data in data_statistical">
+                                <td class="text-center">[[ data[0] ]]</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">[[ data[1].toFixed(2) ]]</td>
+                                <td class="text-center">[[ data[2].toFixed(2) ]]</td>
+                                <td class="text-center">[[ data[3] ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                    <div class="list-group">
+                        <a class=" list-group-item text-center" v-for="(task, index) in spider_tasks">
+                            <label class="radio-inline" v-if="index === 0">
+                                <input class="testtest" type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                            <label class="radio-inline" v-else>
+                                <input type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                        </a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="choose_task">
+                            查询
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="page-3" aria-labelledby="page-3-tab">
+        <div class="container-fluid" id="main-body-3">
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                    <div class="list-group">
+                        <a class=" list-group-item text-center" v-for="(task, index) in spider_tasks">
+                            <label class="radio-inline" v-if="index === 0">
+                                <input class="testtest" type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                            <label class="radio-inline" v-else>
+                                <input type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                        </a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="choose_task">
+                            查询
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="page-4" aria-labelledby="page-4-tab">
+        <div class="container-fluid" id="main-body-4">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">汇总表单</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">异常总次数</th>
+                                <th class="text-center">运维总次数</th>
+                                <th class="text-center">占比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="data in data_summary">
+                                <td class="text-center">[[ data[0] ]]</td>
+                                <td class="text-center">[[ data[1] ]]</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">[[ data[2] || '-']]</td>
+                            </tr>
+                            <tr v-for="data in data_statistical">
+                                <td class="text-center">[[ data[0] ]]</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">[[ data[1].toFixed(2) ]]</td>
+                                <td class="text-center">[[ data[2].toFixed(2) ]]</td>
+                                <td class="text-center">[[ data[3] ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">统计表-重写/修复率</th>
+                                <th class="text-center">运维总量</th>
+                                <th class="text-center">运维异常</th>
+                                <th class="text-center">运维废弃</th>
+                                <th class="text-center">重写率</th>
+                                <th class="text-center">修复率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(data, index) in data_bar[0]">
+                                <td class="text-center">[[ data ]]</td>
+                                <td class="text-center">[[ data_bar[3][index] ]]</td>
+                                <td class="text-center">[[ data_bar[2][index] ]]</td>
+                                <td class="text-center">[[ data_bar[1][index] ]]</td>
+                                <td class="text-center">[[ Math.abs(((data_bar[3][index]-data_bar[1][index]-data_bar[3][index+1])/data_bar[3][index]*100).toFixed(2)) + '%' ]]</td>
+                                <td class="text-center">[[ ((data_bar[2][index]-data_bar[1][index])/data_bar[3][index]*100).toFixed(2) + '%' ]]</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">sum</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center">[[ rate_of_rewrite.toFixed(2) + '%' ]]</td>
+                                <td class="text-center">[[ rate_of_repair.toFixed(2) + '%' ]]</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">mean</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center">[[ (rate_of_rewrite/data_bar_range).toFixed(2) + '%' ]]</td>
+                                <td class="text-center">[[ (rate_of_repair/data_bar_range).toFixed(2) + '%' ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">统计表-第一次入库</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">平均天数</th>
+                                <th class="text-center">平均人力</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">[[ data_spider_task_statistical[0] ]]</td>
+                                <td class="text-center">[[ data_spider_task_statistical[1] ]]</td>
+                                <td class="text-center">[[ data_spider_task_statistical[2] ]]</td>
+                                <td class="text-center">[[ data_spider_task_statistical[3] ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                    <div class="list-group">
+                        <a class=" list-group-item text-center" v-for="(task, index) in spider_tasks">
+                            <label class="radio-inline" v-if="index === 0">
+                                <input class="testtest" type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                            <label class="radio-inline" v-else>
+                                <input type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                        </a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="choose_task">
+                            查询
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="page-5" aria-labelledby="page-5-tab">
+        <div class="container-fluid" id="main-body-5">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">汇总表单</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">异常总次数</th>
+                                <th class="text-center">运维总次数</th>
+                                <th class="text-center">占比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="data in data_summary">
+                                <td class="text-center">[[ data[0] ]]</td>
+                                <td class="text-center">[[ data[1] ]]</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">[[ data[2] || '-']]</td>
+                            </tr>
+                            <tr v-for="data in data_statistical">
+                                <td class="text-center">[[ data[0] ]]</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">[[ data[1].toFixed(2) ]]</td>
+                                <td class="text-center">[[ data[2].toFixed(2) ]]</td>
+                                <td class="text-center">[[ data[3] ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="list-group">
+                        <li class="list-group-item"><div id="operation-bar"></div></li>
+                    </ul>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">统计表-重写/修复率</th>
+                                <th class="text-center">运维总量</th>
+                                <th class="text-center">运维异常</th>
+                                <th class="text-center">运维废弃</th>
+                                <th class="text-center">重写率</th>
+                                <th class="text-center">修复率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(data, index) in data_bar[0]">
+                                <td class="text-center">[[ data ]]</td>
+                                <td class="text-center">[[ data_bar[3][index] ]]</td>
+                                <td class="text-center">[[ data_bar[2][index] ]]</td>
+                                <td class="text-center">[[ data_bar[1][index] ]]</td>
+                                <td class="text-center">[[ Math.abs(((data_bar[3][index]-data_bar[1][index]-data_bar[3][index+1])/data_bar[3][index]*100).toFixed(2)) + '%' ]]</td>
+                                <td class="text-center">[[ ((data_bar[2][index]-data_bar[1][index])/data_bar[3][index]*100).toFixed(2) + '%' ]]</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">sum</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center">[[ rate_of_rewrite.toFixed(2) + '%' ]]</td>
+                                <td class="text-center">[[ rate_of_repair.toFixed(2) + '%' ]]</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">mean</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center">[[ (rate_of_rewrite/data_bar_range).toFixed(2) + '%' ]]</td>
+                                <td class="text-center">[[ (rate_of_repair/data_bar_range).toFixed(2) + '%' ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">统计表-第一次入库</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">平均天数</th>
+                                <th class="text-center">平均人力</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">[[ data_spider_task_statistical[0] ]]</td>
+                                <td class="text-center">[[ data_spider_task_statistical[1] ]]</td>
+                                <td class="text-center">[[ data_spider_task_statistical[2] ]]</td>
+                                <td class="text-center">[[ data_spider_task_statistical[3] ]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                    <div class="list-group">
+                        <a class=" list-group-item text-center" v-for="(task, index) in spider_tasks">
+                            <label class="radio-inline" v-if="index === 0">
+                                <input class="testtest" type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                            <label class="radio-inline" v-else>
+                                <input type="radio" name="task_radio" :value="task" v-model="radio_data">
+                                [[ task ]]
+                            </label>
+                        </a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="choose_task">
+                            查询
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

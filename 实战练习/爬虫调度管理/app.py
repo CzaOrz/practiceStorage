@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from crawler.bp import bp_crawler
+from crawler import bp_crawler
 
 app = Flask(__name__)
 app.secret_key = 'https://github.com/CzaOrz'
