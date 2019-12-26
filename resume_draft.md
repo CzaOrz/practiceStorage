@@ -14,7 +14,7 @@
 
 | 技能专长 |  |
 | --- | --- |
-|*|熟悉Python，有过开源项目经验（https://github.com/CzaOrz/Pywss）|
+|*|熟悉Python，有过开源项目经验（ https://github.com/CzaOrz/Pywss ）|
 |*|熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。|
 |*|熟悉Flask/Django等后端框架。有独立项目经验。|
 |*|了解Web前端技术，包括HTML/CSS/JavaScript/Vue等。|
@@ -74,7 +74,7 @@
 
 
 <table>
-<tr>
+<tr style="background-color: red">
     <th colspan="1">项目经验</th>
     <th colspan="2"></th>
 </tr>
