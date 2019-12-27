@@ -4,6 +4,7 @@ from crawler import bp_crawler
 app = Flask(__name__)
 app.secret_key = 'https://github.com/CzaOrz'
 app.config['JSON_AS_ASCII'] = False
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
 @app.route("/")

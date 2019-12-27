@@ -7,9 +7,28 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-    <script src="{{ url_for('static', filename='js/public.js') }}"></script>
+    <style>
+        #page1-line-chat {
+            height: 400px;
+            width: 100%;
+        }
+        .alert_window {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            min-width: 300px;
+            max-width: 600px;
+            z-index: 99999;
+            text-align: center;
+            padding: 15px;
+            border-radius: 0.9em;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-default" id="nav-top">
@@ -46,24 +65,11 @@
         <div class="container-fluid" id="main-body-1">
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-8">
-                    <div class="row">
-                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><div id="page1-line-chat"></div></li>
+                    </ul>
                 </div>
                 <div class="col-sm-2 col-sm-offset-10 fixElement">
-                    <div class="list-group">
-                        <a href="javascript:void(0)" @click.prevent="choose_day(0)" class="list-group-item text-center">今天</a>
-                        <a href="javascript:void(0)" @click.prevent="choose_day(1)" class="list-group-item text-center">昨天</a>
-                        <a href="javascript:void(0)" @click.prevent="choose_day(2)" class="list-group-item text-center">前天</a>
-                        <a class=" list-group-item text-center">
-                            <div class="checkbox" style="margin: 0;"><label><input type="checkbox" value="true" v-model="just_choose_province">仅查看省区</label></div>
-                        </a>
-                        <a class=" list-group-item text-center">
-                            <div class="checkbox" style="margin: 0;"><label><input type="checkbox" value="true" v-model="news_radio">广播新闻更新</label></div>
-                        </a>
-                    </div>
-                    <div class="list-group">
-                        <a href="javascript:void(0)" @click.prevent="goto_top" class="list-group-item text-center">返回顶部</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -363,5 +369,6 @@
         </div>
     </div>
 </div>
+<script src="{{ url_for('static', filename='js/public.js') }}"></script>
 </body>
 </html>
