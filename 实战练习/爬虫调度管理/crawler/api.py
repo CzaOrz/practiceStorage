@@ -20,5 +20,5 @@ def api_ziru(day=15):
     count_statistics = [document["all_count"] for document in documents]
     return jsonify({
         "status": 0,
-        "ziru": documents,
+        "data": {"ziru": documents}
     })
