@@ -74,16 +74,21 @@
 
 
 <table>
-<tr style="background-color: red">
+<tr style="background-color: green">
     <th colspan="1">项目经验</th>
     <th colspan="2"></th>
 </tr>
 <tr>
     <td rowspan="2">开源项目Pywss</td>
-    <td colspan="2">基于socket编写。旨在快速开发WebSocket后端服务。</td>
+    <td colspan="2">
+    基于socket编写。旨在快速开发WebSocket后端服务。<br>
+    详情见：https://github.com/CzaOrz/Pywss/blob/master/README.md
+    </td>
 </tr>
 <tr>
-    <td colspan="2">......</td>
+    <td colspan="2">
+    项目地址：https://github.com/CzaOrz/Pywss<br>
+    Demo地址：https://czaorz.github.io/Pywss/client</td>
 </tr>
 <tr>
     <td rowspan="2">基于自如房价的分析</td>
