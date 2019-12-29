@@ -21,7 +21,7 @@ def api_ziru(day=15):
 
 @bp_crawler.route("/api/lagou/data")
 def api_lagou():
-    mongodb_lagou_statistics = get_mongodb_client()["job_lagou"]["city_statistics"]
+    mongodb_lagou_statistics = get_mongodb_client()["job_lagou"]["city_statistics_python"]
     document = mongodb_lagou_statistics.find_one({"timestamp": timekiller.get_today().timestamp()}, {"_id": 0})
     if document:
         return jsonify({

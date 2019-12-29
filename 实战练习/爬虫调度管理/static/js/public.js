@@ -129,12 +129,17 @@ $(function(){
             init_scatter_chart: function(myChart, api_result){
                 lagou = api_result.lagou;
                 res = [];
+                normalized_list = [];
                 for (key in geoCoordMap) {
                     res.push({
                         name: key,
                         value: geoCoordMap[key].concat(lagou[key]),
                     });
+                    normalized_list.push(lagou[key]);
                 }
+                normalized_list_max = Math.max(...normalized_list);
+                normalized_list_min = Math.min(...normalized_list);
+                normalized_list_gap = normalized_list_max - normalized_list_min;
                 option = {
                     title: {
                         text: '主要城市岗位量 - python',
@@ -262,7 +267,7 @@ $(function(){
                             coordinateSystem: 'bmap',
                             data: res,
                             symbolSize: function (val) {
-                                return val[2] / 10;
+                                return (val[2] - normalized_list_min + 1) * 50 / normalized_list_gap;  // normalized
                             },
                             showEffectOn: 'render',
                             rippleEffect: {
@@ -273,14 +278,17 @@ $(function(){
                                 normal: {
                                     formatter: '{b}',
                                     position: 'right',
-                                    show: true
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: 20,
+                                    },
                                 }
                             },
                             itemStyle: {
                                 normal: {
                                     color: 'purple',
                                     shadowBlur: 10,
-                                    shadowColor: '#333'
+                                    shadowColor: '#333',
                                 }
                             },
                             zlevel: 1
