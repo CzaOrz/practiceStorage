@@ -8,11 +8,22 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=6cIzNbg5BuMGOGc6TECDSkFoC3Mgvly9"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
     <style>
         #page1-line-chat {
-            height: 400px;
+            height: 600px;
+            width: 100%;
+        }
+        #page1-scatter-chat {
+            height: 100vh;
             width: 100%;
         }
         .alert_window {
@@ -67,6 +78,9 @@
                 <div class="col-sm-offset-2 col-sm-8">
                     <ul class="list-group">
                         <li class="list-group-item"><div id="page1-line-chat"></div></li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item"><div id="page1-scatter-chat"></div></li>
                     </ul>
                 </div>
                 <div class="col-sm-2 col-sm-offset-10 fixElement">

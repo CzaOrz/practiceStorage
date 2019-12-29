@@ -17,6 +17,22 @@ $(function(){
         danger_prompt = function(message, time){
             prompt(message, 'alert-danger', time);
         };
+    // map for scatter chart
+    var
+        geoCoordMap = {
+            '东莞':[113.75,23.04],
+            '天津':[117.2,39.13],
+            '长沙':[113,28.21],
+            '西安':[108.95,34.27],
+            '南京':[118.78,32.04],
+            '成都':[104.06,30.67],
+            '武汉':[114.31,30.52],
+            '杭州':[120.19,30.26],
+            '深圳':[114.07,22.62],
+            '广州':[113.23,23.16],
+            '上海':[121.48,31.22],
+            '北京':[116.46,39.92],
+        };
     // api func
     var
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),
@@ -32,18 +48,17 @@ $(function(){
         },
         mounted(){
             this.lineChart = echarts.init(document.getElementById('page1-line-chat'));
+            this.scatterChinaChart = echarts.init(document.getElementById('page1-scatter-chat'));
             this.lineChart.showLoading();
+            this.scatterChinaChart.showLoading();
 			this.init_api();
         },
         methods: {
             init_api: function(){
                 axios.all([api_data_for_ziru(), api_data_for_lagou()])
                 .then(axios.spread((ziru, lagou) => {
-                    api_result = {
-                        'ziru': ziru.data.data.ziru,
-                        'lagou': lagou.data.data.lagou,
-                    };
-                    this.init_line_chart(this.lineChart, api_result);
+                    this.init_line_chart(this.lineChart, ziru.data.data);
+                    this.init_scatter_chart(this.scatterChinaChart, lagou.data.data);
                 }));
             },
             init_line_chart: function(myChart, api_result){
@@ -65,7 +80,7 @@ $(function(){
                         trigger: 'axis'
                     },
                     legend: {
-                        data:['自如','拉钩']
+                        data:['自如']
                     },
                     grid: {
                         left: '3%',
@@ -106,10 +121,169 @@ $(function(){
                             type:'line',
                             data: ziru_data_y
                         },
+                    ]
+                };
+                myChart.hideLoading();
+				myChart.setOption(option);
+            },
+            init_scatter_chart: function(myChart, api_result){
+                lagou = api_result.lagou;
+                res = [];
+                for (key in geoCoordMap) {
+                    res.push({
+                        name: key,
+                        value: geoCoordMap[key].concat(lagou[key]),
+                    });
+                }
+                option = {
+                    title: {
+                        text: '主要城市岗位量 - python',
+                        subtext: 'data from lagou',
+                        sublink: 'https://www.lagou.com/jobs/allCity.html',
+                        left: 'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: (params) => {
+                            if (params.name) {
+                                return `<p style="font-size:18px">${params.name}</p>
+                                <p style="font-size:14px">python岗位: ${params.value[2]}</p>`;
+                            }
+                        },
+                    },
+                    bmap: {
+                        center: [104.114129, 37.550339],
+                        zoom: 6,
+                        roam: true,
+                        mapStyle: {
+                            styleJson: [{
+                                'featureType': 'water',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#d1d1d1'
+                                }
+                            }, {
+                                'featureType': 'land',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#f3f3f3'
+                                }
+                            }, {
+                                'featureType': 'railway',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'visibility': 'off'
+                                }
+                            }, {
+                                'featureType': 'highway',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#fdfdfd'
+                                }
+                            }, {
+                                'featureType': 'highway',
+                                'elementType': 'labels',
+                                'stylers': {
+                                    'visibility': 'off'
+                                }
+                            }, {
+                                'featureType': 'arterial',
+                                'elementType': 'geometry',
+                                'stylers': {
+                                    'color': '#fefefe'
+                                }
+                            }, {
+                                'featureType': 'arterial',
+                                'elementType': 'geometry.fill',
+                                'stylers': {
+                                    'color': '#fefefe'
+                                }
+                            }, {
+                                'featureType': 'poi',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'visibility': 'off'
+                                }
+                            }, {
+                                'featureType': 'green',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'visibility': 'off'
+                                }
+                            }, {
+                                'featureType': 'subway',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'visibility': 'off'
+                                }
+                            }, {
+                                'featureType': 'manmade',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#d1d1d1'
+                                }
+                            }, {
+                                'featureType': 'local',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#d1d1d1'
+                                }
+                            }, {
+                                'featureType': 'arterial',
+                                'elementType': 'labels',
+                                'stylers': {
+                                    'visibility': 'off'
+                                }
+                            }, {
+                                'featureType': 'boundary',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#fefefe'
+                                }
+                            }, {
+                                'featureType': 'building',
+                                'elementType': 'all',
+                                'stylers': {
+                                    'color': '#d1d1d1'
+                                }
+                            }, {
+                                'featureType': 'label',
+                                'elementType': 'labels.text.fill',
+                                'stylers': {
+                                    'color': '#999999'
+                                }
+                            }]
+                        }
+                    },
+                    series : [
                         {
-                            name:'拉钩-python岗',
-                            type:'line',
-                            data:[220, 182, 191, 234, 290, 330, 310]
+                            name: '岗位',
+                            type: 'effectScatter',
+                            coordinateSystem: 'bmap',
+                            data: res,
+                            symbolSize: function (val) {
+                                return val[2] / 10;
+                            },
+                            showEffectOn: 'render',
+                            rippleEffect: {
+                                brushType: 'stroke'
+                            },
+                            hoverAnimation: true,
+                            label: {
+                                normal: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: true
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: 'purple',
+                                    shadowBlur: 10,
+                                    shadowColor: '#333'
+                                }
+                            },
+                            zlevel: 1
                         }
                     ]
                 };
