@@ -2,7 +2,7 @@
 import json
 from minitools.db.mongodb import get_mongodb_client
 from minitools import timekiller
-from flask import jsonify
+from flask import jsonify, request
 from .bp import bp_crawler
 
 
@@ -21,7 +21,8 @@ def api_ziru(day=15):
 
 @bp_crawler.route("/api/lagou/data")
 def api_lagou():
-    mongodb_lagou_statistics = get_mongodb_client()["job_lagou"]["city_statistics_python"]
+    query = request.args.get("query", "python")
+    mongodb_lagou_statistics = get_mongodb_client()["job_lagou"][f"city_statistics_{query}"]
     document = mongodb_lagou_statistics.find_one({"timestamp": timekiller.get_today().timestamp()}, {"_id": 0})
     if document:
         return jsonify({
