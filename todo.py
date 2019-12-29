@@ -64,7 +64,7 @@ __FILE__ = "Unfinished Schedule"
             * 第二页是新闻金融分类接口 + 房价预测。
             * 第三页爬虫节点展示，支持关闭节点。 节点信息（节点名称+任务名+开始时间+分类+机器号+pid+操作方法）
                 -- 获取pid的方法倒是简单，from subprocess import Popen 可拿到父进程  
-                --  杀进程的方法import psutil; psutil.Process(10744).kill()
+                -- 杀进程的方法import psutil; psutil.Process(10744).kill()
             * 第四页是调度管理，里面应该可以在线查看并编辑爬虫
                 -- 所有要执行的爬虫任务展示页面要有一个
                 -- 定时任务调度感觉可以使用celery
