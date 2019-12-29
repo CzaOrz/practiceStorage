@@ -71,6 +71,7 @@ __FILE__ = "Unfinished Schedule"
             * 第五页爬虫日志管理，只需要存文件路径就可以了，文件管理的话，可以在setting中配置好。插入数据库也是可以的，但是强制杀掉后会如何
                 （节点名称+任务分类+机器号+start+end+耗时+文件路径+执行指令）
 2019.12.25 - Nameko和celery和rabbitmq等，都是听都没有听过的东西
+2019.12.29 - flask_apscheduler and apscheduler，这两个模块很重要啊
 """
 
 """DONE!
