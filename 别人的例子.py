@@ -208,3 +208,98 @@ CI：Jenkins/Drone
 2018 年美国大学生数学建模竞赛 C 题三等奖 
 """
 
+"""https://cba.github.io/resume/
+resume
+李启爱的简历(在职)
+联系方式
+手机：176-xxxx-5010
+Email：liqiai@live.com
+期望
+期望职位：PHP软件工程师/Golang软件工程师
+期望薪资：税后月薪9~11k
+期望城市：昆明
+个人信息
+李启爱/男/1994
+专科/江苏联合职业教育学院 - 安全工程学院 工程测量专业
+本科在读/云南大学 - 职业与继续教育学院 计算机科学与技术专业
+工作年限：4年
+自我评价：不错的的学习与接受能力，有一定的承压能力，对新技术保持有一定的好奇心与热情，有意深入golang web 微服务方向开发
+技术博客：https://blog.cnbattle.com
+Github：https://github.com/cnbattle
+工作经历
+New company New job.
+五八零科技股份有限公司（2018年4月~至今）
+职位
+后端主程/运维
+职责
+基于laravel/Lumen后端开发 (60%)
+Golang开发 (20%)
+Linux服务器运维 (10%)
+提供技术难点可执行方案 (10%)
+项目
+抖圈 & 本地短视频 & 同城知了
+基于Lumen5.5
+独立数据库设计及开发，服务端的视频处理，音频处理，性能调优
+主力接口开发
+店老板
+基于Laravel5.5
+数据库设计及开发
+接口开发
+其他
+微信公众号图文爬虫系统（Golang、nodejs）、腾讯视频爬虫系统（Golang）、抖音爬虫系统（Golang、nodejs）
+
+云南翡翠王朝文化传播有限公司（2017年7月~2018年4月）
+职位
+PHP后端开发
+职责
+php开发
+客户子系统
+基于Laravel5.5
+负责数据库设计及开发，包括用户相关的资料、积分、评论、地址和通宝商城的客户端及管理端API开发
+分销商系统
+基于ThinkPHP5.1
+负责数据库设计及管理后台开发、API开发、实现用户追踪、订单交易绑定、收益结算等功能
+客户子系统客户端API整合
+基于ThinkPHP5.0
+实现一个api网关，实现header、body参数验证、数据缓存、数据处理等的统一管理
+其他
+翡翠王朝PC站新版导航（ThinkPHP3.2）、APP直播后台相关开发（ThinkPHP5.0、阿里云）、内部管理系统开发
+
+上海错觉文化传播有限公司（2014年7月~2017年6月）
+职位
+PHP全栈开发+Linux运维
+职责
+php全栈 (90%)
+Linux运维 (10%)
+微信第三方开发
+负责公司公众号相关功能开发，微信H5开发，微信投票程序开发
+
+其他全栈开发
+上海错觉文化传播有限公司官网项目、南京葫芦兄弟网络科技有限公司官网项目、春城助手小程序项目、春城社区wap网站项目
+
+开源项目
+douyin ：抖音视频爬虫方案，300+ star
+drone-gitea：drone+gitea的CI CD方案
+wubi：golang 汉字转五笔包（86版五笔编码）
+PHPBase：在维护和自用php常用函数集合composer包
+AIIO：在维护和自用golang相关扩展包集合
+wechat-JS-SDK-SAE：微信js sdk SAE版
+技能清单
+开发语言：PHP Golang
+框架：
+PHP：Laravel Lumen ThinkPHP CodeIgniter
+Golang：Gin Gorm Go-micro
+数据库缓存相关：MySQL SQLite Redis MemCache
+云和开放平台：熟悉阿里云/腾讯云/七牛等云平台SDK、熟悉微信生态H5/小程序相关开发
+操作系统：熟悉Debian系Linux，了解Centos、了解Linux一般运维工作、了解分布式系统
+目前工作环境：
+OS：Linux Mint
+IDE：PHPstorm Goland
+开发环境：Docker Vagrant
+版本管理及其他工具：Git Composer
+技能储备(学习中)
+Shell
+Systemd
+致谢
+感谢您花时间阅读我的简历，期待能有机会和您共事。
+"""
