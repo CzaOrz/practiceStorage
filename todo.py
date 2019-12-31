@@ -73,6 +73,7 @@ __FILE__ = "Unfinished Schedule"
 2019.12.25 - Nameko和celery和rabbitmq等，都是听都没有听过的东西
 2019.12.30 - 好好看下rabbitmq的例子怎么写的，是否可以仿照着再写一个工具出来
 2019.12.31 - 整个框架流程还是要好好想想，整个体系是有点大的了
+2019.12.31 - multiprocessing是如何实现queue的共享的
 """
 
 """DONE!
