@@ -1,14 +1,27 @@
+import logging
 import subprocess
-import multiprocessing
+
+logger = logging.getLogger(__name__)
+
+try:
+    from local_setting import ConsumerConfig
+except:
+    raise RuntimeError("Please copy setting file as to local_setting and config it")
 
 
-class BaseTask:
-    dir = ""
-    command = ""
-
-    @classmethod
-    def run(cls): multiprocessing.Process(target=cls.run_command).start()
+class BaseTask(ConsumerConfig):
+    command = None
 
     @classmethod
     def run_command(cls):
-        subprocess.Popen("")
+        subprocess.run(cls.command, shell=True)
+        raise NotImplementedError
+
+
+class ZiRuSpider(BaseTask):
+    name = "ZiruHousePrice"  # show in web
+    spider = "ziru_spider"  # spider file.__name__
+
+    @classmethod
+    def run_command(cls):
+        command = cls.command
