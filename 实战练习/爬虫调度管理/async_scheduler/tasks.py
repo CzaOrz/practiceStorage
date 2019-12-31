@@ -1,0 +1,3 @@
+class BaseTask:
+    dir = ""
+    command = ""

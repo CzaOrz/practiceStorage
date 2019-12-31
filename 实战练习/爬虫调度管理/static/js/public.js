@@ -74,7 +74,7 @@ $(function(){
                 })
                 option = {
                     title: {
-                        text: '爬虫'
+                        text: '爬虫',
                     },
                     tooltip: {
                         trigger: 'axis'
@@ -119,7 +119,7 @@ $(function(){
                         {
                             name:'自如-房源增量',
                             type:'line',
-                            data: ziru_data_y
+                            data: ziru_data_y,
                         },
                     ]
                 };
@@ -142,7 +142,7 @@ $(function(){
                 normalized_list_gap = normalized_list_max - normalized_list_min;
                 option = {
                     title: {
-                        text: '主要城市岗位量 - python',
+                        text: '主要城市岗位分布 - python',
                         subtext: 'data from lagou',
                         sublink: 'https://www.lagou.com/jobs/allCity.html',
                         left: 'center'
@@ -158,7 +158,7 @@ $(function(){
                     },
                     bmap: {
                         center: [104.114129, 37.550339],
-                        zoom: 6,
+                        zoom: 5,
                         roam: true,
                         mapStyle: {
                             styleJson: [{
