@@ -8,8 +8,10 @@ app = Flask(__name__)
 class Config:
     secret_key = 'https://github.com/CzaOrz'
     JSON_AS_ASCII = False
-    SEND_FILE_MAX_AGE_DEFAULT = 0
     SCHEDULER_API_ENABLED = True
+    SCHEDULER_JOBSTORES = {"default": {"type": "mongodb"}}  # db:apscheduler, coll:jobs
+
+    SEND_FILE_MAX_AGE_DEFAULT = 0
 
 
 app.config.from_object(Config())
