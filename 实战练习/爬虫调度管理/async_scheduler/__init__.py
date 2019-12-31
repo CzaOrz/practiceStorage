@@ -2,7 +2,7 @@
 import logging
 from minitools.db.amqp.rabbitmq import get_rabbitmq
 
-rabbitmq = get_rabbitmq("test", ("czaorz", "czasg0.0"))
+rabbitmq = get_rabbitmq("test", ("guest", "guest"))
 logger = logging.getLogger(__name__)
 
 
