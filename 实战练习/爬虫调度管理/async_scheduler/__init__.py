@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import logging
 from minitools.db.amqp.rabbitmq import get_rabbitmq
 
@@ -7,6 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 def async_scheduler(*args, **kwargs):
-    print(args, kwargs)
-    # rabbitmq.push("this is a test")
-    logger.debug("schedule success!")
+    if kwargs and "task_name" in kwargs:
+        rabbitmq.push(json.dumps(kwargs, ensure_ascii=False))
+        logger.debug("schedule success!")
