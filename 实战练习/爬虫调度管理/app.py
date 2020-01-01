@@ -40,4 +40,4 @@ if __name__ == '__main__':
     thread = threading.Thread(target=scheduler_socket)
     thread.setDaemon(True)
     thread.start()
-    app.run(host=cfg.host, port=cfg.port, debug=False)
+    app.run(host="0.0.0.0", port=cfg.port)

@@ -5,7 +5,7 @@ from utils.node import check_dir
 try:
     from local_setting import ConsumerConfig
 except:
-    raise RuntimeError("Please copy setting file as to local_setting and config it")
+    from setting import ConsumerConfig
 
 
 class BaseTask(ConsumerConfig):
@@ -23,4 +23,9 @@ class BaseTask(ConsumerConfig):
 
 class ZiRuSpider(BaseTask):
     name = "ZiruHousePrice"
+    spider = "ziru_spider"
+
+
+class LagouSpider(BaseTask):
+    name = "LagouJob"
     spider = "ziru_spider"

@@ -1,15 +1,24 @@
 import os
+import psutil
 from importlib import import_module
 from minitools import Emailer, timekiller
 
-email = Emailer
+try:
+    email = Emailer("", "", "")
+except:
+    class FakeEmail:
+        @classmethod
+        def send(cls, *args, **kwargs): """no execute anything"""
+
+
+    email = FakeEmail
 
 
 def gather_tasks():
     all_tasks = {}
     tasks = import_module("async_scheduler.tasks")
     for attr in dir(tasks):
-        if attr.startswith("__"):
+        if attr.startswith("_"):
             continue
         task = getattr(tasks, attr)
         name = getattr(task, "name", None)
@@ -40,10 +49,21 @@ def encode_node_task(task, pid=None):
            }
 
 
-def decode_node_task(taskName):
-    return TasksPool.query_task(taskName)
+def decode_node_task(taskName: str):
+    if not isinstance(taskName, str):
+        return
+    return TasksPool.query_task(taskName)  # type: async_scheduler.tasks.BaseTasks
 
 
 def check_dir(dir_path):
     os.makedirs(dir_path, exist_ok=True)
     os.chmod(dir_path, 0o777)
+
+
+def kill_pid(pid):
+    try:
+        pid = int(pid)
+        psutil.Process(pid).kill()
+    except:
+        pass
+    return pid

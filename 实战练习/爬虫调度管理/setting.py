@@ -9,12 +9,32 @@ class FlaskConfig:
 
     SEND_FILE_MAX_AGE_DEFAULT = 0  # debug
 
-    host = "0.0.0.0"
+    # scheduler socket will bind (host, port + 1), and the port will be used by flask
+    host = "127.0.0.1"
     port = 8867
 
 
 class ConsumerConfig:
-    node_id = ""
+    node_id = "default"  # need pointed
     node_dir = current_file_path("spiders", __file__)
     log_dir = current_file_path("logs", __file__)
     project_dir = node_dir
+
+    # log config
+    log_max_line = 300  # read max line from log
+    log_max_rows = 1024  # read max string from one row
+
+    # redis config
+    redis_node_pool_tasks = "spider:scheduler:node:pool:tasks"
+
+    # mongodb config
+    mongodb_dbs_task = "scheduler"
+    mongodb_col_task = "done"
+
+
+class RabbitMQConfig:
+    # rabbit-mq config
+    rabbitmq_queue = "test"
+    rabbitmq_auth = ("guest", "guest")
+    rabbitmq_conn_params = {}
+    rabbitmq_exchange_params = {}
