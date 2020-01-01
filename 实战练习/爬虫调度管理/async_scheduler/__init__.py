@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 import json
 import logging
-from minitools.db.amqp.rabbitmq import get_rabbitmq
+from minitools.db.amqp.rabbitmq import RestartRabbitMQ
 
 try:
     from local_setting import RabbitMQConfig
 except:
     from setting import RabbitMQConfig
 
-rabbitmq = get_rabbitmq(queue=RabbitMQConfig.rabbitmq_queue,
-                        conn_auth=RabbitMQConfig.rabbitmq_auth,
-                        conn_params=RabbitMQConfig.rabbitmq_conn_params,
-                        exchange_params=RabbitMQConfig.rabbitmq_exchange_params)
+rabbitmq = RestartRabbitMQ(queue=RabbitMQConfig.rabbitmq_queue,
+                           conn_auth=RabbitMQConfig.rabbitmq_auth,
+                           conn_params=RabbitMQConfig.rabbitmq_conn_params,
+                           exchange_params=RabbitMQConfig.rabbitmq_exchange_params)
 logger = logging.getLogger(__name__)
 
 
