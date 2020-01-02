@@ -1,4 +1,4 @@
-# import requests
+import requests
 
 # print(requests.get("http://127.0.0.1:8867/scheduler/jobs").text)
 
@@ -16,6 +16,15 @@
 # print(requests.post("http://127.0.0.1:8867/scheduler/jobs/test_1/resume").text)
 
 # print(requests.delete("http://127.0.0.1:8867/scheduler/jobs/test_1").text)
+
+# print(requests.post("http://127.0.0.1:8867/scheduler/jobs/node/process/close").text)
+
+# print(requests.patch("http://127.0.0.1:8867/scheduler/jobs/test_1", json={
+#     # "trigger": "interval",
+#     # "seconds": 5,
+#     "trigger": "cron",
+#     "second": 5,
+# }).text)
 
 
 # import time
@@ -38,7 +47,7 @@
 #             so = socks["test"]
 #             try:
 #                 so.setblocking(False)
-#                 print(so.recv(1024))
+#                 print(so.recv(1))
 #             except (BlockingIOError, socket.timeout):
 #                 print("报错了")
 #             except ConnectionError:

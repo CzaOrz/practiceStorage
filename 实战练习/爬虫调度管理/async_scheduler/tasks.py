@@ -11,12 +11,14 @@ except:
 class BaseTask(ConsumerConfig):
     name = None  # show in web
     spider = None  # spider file.__name__
+    project_git = None
 
     def __init__(self):
         now = timekiller.get_now()
         year, month, day = now.year, now.month, now.day
         log_path = to_path(self.log_dir, str(year), str(month), str(day))
         check_dir(log_path)
+        check_dir(self.project_dir, self.project_git)
         self.log_file = to_path(log_path, f"{uuid4()}.log")
         self.command = f"python {to_path(self.project_dir, self.spider)}.py >{self.log_file} 2>&1"  # add source environment
 

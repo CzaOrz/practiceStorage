@@ -1,5 +1,6 @@
 import os
 import psutil
+import subprocess
 from importlib import import_module
 from minitools import Emailer, timekiller
 
@@ -41,7 +42,7 @@ class TasksPool:
 
 
 def encode_node_task(task, pid=None):
-    return f"{os.getpid()}{task.node_id}", \
+    return f"{pid}_{task.node_id}", \
            {
                "task": task.name,
                "start_time": timekiller.get_now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -55,9 +56,17 @@ def decode_node_task(taskName: str):
     return TasksPool.query_task(taskName)  # type: async_scheduler.tasks.BaseTasks
 
 
-def check_dir(dir_path):
-    os.makedirs(dir_path, exist_ok=True)
-    os.chmod(dir_path, 0o777)
+def check_dir(dir_path, by_git=None):
+    if by_git:
+        if os.path.exists(dir_path):
+            subprocess.run(f"cd {dir_path} && git pull >/dev/null 2>&1", shell=True)
+        else:
+            dir_path = os.path.dirname(dir_path)
+            os.makedirs(dir_path, exist_ok=True)
+            subprocess.run(f"cd dir_path && git clone {by_git} >/dev/null 2>&1", shell=True)
+    else:
+        os.makedirs(dir_path, exist_ok=True)
+        os.chmod(dir_path, 0o777)
 
 
 def kill_pid(pid):

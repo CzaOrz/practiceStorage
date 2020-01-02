@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import time
 import socket
@@ -11,7 +12,7 @@ from concurrent.futures import ProcessPoolExecutor
 from minitools import init_logging_format
 from minitools.db.redisdb import get_redis_client
 from minitools.db.mongodb import get_mongodb_client
-from minitools.db.amqp.rabbitmq import get_rabbitmq
+from minitools.db.amqp.rabbitmq import RestartRabbitMQ
 
 try:
     from local_setting import FlaskConfig, ConsumerConfig, RabbitMQConfig
@@ -29,7 +30,7 @@ def save_task(task=None):
         try:
             max_line = ConsumerConfig.log_max_line
             max_rows = ConsumerConfig.log_max_rows
-            with open(task["log_path"], "r", encoding="utf-8") as f:
+            with open(task["log_path"], "r") as f:
                 while max_line:
                     line = f.readline(max_rows)
                     if line:
@@ -39,7 +40,7 @@ def save_task(task=None):
                         break
         except Exception as e:
             content += "log read error!\n\n"
-            content += e
+            content += e.__repr__()
         client = get_mongodb_client()
         coll = client[ConsumerConfig.mongodb_dbs_task][ConsumerConfig.mongodb_col_task]
         task.setdefault("log_content", content)
@@ -54,6 +55,7 @@ def worker(data, value=None):
         task_name = json_data.get("task_name")
         if not task_name:
             raise Exception(f"there is not task {task_name}")
+        logger.info(f"get task {task_name}")
         redis_client = get_redis_client()
         task = decode_node_task(task_name)
         if task:
@@ -74,10 +76,10 @@ def worker(data, value=None):
 
 
 def run():
-    rabbitmq = get_rabbitmq(queue=RabbitMQConfig.rabbitmq_queue,
-                            conn_auth=RabbitMQConfig.rabbitmq_auth,
-                            conn_params=RabbitMQConfig.rabbitmq_conn_params,
-                            exchange_params=RabbitMQConfig.rabbitmq_exchange_params)
+    rabbitmq = RestartRabbitMQ(queue=RabbitMQConfig.rabbitmq_queue,
+                               conn_auth=RabbitMQConfig.rabbitmq_auth,
+                               conn_params=RabbitMQConfig.rabbitmq_conn_params,
+                               exchange_params=RabbitMQConfig.rabbitmq_exchange_params)
     rabbitmq.start_consuming(worker)
 
 
@@ -85,10 +87,9 @@ class ConsumerProcess:
 
     @classmethod
     def run(cls):
-        with ProcessPoolExecutor(1) as process:
-            while True:
-                process.submit(run)
-                logger.info("process start...")
+        with ProcessPoolExecutor(1) as executor:
+            executor.submit(run)
+            logger.info("process start...")
 
 
 if __name__ == '__main__':
@@ -103,8 +104,10 @@ if __name__ == '__main__':
                 continue
             while True:
                 try:
-                    pid = sch_node.recv(1024).decode()
+                    pid_node = sch_node.recv(1024).decode()
+                    pid, node = pid_node.split("_", 1)
                     print(f"kill {kill_pid(pid)} success")
+                    get_redis_client().hdel(ConsumerConfig.redis_node_pool_tasks, node)
                 except:
                     break
             sch_node.close()
