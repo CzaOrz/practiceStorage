@@ -25,7 +25,8 @@ typedef struct {
     Py_ssize_t allocated;  // 申请的内存的槽的个数
 } PyListObject;
 ```
-python中的list是对其他对象的引用组成连续数组
+python中的list是对其他对象的引用组成连续数组。是一个动态数组，存储在一个连续的内存区块中，
+。push和pop操作的复杂度为O(1)，但是插入和删除元素会造成内存块的移动，复杂度为O(n)。
 
 #### dict
 ###### 解释器赋值：

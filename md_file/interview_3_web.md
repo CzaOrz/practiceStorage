@@ -1,5 +1,7 @@
 ### [Web](#Web)
 * [TCP握手协议](#TCP握手协议)
+* [GET/POST](#GET/POST)
+* [Session、Cookie、Token](#Session/Cookie/Token)
 * [HTTP](#HTTP)
 * [WSGI](#WSGI)
 * [MVC](#MVC)
@@ -12,8 +14,15 @@
 web应用的本质。客户端发起HTTP请求，服务端接收请求作出回应，比如生成一个Html文件，
 然后服务器把此Html文件作为HTTP响应的Body发送给客户端，由客户端进行后续的显示处理。
 
+#### GET/POST
+* GET: 
 
 #### TCP握手协议
+
+#### Session/Cookie/Token
+* Session：是一个概念，即信息存储在客户端。（Flask的session是存储在客户端的）
+* Cookie：是对Session的一种实现，信息存储在客户端。
+* 由于HTTP协议的无状态性，需要识别用户身份时，可以使用到Cookie/Token
 
 
 #### HTTP
