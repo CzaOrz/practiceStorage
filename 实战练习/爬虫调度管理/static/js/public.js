@@ -39,6 +39,7 @@ $(function(){
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),
         api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),
         api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),
+        api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),
         api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),
         api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);
     // first tab panel
@@ -302,6 +303,28 @@ $(function(){
                 myChart.hideLoading();
 				myChart.setOption(option);
             },
+        },
+    });
+    // third tab panel
+    new Vue({
+        el: '#page-3',
+        delimiters: ['[[', ']]'],
+        data(){
+            return {
+                nodes: [],
+                tasks: [],
+            }
+        },
+        mounted(){
+            this.init_api();
+        },
+        methods: {
+            init_api: function() {
+                api_data_for_nodes().then((api_result) => {
+                    this.nodes = api_result.data.nodes;
+                    this.tasks = api_result.data.tasks;
+                })
+            }
         },
     });
     // fourth tab panel
