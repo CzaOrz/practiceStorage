@@ -35,6 +35,7 @@ $(function(){
         };
     // api func
     var
+        api_data_for_logs = () => axios.get('/crawler/api/logs'),
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),
         api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),
         api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),
@@ -303,6 +304,7 @@ $(function(){
             },
         },
     });
+    // fourth tab panel
     var page_4 = new Vue({
         el: '#page-4',
         delimiters: ['[[', ']]'],
@@ -356,6 +358,26 @@ $(function(){
                         page_4.init_api();
                     })
                 }
+            },
+        },
+    });
+    // fifth tab panel
+    new Vue({
+        el: '#page-5',
+        delimiters: ['[[', ']]'],
+        data(){
+            return {
+                logs: []
+            }
+        },
+        mounted(){
+            this.init_api();
+        },
+        methods: {
+            init_api: function() {
+                api_data_for_logs().then((api_result) => {
+                    this.logs = api_result.data;
+                })
             },
         },
     });

@@ -3,7 +3,7 @@ import requests
 # print(requests.get("http://127.0.0.1:8867/scheduler/jobs").text)
 
 print(requests.post("http://127.0.0.1:8867/scheduler/jobs", json={
-    "id": "test_2",
+    "id": "test_3",
     "name":"cza_test",
     "func": "async_scheduler:async_scheduler",
     # "args": ("ZiruHousePrice",),

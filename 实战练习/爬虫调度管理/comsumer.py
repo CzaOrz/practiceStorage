@@ -30,7 +30,7 @@ def save_task(task=None):
         try:
             max_line = ConsumerConfig.log_max_line
             max_rows = ConsumerConfig.log_max_rows
-            with open(task["log_path"], "r") as f:
+            with open(task["log_path"], "r", encoding="utf-8") as f:
                 while max_line:
                     line = f.readline(max_rows)
                     if line:

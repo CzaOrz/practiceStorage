@@ -5,6 +5,11 @@ from minitools import timekiller
 from flask import jsonify, request
 from .bp import bp_crawler
 
+try:
+    from local_setting import ConsumerConfig
+except:
+    from setting import ConsumerConfig
+
 
 @bp_crawler.route("/api/ziru/data")
 @bp_crawler.route("/api/ziru/data/<int:day>")
@@ -36,3 +41,15 @@ def api_lagou():
             "data": "",
             "msg": "Not query data",
         }), 404
+
+
+@bp_crawler.route("/api/logs/<log_id>")
+@bp_crawler.route("/api/logs/")
+def api_log_list(log_id=None):
+    col = get_mongodb_client()[ConsumerConfig.mongodb_dbs_task][ConsumerConfig.mongodb_col_task]
+    if log_id:
+        doc = col.find_one({"_id": log_id}, {"log_content": 1})["log_content"]
+        return f"<pre>{doc}</pre>"
+    documents = col.find({}, {"pid": 0, "log_content": 0}). \
+        sort([('_id', -1)]).skip(0).limit(5)
+    return jsonify(list(documents))

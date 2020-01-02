@@ -46,7 +46,7 @@ def encode_node_task(task, pid=None):
            {
                "task": task.name,
                "start_time": timekiller.get_now().strftime("%Y-%m-%d %H:%M:%S"),
-               "pid": f"{pid or os.getpid()}",
+               "_id": f"{task.log_id}",
            }
 
 
