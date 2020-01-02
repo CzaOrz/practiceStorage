@@ -22,11 +22,12 @@ def index():
     return render_template("index.html")
 
 
-scheduler._add_url_route("close_node_process", '/jobs/<node>/<process_id>/close', close_node_process, 'GET')
+scheduler._add_url_route("close_node_process", '/jobs/<node>/<process_id>/close', close_node_process, 'POST')
 scheduler._add_url_route("all_online_nodes", '/jobs/online/nodes', all_online_nodes, 'GET')
 
 if __name__ == '__main__':
     thread = threading.Thread(target=scheduler_socket)
     thread.setDaemon(True)
     thread.start()
+    app.jinja_env.auto_reload = True  # debug
     app.run(host="0.0.0.0", port=cfg.port)

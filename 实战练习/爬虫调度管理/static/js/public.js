@@ -36,7 +36,10 @@ $(function(){
     // api func
     var
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),
-        api_data_for_lagou = () => axios.get('/crawler/api/lagou/data');
+        api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),
+        api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),
+        api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),
+        api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);
     // first tab panel
     new Vue({
         el: '#page-1',
@@ -299,5 +302,61 @@ $(function(){
 				myChart.setOption(option);
             },
         },
-    })
+    });
+    var page_4 = new Vue({
+        el: '#page-4',
+        delimiters: ['[[', ']]'],
+        data(){
+            return {
+                scheduler_tasks: null,
+            }
+        },
+        mounted(){
+            this.init_api();
+        },
+        methods: {
+            init_api: function() {
+                api_data_for_scheduler_tasks().then((api_result) => {
+                    this.scheduler_tasks = api_result.data;
+                })
+            },
+            open_task: function(taskID) {
+                axios.post(`/scheduler/jobs/${taskID}/resume`).then(() => {
+                    this.init_api();
+                })
+            },
+            close_task: function(taskID) {
+                axios.post(`/scheduler/jobs/${taskID}/pause`).then(() => {
+                    this.init_api();
+                })
+            },
+            edit_task: function(task_info) {
+                scheduler_task_template.task_info = task_info;
+            },
+            delete_task: function(task) {
+                api_data_for_deleting_task(task.id);
+                this.init_api();
+            }
+        },
+    });
+    var scheduler_task_template = new Vue({
+        el: '#scheduler_task_template',
+        delimiters: ['[[', ']]'],
+        data: {
+            task_info: '',
+        },
+        methods: {
+            edit_task: function() {
+                data = {"trigger": "cron"};
+                if (this.task_info.hour) { data['hour'] = this.task_info.hour };
+                if (this.task_info.minute) { data['minute'] = this.task_info.minute };
+                if (this.task_info.second) { data['second'] = this.task_info.second };
+                if (data) {
+                    api_data_for_patch_task(this.task_info.id, data).then(() => {
+                        page_4.init_api();
+                    })
+                }
+            },
+        },
+    });
 })

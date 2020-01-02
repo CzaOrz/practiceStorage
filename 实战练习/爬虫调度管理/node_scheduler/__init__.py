@@ -43,8 +43,7 @@ def all_online_nodes():
         except ConnectionError:
             nodes.pop(node_id)
     data = get_redis_client().hgetall(ConsumerConfig.redis_node_pool_tasks)
-    print(data, type(data))
     return jsonify({
         "nodes": list(nodes.keys()),
-        "tasks": {key.decode(): eval(value.decode()) for key, value in data.items()},
+        "tasks": [(key.decode(), eval(value.decode())) for key, value in data.items()],
     })
