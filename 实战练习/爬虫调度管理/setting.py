@@ -20,6 +20,9 @@ class ConsumerConfig:
     log_dir = current_file_path("logs", __file__)
     project_dir = node_dir
 
+    # max worker process
+    MAX_WORKER_PROCESS = 1
+
     # log config
     log_max_line = 300  # read max line from log
     log_max_rows = 1024  # read max string from one row
@@ -30,6 +33,9 @@ class ConsumerConfig:
     # mongodb config
     mongodb_dbs_task = "scheduler"
     mongodb_col_task = "done"
+
+    # flag for clear dirty node process
+    CLEAR_DIRTY_NODE_PROCESS = b"DirtyProcessClear"
 
 
 class RabbitMQConfig:

@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 import threading
 from flask import Flask, render_template
 from crawler import bp_crawler
 from setting import FlaskConfig
-from node_scheduler import scheduler, scheduler_socket, all_online_nodes, close_node_process
+from node_scheduler import scheduler, scheduler_socket, all_online_nodes, close_node_process, clear_dirty_node_process
 
 # for flask
 app = Flask(__name__)
@@ -22,6 +23,8 @@ def index():
     return render_template("index.html")
 
 
+scheduler._add_url_route("clear_dirty_node_process", '/jobs/nodes/dirty/process/clear',
+                         clear_dirty_node_process, 'POST')
 scheduler._add_url_route("close_node_process", '/jobs/<node>/<process_id>/close', close_node_process, 'POST')
 scheduler._add_url_route("all_online_nodes", '/jobs/online/nodes', all_online_nodes, 'GET')
 

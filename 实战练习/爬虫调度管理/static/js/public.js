@@ -40,6 +40,8 @@ $(function(){
         api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),
         api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),
         api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),
+        api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),
+        api_data_for_clear_dirty_process = () => axios.post(`/scheduler/jobs/nodes/dirty/process/clear`),
         api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),
         api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);
     // first tab panel
@@ -312,7 +314,7 @@ $(function(){
         data(){
             return {
                 nodes: [],
-                tasks: [],
+                node_tasks: [],
             }
         },
         mounted(){
@@ -322,9 +324,19 @@ $(function(){
             init_api: function() {
                 api_data_for_nodes().then((api_result) => {
                     this.nodes = api_result.data.nodes;
-                    this.tasks = api_result.data.tasks;
+                    this.node_tasks = api_result.data.tasks;
                 })
-            }
+            },
+            close_node: function(task) {
+                if (confirm('close this node-process?')){
+                    api_data_for_close_node(task[0], task[1].pid).then(() => this.init_api());
+                }
+            },
+            clear_dirty_process: function() {
+                if (confirm('clear the dirty node process?')){
+                    api_data_for_clear_dirty_process().then(() => this.init_api()).catch((e) => alert(e));
+                }
+            },
         },
     });
     // fourth tab panel

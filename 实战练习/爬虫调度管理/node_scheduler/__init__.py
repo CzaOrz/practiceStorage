@@ -11,7 +11,7 @@ nodes = {}
 
 def scheduler_socket():
     sch_host = socket.socket()
-    sch_host.bind(("127.0.0.1", FlaskConfig.port + 1))
+    sch_host.bind(("0.0.0.0", FlaskConfig.port + 1))
     sch_host.listen(3)
     while True:
         try:
@@ -22,13 +22,28 @@ def scheduler_socket():
             pass
 
 
+def clear_dirty_node_process():
+    if not nodes:
+        return "No Activating Node now", 503
+    nodes_copy = nodes.copy()
+    for node_socket in nodes_copy.values():
+        try:
+            node_socket.send(ConsumerConfig.CLEAR_DIRTY_NODE_PROCESS)
+        except:
+            pass
+    return ""
+
+
 def close_node_process(node, process_id):
     node_id = node.split("_")[-1]
     if node_id not in nodes:
         return "", 404
     node_info = get_redis_client().hget(ConsumerConfig.redis_node_pool_tasks, node)
     if node_info and process_id in node_info.decode():
-        nodes[node_id].send(f"{process_id}_{node}".encode())
+        try:
+            nodes[node_id].send(f"{process_id}_{node}".encode())
+        except:
+            pass
     return ""
 
 

@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Crawler</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
@@ -136,9 +136,10 @@
                             <span class="badge">[[ nodes.length ]]</span>
                             Active Nodes
                         </a>
+                        <a class="list-group-item" href="javascript:void(0)" @click="clear_dirty_process">clear dirty process</a>
                     </div>
                     <ul class="collapse" id="collapseExample" style="padding: 0;">
-                        <li class="list-group-item" v-for="node in nodes">[[ node ]]</li>
+                        <li class="list-group-item list-group-item-success" v-for="node in nodes">[[ node ]]</li>
                     </ul>
                 </div>
                 <div class="col-sm-8">
@@ -153,12 +154,21 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <tr v-for="task in node_tasks">
+                                <td class="text-center">[[ task[0] ]]</td>
+                                <td class="text-center">[[ task[1].task ]]</td>
+                                <td class="text-center">[[ task[1].start_time ]]</td>
+                                <td class="text-center">[[ task[1].pid ]]</td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0)" @click="close_node(task)"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                <div class="col-sm-2 fixElement">
                     <div class="list-group">
+                        <a class="list-group-item" href="javascript:void(0)" @click="init_api">update cur page</a>
                     </div>
                 </div>
             </div>
@@ -189,6 +199,10 @@
                                 <td class="text-center">[[ task['second'] || '---' ]]</td>
                                 <td class="text-center">
                                     <a href="#" @click="close_task(task.id)" v-if="task.next_run_time">
+                                        <div class="switch round">
+                                            <input id="mySwitch3" type="checkbox">
+                                            <label for="mySwitch3"></label>
+                                        </div>
                                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                                     </a>
                                     <a href="#" @click="open_task(task.id)" v-else>
@@ -226,6 +240,11 @@
                                 <td colspan="3"><a :href="'/crawler/api/logs/' + log._id" target="_blank">log-file: [[ log.log_path ]]</a></td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+                <div class="col-sm-2 fixElement">
+                    <div class="list-group">
+                        <a class="list-group-item" href="javascript:void(0)" @click="init_api">update cur page</a>
                     </div>
                 </div>
             </div>

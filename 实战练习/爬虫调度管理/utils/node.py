@@ -47,6 +47,7 @@ def encode_node_task(task, pid=None):
                "task": task.name,
                "start_time": timekiller.get_now().strftime("%Y-%m-%d %H:%M:%S"),
                "_id": f"{task.log_id}",
+               "pid": f"{pid or os.getpid()}",
            }
 
 
@@ -76,3 +77,11 @@ def kill_pid(pid):
     except:
         pass
     return pid
+
+
+def check_pid(pid):
+    try:
+        psutil.Process(int(pid))
+        return True
+    except:
+        return False

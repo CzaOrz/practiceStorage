@@ -44,7 +44,7 @@ def api_lagou():
 
 
 @bp_crawler.route("/api/logs/<log_id>")
-@bp_crawler.route("/api/logs/")
+@bp_crawler.route("/api/logs")
 def api_log_list(log_id=None):
     col = get_mongodb_client()[ConsumerConfig.mongodb_dbs_task][ConsumerConfig.mongodb_col_task]
     if log_id:
