@@ -45,6 +45,7 @@ $(function(){
         api_data_for_clear_dirty_process = () => axios.post(`/scheduler/jobs/nodes/dirty/process/clear`),  // for page-3
 
         api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),  // for page-4
+        api_data_for_add_task = (data) => axios.post('/scheduler/jobs', data),  // for page-4
         api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),  // for page-4
         api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);  // for page-4
 
@@ -371,14 +372,15 @@ $(function(){
             close_node: function(task) {
                 if (confirm('close this node-process?')){
                     api_data_for_close_node(task[0], task[1].pid).then(() => this.init_api()).catch((e) => {
-                        console.log(e);
                         danger_prompt(e, 1000);
                     });
                 }
             },
             clear_dirty_process: function() {
                 if (confirm('clear the dirty node process?')){
-                    api_data_for_clear_dirty_process().then(() => this.init_api()).catch((e) => alert(e));
+                    api_data_for_clear_dirty_process().then(() => this.init_api()).catch((e) => {
+                        danger_prompt(e, 1000);
+                    });
                 }
             },
         },
@@ -398,8 +400,13 @@ $(function(){
         methods: {
             init_api: function() {
                 api_data_for_scheduler_tasks().then((api_result) => {
+                    success_prompt('update task successful~', 500);
                     this.scheduler_tasks = api_result.data;
                 })
+            },
+            add_task: function() {
+                scheduler_task_template.model = 'add';
+                scheduler_task_template.task_info = {trigger: 'cron'};
             },
             open_task: function(taskID) {
                 axios.post(`/scheduler/jobs/${taskID}/resume`).then(() => {
@@ -412,11 +419,13 @@ $(function(){
                 })
             },
             edit_task: function(task_info) {
+                scheduler_task_template.model = 'edit';
                 scheduler_task_template.task_info = task_info;
             },
             delete_task: function(task) {
-                api_data_for_deleting_task(task.id);
-                this.init_api();
+                if (confirm('still delete this task?')) {
+                    api_data_for_deleting_task(task.id).then(() => this.init_api());
+                }
             }
         },
     });
@@ -425,8 +434,18 @@ $(function(){
         delimiters: ['[[', ']]'],
         data: {
             task_info: '',
+            model: '',
         },
         methods: {
+            click_button: function() {
+                if (this.model === 'edit') {
+                    this.edit_task();
+                } else if (this.model === 'add') {
+                    this.add_task();
+                } else {
+                    danger_prompt('there is some error! please contact for manager', 1000);
+                }
+            },
             edit_task: function() {
                 data = {"trigger": "cron"};
                 if (this.task_info.hour) { data['hour'] = this.task_info.hour };
@@ -434,9 +453,37 @@ $(function(){
                 if (this.task_info.second) { data['second'] = this.task_info.second };
                 if (data) {
                     api_data_for_patch_task(this.task_info.id, data).then(() => {
+                        this.clear_task();
                         page_4.init_api();
                     })
                 }
+            },
+            add_task: function() {
+                data = {
+                    id: this,
+                    name: this,
+                    func: this,
+                    kwargs: {task_name: this},
+                    trigger: 'cron',
+                    hour: this.null,
+                    minute: null,
+                    second: null,
+                }
+                if (!(this.task_info.id || this.task_info.name || this.task_info.func || this.task_info.task_name)) {
+                    danger_prompt('input error!', 1000);
+                    return
+                }
+                this.task_info.kwargs = {
+                    task_name: this.task_info.task_name
+                };
+                delete this.task_info.task_name;
+                console.log(this.task_info)
+                return
+                api_data_for_add_task(data).then(() => this.init_api())
+            },
+            clear_task: function() {
+                this.model = '';
+                this.task_info = '';
             },
         },
     });
@@ -455,6 +502,7 @@ $(function(){
         methods: {
             init_api: function() {
                 api_data_for_logs().then((api_result) => {
+                    success_prompt('update logs successful~', 500);
                     this.logs = api_result.data;
                 })
             },

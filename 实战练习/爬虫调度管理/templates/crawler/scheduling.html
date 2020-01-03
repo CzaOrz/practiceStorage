@@ -63,8 +63,8 @@
 			</ul>
             <form class="navbar-form navbar-right">
                 <a type="button" class="btn" data-toggle="modal" data-target="#WebSocket-Chat">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    <span class="badge">[[ unread || '' ]]</span>
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    <span class="badge">123</span>
                 </a>
             </form>
 		</div>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="col-sm-2 fixElement">
                     <div class="list-group">
-                        <a class="list-group-item active text-center" href="javascript:void(0)" @click="init_api">update cur page</a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="init_api">update cur page</a>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-sm-2 fixElement">
                     <div class="list-group">
-                        <a class="list-group-item active text-center" href="javascript:void(0)" @click="init_api">update cur page</a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="init_api">update cur page</a>
                     </div>
                 </div>
             </div>
@@ -199,10 +199,6 @@
                                 <td class="text-center">[[ task['second'] || '---' ]]</td>
                                 <td class="text-center">
                                     <a href="#" @click="close_task(task.id)" v-if="task.next_run_time">
-                                        <div class="switch round">
-                                            <input id="mySwitch3" type="checkbox">
-                                            <label for="mySwitch3"></label>
-                                        </div>
                                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                                     </a>
                                     <a href="#" @click="open_task(task.id)" v-else>
@@ -217,8 +213,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                <div class="col-sm-2 fixElement">
                     <div class="list-group">
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="init_api">update task</a>
+                        <a class="list-group-item text-center" href="javascript:void(0)" @click="add_task"  type="button" data-toggle="modal" data-target="#scheduler_task_template">add task</a>
                     </div>
                 </div>
             </div>
@@ -261,18 +259,41 @@
             </div>
             <div class="modal-body">
 <form class="form-horizontal">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">taskID</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" :value="task_info.id" disabled>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">taskID</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" v-model="task_info.id" disabled v-if="model==='edit'">
+            <input type="email" class="form-control fixed" v-model="task_info.id" v-else-if="model==='add'">
+        </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">hour</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control"  v-model="task_info.hour">
+    <div class="form-group" v-if="model==='add'">
+        <label class="col-sm-2 control-label">taskName</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" v-model="task_info.name">
+        </div>
     </div>
-  </div>
+    <div class="form-group" v-if="model==='add'">
+        <label class="col-sm-2 control-label">taskFunc</label>
+        <div class="col-sm-10">
+            <select class="form-control" v-model="task_info.func">
+                <option>async_scheduler:async_scheduler</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" v-if="model==='add'">
+        <label class="col-sm-2 control-label">spider</label>
+        <div class="col-sm-10">
+            <select class="form-control" v-model="task_info.task_name">
+                <option>ZiruHousePrice</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">hour</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control"  v-model="task_info.hour">
+        </div>
+    </div>
   <div class="form-group">
     <label  class="col-sm-2 control-label">minute</label>
     <div class="col-sm-10">
@@ -285,10 +306,16 @@
       <input type="text" class="form-control" v-model="task_info.second">
     </div>
   </div>
+    <div class="form-group" v-if="model==='add'">
+        <label class="col-sm-2 control-label">other</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control fixed" v-model="">
+        </div>
+    </div>
 </form>
             </div>
             <div class="modal-footer">
-                <button @click="edit_task" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+                <button @click="click_button" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
