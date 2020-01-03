@@ -35,15 +35,20 @@ $(function(){
         };
     // api func
     var
-        api_data_for_logs = () => axios.get('/crawler/api/logs'),
-        api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),
-        api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),
-        api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),
-        api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),
-        api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),
-        api_data_for_clear_dirty_process = () => axios.post(`/scheduler/jobs/nodes/dirty/process/clear`),
-        api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),
-        api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);
+        api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),  // for page-1
+        api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),  // for page-1
+
+        api_data_for_news_classify = (data) => axios.post('/other/news/classify', data),  // for page-2
+
+        api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),  // for page-3
+        api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),  // for page-3
+        api_data_for_clear_dirty_process = () => axios.post(`/scheduler/jobs/nodes/dirty/process/clear`),  // for page-3
+
+        api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),  // for page-4
+        api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),  // for page-4
+        api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);  // for page-4
+
+        api_data_for_logs = () => axios.get('/crawler/api/logs'),  // for page-5 logs
     // first tab panel
     new Vue({
         el: '#page-1',
@@ -307,6 +312,42 @@ $(function(){
             },
         },
     });
+    // second tab panel
+    new Vue({
+        el: '#page-2',
+        delimiters: ['[[', ']]'],
+        data(){
+            return {
+                title: '',
+                news_classify: [],
+                news_classify_running: false,
+            }
+        },
+        methods: {
+            init_api: function() {
+                this.title = '';
+                this.news_classify = [];
+                this.news_classify_running = false;
+                success_prompt('update successful~', 500);
+            },
+            classify: function() {
+                if (this.news_classify_running) {
+                    danger_prompt("this interface is running~ Not try again please~", 1000);
+                    return
+                }
+                if (this.title) {
+                    var new_title = this.title;
+                    this.news_classify_running = true;
+                    api_data_for_news_classify({title: new_title}).then((api_result) => {
+                        this.news_classify.push([api_result.data.classify, new_title]);
+                        this.news_classify_running = false;
+                    }).catch(() => this.news_classify_running = false);
+                } else {
+                    danger_prompt("Please input an valid title!", 1000);
+                }
+            },
+        },
+    });
     // third tab panel
     new Vue({
         el: '#page-3',
@@ -329,7 +370,10 @@ $(function(){
             },
             close_node: function(task) {
                 if (confirm('close this node-process?')){
-                    api_data_for_close_node(task[0], task[1].pid).then(() => this.init_api());
+                    api_data_for_close_node(task[0], task[1].pid).then(() => this.init_api()).catch((e) => {
+                        console.log(e);
+                        danger_prompt(e, 1000);
+                    });
                 }
             },
             clear_dirty_process: function() {

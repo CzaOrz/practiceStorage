@@ -56,7 +56,7 @@
 		<div class="collapse navbar-collapse" id="nav-body">
 			<ul class="nav navbar-nav">
                 <li class="active" role="presentation"><a href="#page-1" aria-controls="page-1" role="tab" data-toggle="tab">数据展示</a></li>
-                <li role="presentation"><a href="#page-2" aria-controls="page-2" role="tab" data-toggle="tab">分析展示</a></li>
+                <li role="presentation"><a href="#page-2" aria-controls="page-2" role="tab" data-toggle="tab">数据分析</a></li>
                 <li role="presentation"><a href="#page-3" aria-controls="page-3" role="tab" data-toggle="tab">节点管理</a></li>
                 <li role="presentation"><a href="#page-4" aria-controls="page-4" role="tab" data-toggle="tab">调度管理</a></li>
                 <li role="presentation"><a href="#page-5" aria-controls="page-5" role="tab" data-toggle="tab">日志管理</a></li>
@@ -92,36 +92,36 @@
         <div class="container-fluid" id="main-body-2">
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-8">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th class="text-center">汇总表单</th>
-                                <th class="text-center">Count</th>
-                                <th class="text-center">异常总次数</th>
-                                <th class="text-center">运维总次数</th>
-                                <th class="text-center">占比</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="data in data_summary">
-                                <td class="text-center">[[ data[0] ]]</td>
-                                <td class="text-center">[[ data[1] ]]</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">[[ data[2] || '-']]</td>
-                            </tr>
-                            <tr v-for="data in data_statistical">
-                                <td class="text-center">[[ data[0] ]]</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">[[ data[1].toFixed(2) ]]</td>
-                                <td class="text-center">[[ data[2].toFixed(2) ]]</td>
-                                <td class="text-center">[[ data[3] ]]</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">新闻分类</div>
+                        <div class="panel-body">
+                            <p><strong>接口说明：</strong></p>
+                            <p>该新闻分类接口，基于词频统计模型（朴素贝叶斯算法）</p>
+                            <p>以2w+政府公开新闻作为训练数据（特征：`标题`/`分类`）</p>
+                            <p>中文切词采用的Python开源库jieba</p>
+                            <hr>
+                            <p><strong>新闻标题样例：</strong></p>
+                            <p class="lead">国家主席习近平发表二〇二〇年新年贺词</p>
+                            <p class="lead">激发“互联网+政务服务”内外合力</p>
+                            <p class="lead">监督管理局突破传统监管思维定式努力实现食品安全共建共治共享</p>
+                            <p class="lead">市男子冰球队获“工人先锋号”荣誉称号</p>
+                            <hr>
+                            <div class="form-group">
+                                <label for="new_classify">Interface:</label>
+                                <input type="text" class="form-control" id="new_classify" placeholder="please input new title" v-model="title">
+                            </div>
+                            <button type="submit" class="btn btn-default" @click="classify">Submit</button>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" v-if="news_classify" v-for="data in news_classify">
+                                classify: <strong>[[ data[0] ]]</strong>. from: [[ data[1] ]]
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-sm-2 col-sm-offset-10 fixElement">
+                <div class="col-sm-2 fixElement">
                     <div class="list-group">
+                        <a class="list-group-item active text-center" href="javascript:void(0)" @click="init_api">update cur page</a>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-sm-2 fixElement">
                     <div class="list-group">
-                        <a class="list-group-item" href="javascript:void(0)" @click="init_api">update cur page</a>
+                        <a class="list-group-item active text-center" href="javascript:void(0)" @click="init_api">update cur page</a>
                     </div>
                 </div>
             </div>

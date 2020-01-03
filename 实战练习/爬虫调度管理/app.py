@@ -2,6 +2,7 @@
 import threading
 from flask import Flask, render_template
 from crawler import bp_crawler
+from other import bp_other
 from setting import FlaskConfig
 from node_scheduler import scheduler, scheduler_socket, all_online_nodes, close_node_process, clear_dirty_node_process
 
@@ -11,6 +12,7 @@ cfg = FlaskConfig()
 app.config.from_object(cfg)
 # for blueprint
 app.register_blueprint(bp_crawler)
+app.register_blueprint(bp_other)
 # for apschedule
 scheduler.init_app(app)
 scheduler.start()
