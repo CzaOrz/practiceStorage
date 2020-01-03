@@ -459,16 +459,6 @@ $(function(){
                 }
             },
             add_task: function() {
-                data = {
-                    id: this,
-                    name: this,
-                    func: this,
-                    kwargs: {task_name: this},
-                    trigger: 'cron',
-                    hour: this.null,
-                    minute: null,
-                    second: null,
-                }
                 if (!(this.task_info.id || this.task_info.name || this.task_info.func || this.task_info.task_name)) {
                     danger_prompt('input error!', 1000);
                     return
@@ -477,9 +467,7 @@ $(function(){
                     task_name: this.task_info.task_name
                 };
                 delete this.task_info.task_name;
-                console.log(this.task_info)
-                return
-                api_data_for_add_task(data).then(() => this.init_api())
+                api_data_for_add_task(this.task_info).then(() => page_4.init_api())
             },
             clear_task: function() {
                 this.model = '';

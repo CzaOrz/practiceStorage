@@ -16,8 +16,6 @@ app.register_blueprint(bp_other)
 # for apschedule
 scheduler.init_app(app)
 scheduler.start()
-# for nodes scheduler socket
-nodes = {}
 
 
 @app.route("/")

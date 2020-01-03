@@ -255,64 +255,65 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Scheduler-Task-Info</h4>
+                <h4 class="modal-title">Task-Info</h4>
             </div>
             <div class="modal-body">
-<form class="form-horizontal">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">taskID</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" v-model="task_info.id" disabled v-if="model==='edit'">
-            <input type="email" class="form-control fixed" v-model="task_info.id" v-else-if="model==='add'">
-        </div>
-    </div>
-    <div class="form-group" v-if="model==='add'">
-        <label class="col-sm-2 control-label">taskName</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" v-model="task_info.name">
-        </div>
-    </div>
-    <div class="form-group" v-if="model==='add'">
-        <label class="col-sm-2 control-label">taskFunc</label>
-        <div class="col-sm-10">
-            <select class="form-control" v-model="task_info.func">
-                <option>async_scheduler:async_scheduler</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group" v-if="model==='add'">
-        <label class="col-sm-2 control-label">spider</label>
-        <div class="col-sm-10">
-            <select class="form-control" v-model="task_info.task_name">
-                <option>ZiruHousePrice</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">hour</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control"  v-model="task_info.hour">
-        </div>
-    </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">minute</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" v-model="task_info.minute">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">second</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" v-model="task_info.second">
-    </div>
-  </div>
-    <div class="form-group" v-if="model==='add'">
-        <label class="col-sm-2 control-label">other</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control fixed" v-model="">
-        </div>
-    </div>
-</form>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">taskID</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" v-model="task_info.id" disabled v-if="model==='edit'">
+                        <input type="email" class="form-control fixed" v-model="task_info.id" v-else-if="model==='add'">
+                    </div>
+                </div>
+                <div class="form-group" v-if="model==='add'">
+                    <label class="col-sm-2 control-label">taskName</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" v-model="task_info.name">
+                    </div>
+                </div>
+                <div class="form-group" v-if="model==='add'">
+                    <label class="col-sm-2 control-label">taskFunc</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" v-model="task_info.func">
+                            <option>async_scheduler:async_scheduler</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" v-if="model==='add'">
+                    <label class="col-sm-2 control-label">spider</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" v-model="task_info.task_name">
+                            <option>ZiruHousePrice</option>
+                            <option>LagouJob</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">hour</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"  v-model="task_info.hour">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">minute</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" v-model="task_info.minute">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">second</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" v-model="task_info.second">
+                    </div>
+                </div>
+                <div class="form-group" v-if="model==='add'">
+                    <label class="col-sm-2 control-label">other</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control fixed">
+                    </div>
+                </div>
+            </form>
             </div>
             <div class="modal-footer">
                 <button @click="click_button" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
