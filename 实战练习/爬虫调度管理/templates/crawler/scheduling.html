@@ -39,6 +39,9 @@
             padding: 15px;
             border-radius: 0.9em;
         }
+        .fixElement {
+            position: fixed;
+        }
     </style>
 </head>
 <body>
@@ -80,10 +83,19 @@
                         <li class="list-group-item"><div id="page1-line-chat"></div></li>
                     </ul>
                     <ul class="list-group">
-                        <li class="list-group-item"><div id="page1-scatter-chat"></div></li>
+                        <li class="list-group-item">
+                            <div id="page1-scatter-chat"></div>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-2 col-sm-offset-10 fixElement">
+                    <div class="list-group">
+                        <select class="form-control" v-model="query">
+                            <option>python</option>
+                            <option>java</option>
+                        </select>
+                        <button class="btn form-control btn-info" @click="submit_query">submit</button>
+                    </div>
                 </div>
             </div>
         </div>

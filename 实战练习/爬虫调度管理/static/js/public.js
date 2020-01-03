@@ -36,7 +36,7 @@ $(function(){
     // api func
     var
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),  // for page-1
-        api_data_for_lagou = () => axios.get('/crawler/api/lagou/data'),  // for page-1
+        api_data_for_lagou = (data) => axios.get(`/crawler/api/lagou/data?query=${data}`),  // for page-1
 
         api_data_for_news_classify = (data) => axios.post('/other/news/classify', data),  // for page-2
 
@@ -57,6 +57,8 @@ $(function(){
         data(){
             return {
                 api_ziru_data: null,
+                query: 'python',
+                current_query: 'python',
             }
         },
         mounted(){
@@ -68,11 +70,22 @@ $(function(){
         },
         methods: {
             init_api: function(){
-                axios.all([api_data_for_ziru(), api_data_for_lagou()])
+                axios.all([api_data_for_ziru(), api_data_for_lagou('python')])
                 .then(axios.spread((ziru, lagou) => {
                     this.init_line_chart(this.lineChart, ziru.data.data);
                     this.init_scatter_chart(this.scatterChinaChart, lagou.data.data);
                 }));
+            },
+            submit_query: function() {
+                if (this.query === this.current_query) {
+                    danger_prompt(`current query is ${this.query}`, 1000);
+                } else {
+                    this.current_query = this.query;
+                    this.scatterChinaChart.showLoading();
+                    api_data_for_lagou(this.query).then((api_result) => {
+                        this.init_scatter_chart(this.scatterChinaChart, api_result.data.data);
+                    })
+                }
             },
             init_line_chart: function(myChart, api_result){
                 ziru = api_result.ziru;
@@ -155,7 +168,7 @@ $(function(){
                 normalized_list_gap = normalized_list_max - normalized_list_min;
                 option = {
                     title: {
-                        text: '主要城市岗位分布 - python',
+                        text: `主要城市岗位分布 - ${this.current_query}`,
                         subtext: 'data from lagou',
                         sublink: 'https://www.lagou.com/jobs/allCity.html',
                         left: 'center'
@@ -165,7 +178,7 @@ $(function(){
                         formatter: (params) => {
                             if (params.name) {
                                 return `<p style="font-size:18px">${params.name}</p>
-                                <p style="font-size:14px">python岗位: ${params.value[2]}</p>`;
+                                <p style="font-size:14px">${this.current_query}岗位: ${params.value[2]}</p>`;
                             }
                         },
                     },
