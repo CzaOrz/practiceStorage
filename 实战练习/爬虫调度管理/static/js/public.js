@@ -322,6 +322,7 @@ $(function(){
                     ]
                 };
                 myChart.hideLoading();
+                myChart.clear();
 				myChart.setOption(option);
             },
         },
