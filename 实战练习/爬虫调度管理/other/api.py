@@ -43,3 +43,19 @@ def news_classification():
                     wordLabel = '其他信息' if '畜牧兽医' in label else label
         return jsonify({'classify': wordLabel, 'version': 'v3', 'status': 1})
     abort(403)
+
+
+@bp_other.route('/house/predict', methods=["POST"])
+def house_predict():
+    city = request.json.get("city", None)
+    area = request.json.get("area", None)
+    house_area = request.json.get("house_area", None)
+    if all((city, area, house_area)):
+        with open(current_file_path('house_price.json', __file__), 'r') as f:
+            try:
+                json_data = json.loads(f.read())
+                k, b, min_, ave_, max_ = json_data[city][area]
+                return jsonify([int(house_area) * k + b, min_, ave_, max_])
+            except:
+                return abort(503)
+    abort(403)
