@@ -39,7 +39,8 @@ $(function(){
         api_data_for_lagou = (data) => axios.get(`/crawler/api/lagou/data?query=${data}`),  // for page-1
 
         api_data_for_news_classify = (data) => axios.post('/other/news/classify', data),  // for page-2
-        api_data_for_house_predicts = (data) => axios.post('/house/predict', data),
+        api_data_for_house_predicts = (data) => axios.post('/house/predict', data),  // for page-2
+        api_data_for_house_predict_areas = () => axios.get('/house/predict/areas'),  // for page-2
 
         api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),  // for page-3
         api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),  // for page-3
@@ -345,6 +346,9 @@ $(function(){
                 house_predicts: [],
                 house_predict_running: false,
             }
+        },
+        mounted(){
+            api_data_for_house_predict_areas().then((api_result) => console.log(api_result.data));
         },
         methods: {
             init_api: function() {

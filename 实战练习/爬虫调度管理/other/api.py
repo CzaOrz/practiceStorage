@@ -59,3 +59,16 @@ def house_predict():
             except:
                 return abort(503)
     abort(403)
+
+
+@bp_other.route('/house/predict/areas')
+def house_predict_areas():
+    try:
+        with open(current_file_path('house_price.json', __file__), 'r') as f:
+            json_data = json.loads(f.read())
+            res = dict()
+            for key in json_data:
+                res[key] = list(json_data[key].keys())
+            return jsonify(res)
+    except:
+        abort(403)
