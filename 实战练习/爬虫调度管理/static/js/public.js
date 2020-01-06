@@ -39,6 +39,7 @@ $(function(){
         api_data_for_lagou = (data) => axios.get(`/crawler/api/lagou/data?query=${data}`),  // for page-1
 
         api_data_for_news_classify = (data) => axios.post('/other/news/classify', data),  // for page-2
+        api_data_for_house_predicts = (data) => axios.post('/house/predict', data),
 
         api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),  // for page-3
         api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),  // for page-3
@@ -333,9 +334,16 @@ $(function(){
         delimiters: ['[[', ']]'],
         data(){
             return {
+                // for new classify
                 title: '',
                 news_classify: [],
                 news_classify_running: false,
+                // for house predicts
+                city: '',
+                area: '',
+                house_area: '',
+                house_predicts: [],
+                house_predict_running: false,
             }
         },
         methods: {
@@ -359,6 +367,23 @@ $(function(){
                     }).catch(() => this.news_classify_running = false);
                 } else {
                     danger_prompt("Please input an valid title!", 1000);
+                }
+            },
+            predicts: function() {
+                if (this.house_predict_running) {
+                    danger_prompt("this interface is running~ Not try again please~", 1000);
+                    return
+                }
+                if (this.city && this.area && this.house_area) {
+                    this.house_predict_running = true;
+                    api_data_for_house_predicts({
+                        city: city, area: area, house_area: house_area,
+                    }).then((api_result) => {
+                        this.house_predicts.push([api_result.data.classify, new_title]);
+                        this.house_predict_running = false;
+                    }).catch(() => this.news_classify_running = false);
+                } else {
+                    danger_prompt("Please input an valid house-area!", 1000);
                 }
             },
         },

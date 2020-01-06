@@ -130,6 +130,37 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">新闻分类</div>
+                        <div class="panel-body">
+                            <p><strong>接口说明：</strong></p>
+                            <p>该新闻分类接口，基于词频统计模型（朴素贝叶斯算法）</p>
+                            <p>以2w+政府公开新闻作为训练数据（特征：`标题`/`分类`）</p>
+                            <p>中文切词采用的Python开源库jieba</p>
+                            <hr>
+                            <p><strong>新闻标题样例：</strong></p>
+                            <p class="lead">国家主席习近平发表二〇二〇年新年贺词</p>
+                            <p class="lead">激发“互联网+政务服务”内外合力</p>
+                            <p class="lead">监督管理局突破传统监管思维定式努力实现食品安全共建共治共享</p>
+                            <p class="lead">市男子冰球队获“工人先锋号”荣誉称号</p>
+                            <hr>
+                            <div class="form-group">
+                                <label for="new_classify">Interface:</label>
+<!--                                <select>-->
+<!--                                    <option></option>-->
+<!--                                    <option></option>-->
+<!--                                    <option></option>-->
+<!--                                </select>-->
+                                <input type="text" class="form-control" id="house_predict" placeholder="please " v-model="house_area">
+                            </div>
+                            <button type="submit" class="btn btn-default" @click="predicts">Submit</button>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" v-if="house_predicts" v-for="data in house_predicts">
+
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-sm-2 fixElement">
                     <div class="list-group">
