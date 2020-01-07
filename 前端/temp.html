@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crawler</title>
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />-->
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<!--    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=6cIzNbg5BuMGOGc6TECDSkFoC3Mgvly9"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>-->
+</head>
+<body>
+<style>
+    .button {
+        transition: all 0.5s ease;
+        width: 50px;
+        height: 50px;
+        left: 0px;
+        position: relative;
+        display: block;
+        background-color: green;
+        border-radius: 10px;
+    }
+    .button-click {
+        left: 50px;
+    }
+</style>
+<div style="background-color:red; height:50vh; width:50vh;" id="test">
+    <div style="height:50px; width: 200px; background-color: yellow; border-radius: 10px;
+position: absolute;">
+        <a href="#" @click="click_func" class="button" :class="{'button-click': isClick}">
+            <div class="" style="">
+
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#test',
+        data(){
+            return {
+                isClick: false,
+            }
+        },
+        methods: {
+            click_func: function() {
+                this.isClick = (!this.isClick);
+            },
+        },
+    })
+</script>
+</body>
+</html>
