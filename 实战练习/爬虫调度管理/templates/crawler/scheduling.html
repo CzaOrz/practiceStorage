@@ -42,6 +42,44 @@
         .fixElement {
             position: fixed;
         }
+        .switch-container-close {
+            background-color: #E0E0E0;
+            border-radius: 10px;
+            padding: 0px;
+            margin: 0px;
+            max-width: 70px;
+            margin: auto;
+        }
+        .switch-container-open {
+            background-color: #AED581;
+            border-radius: 10px;
+            padding: 0px;
+            margin: 0px;
+            max-width: 70px;
+            margin: auto;
+        }
+        .boll-close {
+            transition: all 0.5s ease;
+            float: left;
+            height: 20px;
+            width: 20px;
+            background-color: #9E9E9E;
+            display: block;
+            padding: 0px;
+            margin: 0px;
+            border-radius: 10px;
+        }
+        .boll-open {
+            transition: all 0.5s ease;
+            float: right;
+            height: 20px;
+            width: 20px;
+            background-color: #43A047;
+            display: block;
+            padding: 0px;
+            margin: 0px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -244,12 +282,16 @@
                                 <td class="text-center">[[ task['minute'] || '---' ]]</td>
                                 <td class="text-center">[[ task['second'] || '---' ]]</td>
                                 <td class="text-center">
-                                    <a href="#" @click="close_task(task.id)" v-if="task.next_run_time">
-                                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                                    </a>
-                                    <a href="#" @click="open_task(task.id)" v-else>
-                                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
-                                    </a>
+                                    <div class="switch-container-open container-fluid" v-if="task.next_run_time">
+                                        <a href="#"  @click="close_task(task.id)">
+                                            <div class="boll-open"></div>
+                                        </a>
+                                    </div>
+                                    <div class="switch-container-close container-fluid" v-else>
+                                        <a href="#"  @click="open_task(task.id)">
+                                            <div class="boll-close"></div>
+                                        </a>
+                                    </div>
                                 </td>
                                 <td class="text-center">
                                     <a href="#" @click="edit_task(task)" type="button" data-toggle="modal" data-target="#scheduler_task_template"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
