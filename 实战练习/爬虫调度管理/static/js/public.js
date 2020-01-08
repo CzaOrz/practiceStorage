@@ -39,8 +39,8 @@ $(function(){
         api_data_for_lagou = (data) => axios.get(`/crawler/api/lagou/data?query=${data}`),  // for page-1
 
         api_data_for_news_classify = (data) => axios.post('/other/news/classify', data),  // for page-2
-        api_data_for_house_predicts = (data) => axios.post('/house/predict', data),  // for page-2
-        api_data_for_house_predict_areas = () => axios.get('/house/predict/areas'),  // for page-2
+        api_data_for_house_predicts = (data) => axios.post('/other/house/predict', data),  // for page-2
+        api_data_for_house_predict_areas = () => axios.get('/other/house/predict/areas'),  // for page-2
 
         api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),  // for page-3
         api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),  // for page-3
@@ -345,10 +345,15 @@ $(function(){
                 house_area: '',
                 house_predicts: [],
                 house_predict_running: false,
+                all_area_keys_info: [],
+                all_area_info: [],
             }
         },
         mounted(){
-            api_data_for_house_predict_areas().then((api_result) => console.log(api_result.data));
+            api_data_for_house_predict_areas().then((api_result) => {
+                this.all_area_keys_info = Object.keys(api_result.data)
+                this.all_area_info = api_result.data
+            });
         },
         methods: {
             init_api: function() {
@@ -378,12 +383,15 @@ $(function(){
                     danger_prompt("this interface is running~ Not try again please~", 1000);
                     return
                 }
-                if (this.city && this.area && this.house_area) {
+                city = this.city;
+                area = this.area;
+                house_area = this.house_area;
+                if (city && area && house_area) {
                     this.house_predict_running = true;
                     api_data_for_house_predicts({
                         city: city, area: area, house_area: house_area,
                     }).then((api_result) => {
-                        this.house_predicts.push([api_result.data.classify, new_title]);
+                        this.house_predicts.push([city, area, house_area, api_result.data]);
                         this.house_predict_running = false;
                     }).catch(() => this.news_classify_running = false);
                 } else {

@@ -144,20 +144,23 @@
                             <p class="lead"></p>
                             <p class="lead"></p>
                             <hr>
-                            <div class="form-group">
+                            <div class="form-group">query
                                 <label for="new_classify">Interface:</label>
-<!--                                <select>-->
-<!--                                    <option></option>-->
-<!--                                    <option></option>-->
-<!--                                    <option></option>-->
-<!--                                </select>-->
+                                <select class="form-control" v-model="city">
+                                    <option v-for="area_key_info of all_area_keys_info">[[ area_key_info ]]</option>
+                                </select>
+                                <select class="form-control" v-model="area">
+                                    <option v-for="area_area_info of all_area_info[city]">[[ area_area_info ]]</option>
+                                </select>
                                 <input type="text" class="form-control" id="house_predict" placeholder="please " v-model="house_area">
                             </div>
                             <button type="submit" class="btn btn-default" @click="predicts">Submit</button>
                         </div>
                         <ul class="list-group">
                             <li class="list-group-item" v-if="house_predicts" v-for="data in house_predicts">
-
+                                info: [[ data[0] + '-' + data[1] + '-' + data[2] + 'm^2' ]]<br>
+                                predict: <strong>[[ '$' + parseInt(data[3][0]) ]]</strong><br>
+                                distance-from-subway: <strong>[[ 'min/ave/max: ' + parseInt(data[3][1]) + '/' + parseInt(data[3][2]) + '/' + parseInt(data[3][3]) ]]</strong>
                             </li>
                         </ul>
                     </div>

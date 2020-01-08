@@ -51,7 +51,7 @@ def house_predict():
     area = request.json.get("area", None)
     house_area = request.json.get("house_area", None)
     if all((city, area, house_area)):
-        with open(current_file_path('house_price.json', __file__), 'r') as f:
+        with open(current_file_path('house_price.json', __file__), 'r', encoding='utf-8') as f:
             try:
                 json_data = json.loads(f.read())
                 k, b, min_, ave_, max_ = json_data[city][area]
@@ -64,7 +64,7 @@ def house_predict():
 @bp_other.route('/house/predict/areas')
 def house_predict_areas():
     try:
-        with open(current_file_path('house_price.json', __file__), 'r') as f:
+        with open(current_file_path('house_price.json', __file__), 'r', encoding='utf-8') as f:
             json_data = json.loads(f.read())
             res = dict()
             for key in json_data:
