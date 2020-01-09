@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import threading
+from minitools import to_md5
 from flask import Flask, render_template, request, abort
 from crawler import bp_crawler
 from other import bp_other
@@ -30,7 +31,7 @@ def api_authentication():
             '/scheduler/jobs/<node>',
             '/scheduler/jobs/<job_id>')):
         token = request.cookies.get('token')
-        if token and token == 'czaissg':
+        if token and to_md5(token) == 'e67224f2f17d8a4c2327f6f05cbb4ab7':
             return
         return abort(403)
 
