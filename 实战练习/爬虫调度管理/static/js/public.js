@@ -1,4 +1,5 @@
 $(function(){
+    // ajax carry cookies
     axios.defaults.withCredentials=true;
     // public func for alert
     var
@@ -55,6 +56,21 @@ $(function(){
         api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);  // for page-4
 
         api_data_for_logs = () => axios.get('/crawler/api/logs'),  // for page-5 logs
+    // nar bar
+    new Vue({
+        el: '#nav-top',
+        delimiters: ['[[', ']]'],
+        data(){
+            return {
+                token: '',
+            }
+        },
+        methods: {
+            check_token: function(){
+                
+            },
+        }
+    });
     // first tab panel
     new Vue({
         el: '#page-1',
