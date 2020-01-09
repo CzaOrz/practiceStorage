@@ -1,4 +1,5 @@
 $(function(){
+    axios.defaults.withCredentials=true;
     // public func for alert
     var
         prompt = function (message, style, time){
@@ -464,11 +465,15 @@ $(function(){
             open_task: function(task) {
                 api_data_for_open_task(task.id).then(() => {
                     task.next_run_time = true;
+                }).catch(() => {
+                    danger_prompt('have no permissions', 1000);
                 })
             },
             close_task: function(task) {
                 api_data_for_close_task(task.id).then(() => {
                     task.next_run_time = false;
+                }).catch(() => {
+                    danger_prompt('have no permissions', 1000);
                 })
             },
             edit_task: function(task_info) {
@@ -477,7 +482,9 @@ $(function(){
             },
             delete_task: function(task) {
                 if (confirm('still delete this task?')) {
-                    api_data_for_deleting_task(task.id).then(() => this.init_api());
+                    api_data_for_deleting_task(task.id).then(() => this.init_api()).catch(() => {
+                    danger_prompt('have no permissions', 1000);
+                });
                 }
             }
         },
@@ -508,6 +515,8 @@ $(function(){
                     api_data_for_patch_task(this.task_info.id, data).then(() => {
                         this.clear_task();
                         page_4.init_api();
+                    }).catch(() => {
+                        danger_prompt('have no permissions', 1000);
                     })
                 }
             },

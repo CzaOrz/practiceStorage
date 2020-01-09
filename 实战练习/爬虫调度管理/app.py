@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import threading
-from flask import Flask, render_template
+from flask import Flask, render_template, request, abort
 from crawler import bp_crawler
 from other import bp_other
 from setting import FlaskConfig
@@ -21,6 +21,18 @@ scheduler.start()
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.before_request
+def api_authentication():
+    if str(request.url_rule).startswith((
+            '/scheduler/jobs/nodes',
+            '/scheduler/jobs/<node>',
+            '/scheduler/jobs/<job_id>')):
+        token = request.cookies.get('token')
+        if token and token == 'czaissg':
+            return
+        return abort(403)
 
 
 scheduler._add_url_route("clear_dirty_node_process", '/jobs/nodes/dirty/process/clear',
