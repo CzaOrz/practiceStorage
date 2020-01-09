@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import threading
 from minitools import to_md5
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, make_response, redirect
 from crawler import bp_crawler
 from other import bp_other
 from setting import FlaskConfig
@@ -21,7 +21,12 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    token = request.args.get('token')
+    if token and to_md5(token) == 'e67224f2f17d8a4c2327f6f05cbb4ab7':
+        response = make_response(redirect('/crawler'))
+        response.set_cookie('token', token, max_age=3600)
+        return response
+    abort(404)
 
 
 @app.before_request

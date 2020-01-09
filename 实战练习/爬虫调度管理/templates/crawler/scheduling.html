@@ -103,8 +103,8 @@
                 <li role="presentation"><a href="#page-5" aria-controls="page-5" role="tab" data-toggle="tab">日志管理</a></li>
 			</ul>
             <form class="navbar-form navbar-right">
-                <input type="password" class="form-control" placeholder="Token">
-                <button class="btn btn-default">Submit</button>
+                <input type="password" class="form-control" placeholder="Token" v-model="token">
+                <button class="btn btn-default" @click="check_token">Submit</button>
             </form>
 		</div>
 	</div>

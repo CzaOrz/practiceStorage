@@ -37,6 +37,8 @@ $(function(){
         };
     // api func
     var
+        check_token_func = (token) => axios.get(`/?token=${token}`),
+
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),  // for page-1
         api_data_for_lagou = (data) => axios.get(`/crawler/api/lagou/data?query=${data}`),  // for page-1
 
@@ -67,7 +69,14 @@ $(function(){
         },
         methods: {
             check_token: function(){
-                
+                if (this.token) {
+                    check_token_func(this.token).catch(() => {
+                        danger_prompt('Invalid Token!', 1000)
+                    })
+                } else {
+                    danger_prompt('Empty Token!', 1000)
+                }
+                this.token = '';
             },
         }
     });
