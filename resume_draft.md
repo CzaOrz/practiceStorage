@@ -42,30 +42,18 @@
     * 其他说明：
         * 工作情况：整体工作表现优异，有责任心，由基础爬虫开发到承接特殊爬虫、pdf转码、数据分析等任务
         * 辞职原因：生活原因。
+<hr>
 
-
-<table>
-<tr style="background-color: green">
-    <th colspan="1">项目经验</th>
-    <th colspan="2"></th>
-</tr>
-<tr>
-    <td rowspan="2">开源项目Pywss</td>
-    <td colspan="2">
-    基于socket编写。旨在快速开发WebSocket后端服务。<br>
-    详情见：https://github.com/CzaOrz/Pywss/blob/master/README.md
-    </td>
-</tr>
-<tr>
-    <td colspan="2">
-    项目地址：https://github.com/CzaOrz/Pywss<br>
-    Demo地址：https://czaorz.github.io/Pywss/client</td>
-</tr>
-<tr>
-    <td rowspan="2">基于自如房价的分析</td>
-    <td colspan="2">包括爬虫开发，数据清洗。前后端开发，数据分析等。</td>
-</tr>
-<tr>
-    <td colspan="2">......</td>
-</tr>
-</table>
+#### 项目经验
+* 分布式爬虫调度系统
+    * 项目说明：
+        * 基于Flask、Flask-Apscheduler、RabbitMQ、Redis、Mongodb搭建的分布式爬虫调度系统。<br>
+        架构图见：（画一个图？），发布者与订阅者之间通过broker通信，在维持此关系的基础上，每一个节点与服务端额外搭建一个socket长连接<br>
+        用于管理与监控节点信息。
+    * 项目链接：
+    * demo：
+* 开源项目Pywss
+    * 项目说明：
+        * 基于socket编写，旨在快速搭建简易websocket服务端
+    * 项目链接： https://github.com/CzaOrz/Pywss
+    * demo： https://czaorz.github.io/Pywss/client
