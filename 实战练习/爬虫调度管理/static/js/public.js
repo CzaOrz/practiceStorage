@@ -48,6 +48,8 @@ $(function(){
 
         api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),  // for page-4
         api_data_for_add_task = (data) => axios.post('/scheduler/jobs', data),  // for page-4
+        api_data_for_open_task = (taskID) => axios.post(`/scheduler/jobs/${taskID}/resume`),  // for page-4
+        api_data_for_close_task = (taskID) => axios.post(`/scheduler/jobs/${taskID}/pause`),  // for page-4
         api_data_for_patch_task = (taskID, data) => axios.patch(`/scheduler/jobs/${taskID}`, data),  // for page-4
         api_data_for_deleting_task = (taskID) => axios.delete(`/scheduler/jobs/${taskID}`);  // for page-4
 
@@ -459,14 +461,14 @@ $(function(){
                 scheduler_task_template.model = 'add';
                 scheduler_task_template.task_info = {trigger: 'cron'};
             },
-            open_task: function(taskID) {
-                axios.post(`/scheduler/jobs/${taskID}/resume`).then(() => {
-                    this.init_api();
+            open_task: function(task) {
+                api_data_for_open_task(task.id).then(() => {
+                    task.next_run_time = true;
                 })
             },
-            close_task: function(taskID) {
-                axios.post(`/scheduler/jobs/${taskID}/pause`).then(() => {
-                    this.init_api();
+            close_task: function(task) {
+                api_data_for_close_task(task.id).then(() => {
+                    task.next_run_time = false;
                 })
             },
             edit_task: function(task_info) {
