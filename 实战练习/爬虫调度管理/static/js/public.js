@@ -37,7 +37,7 @@ $(function(){
         };
     // api func
     var
-        check_token_func = (token) => axios.get(`/?token=${token}`),
+        check_token_func = (token) => axios.get(`/?token=${token}`),  // for top nav bar
 
         api_data_for_ziru = () => axios.get('/crawler/api/ziru/data'),  // for page-1
         api_data_for_lagou = (data) => axios.get(`/crawler/api/lagou/data?query=${data}`),  // for page-1
