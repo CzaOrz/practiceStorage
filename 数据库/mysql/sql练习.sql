@@ -15,31 +15,31 @@
 -- MAX
 -- MIN
 
--- INNER JOIN Ö»·µ»ØÍ¬Ê±´æÔÚÓÚÁ½ÕÅ±íµÄÐÐÊý¾Ý
--- RIGHT OUTER JOIN ·µ»ØÓÒ±í¶¼´æÔÚµÄÐÐ
--- LEFT OUTER JOIN ·µ»Ø×ó±í¶¼´æÔÚµÄÐÐ
--- FULL OUTER JOIN ·µ»ØÁ½ÕÅ±íµÄËùÓÐ¼ÇÂ¼
+-- INNER JOIN åªè¿”å›žåŒæ—¶å­˜åœ¨äºŽä¸¤å¼ è¡¨çš„è¡Œæ•°æ®
+-- RIGHT OUTER JOIN è¿”å›žå³è¡¨éƒ½å­˜åœ¨çš„è¡Œ
+-- LEFT OUTER JOIN è¿”å›žå·¦è¡¨éƒ½å­˜åœ¨çš„è¡Œ
+-- FULL OUTER JOIN è¿”å›žä¸¤å¼ è¡¨çš„æ‰€æœ‰è®°å½•
 
 /* students
 id	class_id	name	gender	score
-1	1	        Ð¡Ã÷	M	    90
-2	1	        Ð¡ºì	F	    95
-3	1	        Ð¡¾ü	M	    88
-4	1	        Ð¡Ã×	F	    73
-5	2	        Ð¡°×	F	    81
-6	2	        Ð¡±ø	M	    55
-7	2	        Ð¡ÁÖ	M	    85
-8	3	        Ð¡ÐÂ	F	    91
-9	3	        Ð¡Íõ	M	    89
-10	3	        Ð¡Àö	F	    88
+1	1	        å°æ˜Ž	M	    90
+2	1	        å°çº¢	F	    95
+3	1	        å°å†›	M	    88
+4	1	        å°ç±³	F	    73
+5	2	        å°ç™½	F	    81
+6	2	        å°å…µ	M	    55
+7	2	        å°æž—	M	    85
+8	3	        å°æ–°	F	    91
+9	3	        å°çŽ‹	M	    89
+10	3	        å°ä¸½	F	    88
 */
 
 /* classes
 id	name
-1	Ò»°à
-2	¶þ°à
-3	Èý°à
-4	ËÄ°à
+1	ä¸€ç­
+2	äºŒç­
+3	ä¸‰ç­
+4	å››ç­
 */
 
 -- STRUCT OF TABLE

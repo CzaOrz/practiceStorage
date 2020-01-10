@@ -1,8 +1,8 @@
 ### [Web](#Web)
-* [��������ͷ������](#��������ͷ������)
-* [TCP����Э��](#TCP����Э��)
+* [正向代理和反向代理](#正向代理和反向代理)
+* [TCP握手协议](#TCP握手协议)
 * [GET/POST](#GET/POST)
-* [Session��Cookie��Token](#Session/Cookie/Token)
+* [Session、Cookie、Token](#Session/Cookie/Token)
 * [HTTP](#HTTP)
 * [WSGI](#WSGI)
 * [MVC](#MVC)
@@ -12,135 +12,135 @@
 ----------
 
 ## web
-webӦ�õı��ʡ��ͻ��˷���HTTP���󣬷���˽�������������Ӧ����������һ��Html�ļ���
-Ȼ��������Ѵ�Html�ļ���ΪHTTP��Ӧ��Body���͸��ͻ��ˣ��ɿͻ��˽��к�������ʾ������
+web应用的本质。客户端发起HTTP请求，服务端接收请求作出回应，比如生成一个Html文件，
+然后服务器把此Html文件作为HTTP响应的Body发送给客户端，由客户端进行后续的显示处理。
 
-#### ��������ͷ������
-##### �������
-��������ǿͻ��˵Ĵ�����Ҳ���ǿͻ���ͨ���������ʷ�����������������У���������ֻ��
-֪���Ǵ����ڷ����ң�����֪���˴η��ʵ�ʵ����������˭��
+#### 正向代理和反向代理
+##### 正向代理
+正向代理是客户端的代理，也就是客户端通过代理访问服务器，在这个流程中，服务器端只能
+知道是代理在访问我，并不知道此次访问的实际作用者是谁。
 
-##### �������
-��������Ƿ������˵Ĵ������ڿͻ��˷��ʷ������Ĺ����У��ͻ���ʵ�ʽӴ������Ƿ������˵�
-������Ҳ����˵����ֱ�ӶԽӷ������������ɴ������к�����ת���������ʵ�ʴ����ķ�������
+##### 反向代理
+反向代理是服务器端的代理。在客户端访问服务器的过程中，客户端实际接触到的是服务器端的
+代理。也就是说并不直接对接服务器，而是由代理进行后续的转发，分配给实际处理的服务器。
 
 #### GET/POST
 * GET: 
 
-#### TCP����Э��
-�������̾��ǿͻ��˷��������һ�����ģ��������Ӧ�˴α��ĸ��ͻ��ˣ��ͻ����ٴλ�Ӧ�������ӡ�
-�Ͽ���ʱ�򣬿ͻ��˷��͡�����
-* ��������
-    * ����TCP���ӵ��������֣�������������ܼƷ�����3������Ŀ����Ϊ��ȷ��˫���Ľ���������
-    ���������Ƿ�������Ҳָ�����Լ��ĳ�ʼ�����к�Ϊ����Ŀɿ��Դ�����׼����
-    * ʵ���ϣ����ǿͻ������ӷ����ָ���˿ڣ�����TCP���ӣ���ͬ������˫�������кź�ȷ�Ϻţ�
-    ����`TCP���ڴ�С��Ϣ`
-    * ��ʼ״̬Ϊ���ͻ��˴���Closed������˴���Listen
-    * ��һ�����֡��ͻ��˸�����˷���һ��SYN���ģ���ָ���ͻ��˵ĳ�ʼ�����к�ISN����ʱ�ͻ��˽���
-    SYN_SENT״̬��<br>
-    �ײ���ͬ��λSYN=1����ʼ�����sqp=x��SYN=1�ı��Ĳ���Я�����ݣ�����Ҫ����һ�����
-    * �ڶ������֣�������յ��ͻ��˵�SYN���ĺ󣬻����Լ���SYN������ΪӦ�𣬲���Ҳ��ָ�����Լ���
-    ��ʼ�����к�ISN��ͬʱ��ѿͻ���ISN+1��ΪACKֵ����ʾ�Լ��Ѿ��յ��˿ͻ��˵�SYN����ʱ������
-    ����SYN_RCVD״̬��<br>
-    ��ȷ�ϱ�����SYN=1��ACK=1��ȷ�Ϻ�Ϊack=x+1����ʼ���seq=y
-    * ���������֣��ͻ��˽��յ���SYN���ĺ󣬻ᷢ��һ��ACK���ģ�Ҳ�ǰɷ�������ISN+1��ΪACK��ֵ��
-    ��ʾ�Ѿ��յ��˷���˵�SYN���ġ�����˽��յ�ACK�󣬱��״̬������ESTABLISHED״̬����ʱ˫��
-    �ѽ������ӡ�<br>
-    ȷ�ϱ���ack=1��ȷ�Ϻ�ack=y+1�����seq=x+1����Ϊ��ʼ��seq=x�����Եڶ������ľ���Ҫ��Ӧx+1��
-    ����ֻ��ACK���Ŀ���Я�����ݣ���Я��������������š�
-    * ���͵�һ��SYN��һ�˽�ִ�������򿪣�active open�����������SYN��������һ��SYN��
-    ��һ����ִ�б����򿪣�passive open��
-    * ��һ�����֣��ǿͻ��˷����������ֻ��ȷ�Ͽͻ��˷���������ok�ģ�Ȼ�����˽����ˣ�
-    �Ǿ�ȷ�Ϸ���˵Ľ���������ok��<br>
-    �ڶ������֣�����˷������Ǿ�ȷ�Ϸ���˵ķ���������ok�ģ��ͻ��˽��յ��ˡ��Ǿ���ȷ�Ͽͻ���
-    ����������ok�ģ����ˣ�����ȷ��˫���ķ��͵Ľ�����������ok�ģ������ǵĽǶ������������ġ�
-    * ���������֣��ͻ��˷���������˽��գ�Ҳ�ʹ�����������Ѿ���ok�ġ�
-    * �����Ӷ��С�����������һ�ν��յ�SYN��ʱ�򣬾ʹ���SYN_RCVD״̬����ʱ˫����û����ȫ�������ӡ�
-    ��������Ѵ���״̬���������ӷ���һ�������У����ǳƴ˶���Ϊ�����Ӷ��С�<br>
-    ��ôȫ���Ӷ��о����Ѿ�������������ֵ�socket��ŵط������������˾Ϳ��ܳ��ֶ���������
-    * SYN_ACK�ش���������������������SYN_ACK�������δ�յ��ͻ��˵�ȷ�ϰ�������������еڶ���
-    �ش����ܶ���ʼ��֪������������������ش���������ʱ�Ὣ��������Ϣ�Ӷ�����ɾ����
-* INS��Initial Sequence Number��
-    * ��һ�ν������Ӷ���������SYNʱ����Ϊ����ѡ��һ����ʼ��š�ISN��ʱ����仯�����ÿһ��ISN����
-    �߱���ͬ��ISN��ISN���Կ�����һ��32���صļ�������û4ms��һ������ѡ����ŵ�Ŀ�����ڷ�ֹ�����ӳٵ��µĴ���
-    * �������ֵ�һ����Ҫ���ܾ��ǿͻ��˺ͷ���˽���ISN���Ա��öԷ�֪���������������ݵ�ʱ����ΰ������װ���ݡ�
-    ���ISN�ǹ̶��ģ������ߺ����ײ³�������ȷ�Ϻš�
-    * ����������ֻ�����һ�οͻ��˵�ACK����Я�����ݣ������������ֲ�����Я�����ݣ�������÷����������ױ�������
-    �����ڵ�һ�������з���������ݣ�������ӷ������Ĵ���ʱ�䡣
-* SYN����
-    * ����˵���Դ�������ڶ�������ʱ����ģ����ͻ��˵���Դ����ʵ�������������ʱ����ġ�SYN��������Client
-    �ڶ�ʱ����α����������ڵ�IP��ַ��������Server�ˣ�Ҳ���ǲ��ϵ���Server����SYN����Server��ͣ��
-    �ظ�ȷ�ϰ������ȴ����ӡ�����Դ��ַ�����ڣ����Server��ȷ�ϰ���������Ӧ����Server�Ի᲻�ϵ�����ֱ��ɾ����
-    ��Щα���SYN��ʱ���ռ��δ���Ӷ��У�����������SYN������Ϊ�����������������Ӷ�����������������ϵͳ̱����
-    * ��鷽�����ǣ��ڷ������п��������İ�����״̬����IPԴ�������ʱ�򣬻������Զ϶��Ǳ�SYN������
-    * ����������1�����̳�ʱʱ�䡣2�����������������3���������ط�����4��SYN cookies����
-* �Ĵλ���
-    * ����TCP�İ�ر����Ե��µġ���رյ���˼����TCP�ṩ�����ӵ�һ���ڽ������ķ��ͺ��ܽ���������һ��
-    ���ݵ�������
-    * �Ĵλ��֣�Ҳ�����ܼ���Ҫ�����ĸ����ݰ���˫��������������ر�����/���ֶ�����
-    * ��һ�λ��֣��ͻ��˷���һ��FIN���ģ����Ļ�ָ��һ�����кš���ʱ�ͻ��˴���FIN_WAIT1״̬��
-    �����������ͷű��ĶΣ�FIN=1�����seq=u������ֹͣ�ڷ������ݣ������ر�TCP���ӣ�����FIN_WAIT1����ֹ�ȴ�1��
-    ״̬���ȴ������ȷ�ϡ�
-    * �ڶ��λ��֣�����˽��յ�FIN֮�󣬻ᷢ��ACK���ģ��ɿͻ��˵����к�+1��ΪACK���ĵ����к�ֵ�������Ѿ�
-    ���յ��ͻ��˵ı����ˣ���ʱ����˴���CLOSE_WAIT״̬��
-    ��ʱTCP���ڰ�����״̬���ͻ����յ�����˵�ȷ�Ϻ󣬽���FIN_WAIT2״̬���ȴ�����˷����������ͷű��ĶΡ�
-    * �����λ��֣������׼�����˶Ͽ������ˣ��Ϳͻ���һ��������FIN���ģ���ָ�����кţ���ʱ����˴���LAST_ACK״̬��
-    ��ʱ���к�Ϊseq=w��ȷ�Ϻ�Ϊack=u+1���ȴ��ͻ��˵�ȷ�ϡ�
-    * ���Ĵλ��֣��ͻ����յ�FIN֮��һ������ACK��ΪӦ�𣬰ɷ���˵����к�+1��Ϊ�Լ�ACK���ģ���ʱ
-    ����˴���TIME_WAIT״̬����Ҫ��һ������ȷ������˽��յ��Լ���ACK���ġ�����˽��յ���ʹ���CLOSED״̬�ˡ�
-    * Ϊʲô��Ҫ�ĴΡ������������У��������Ӧʱ����ֱ�ӷ���SYN+ACK���ģ�����ACKʱ����Ӧ��
-    ��SYN������������ͬ���ġ�
-    ���ǹر����ӣ�Ҳ���Ƿ���˽��յ�FIN��ʱ��ʱ���������ر�socket������ֻ���Ȼظ�һ��ACK���ģ����߿ͻ��ˣ����FIN
-    ���յ��ˡ�ֻ�еȵ��ҷ���˴�������socket�����ܷ���FIN���ġ�Ӧ�˲���һ���͡�
-* 2MSL�ȴ�״̬
-    * TIME_WAIT״̬Ҳ��2MSL�ȴ�״̬��ÿһ��TCPʵ����Ҫѡ��һ�������������ʱ��MSL��Maximum Segment Lifetime��
-    �����κα��ı�����ǰ�������ڵ��ʱ��
-    * Ŀ����������
-        * 1����֤�ͻ��˷��͵����һ��ACK�����ܹ��ﵽ����ˡ�
-        * 2����ֹ��ʧЧ���������ĳ����ڱ������С�
+#### TCP握手协议
+总体流程就是客户端发给服务端一个报文，服务端响应此次报文给客户端，客户端再次回应建立连接。
+断开的时候，客户端发送。。。
+* 三次握手
+    * 建立TCP连接的三次握手，在这个过程中总计发送了3个包，目的是为了确保双方的接收能力和
+    发送能力是否正常，也指定了自己的初始化序列号为后面的可靠性传输做准备。
+    * 实质上，就是客户端连接服务端指定端口，建立TCP连接，并同步连接双方的序列号和确认号，
+    交换`TCP窗口大小信息`
+    * 初始状态为：客户端处于Closed，服务端处于Listen
+    * 第一次握手。客户端给服务端发送一个SYN报文，并指定客户端的初始化序列号ISN。此时客户端进入
+    SYN_SENT状态。<br>
+    首部的同步位SYN=1，初始化序号sqp=x、SYN=1的报文不能携带数据，但需要消耗一个序号
+    * 第二次握手，服务端收到客户端的SYN报文后，会以自己的SYN报文作为应答，并且也是指定了自己的
+    初始化序列号ISN，同时会把客户端ISN+1作为ACK值，表示自己已经收到了客户端的SYN，此时服务器
+    处于SYN_RCVD状态。<br>
+    在确认报文中SYN=1，ACK=1，确认号为ack=x+1，初始序号seq=y
+    * 第三次握手，客户端接收到了SYN报文后，会发送一个ACK报文，也是吧服务器的ISN+1作为ACK的值，
+    表示已经收到了服务端的SYN报文。服务端接收到ACK后，变更状态并处于ESTABLISHED状态，此时双方
+    已建立连接。<br>
+    确认报文ack=1，确认号ack=y+1，序号seq=x+1，因为初始化seq=x，所以第二个报文就需要相应x+1，
+    有且只有ACK报文可以携带数据，不携带数据则不消耗序号。
+    * 发送第一个SYN的一端将执行主动打开（active open），接收这个SYN并发回下一个SYN，
+    另一端则执行被动打开（passive open）
+    * 第一次握手，是客户端发送网络包，只能确认客户端发送能力是ok的，然后服务端接收了，
+    那就确认服务端的接收能力是ok的<br>
+    第二次握手，服务端发包，那就确认服务端的发送能力是ok的，客户端接收到了。那就能确认客户端
+    接收能力是ok的，至此，可以确认双方的发送的接收能力都是ok的，从我们的角度来看是这样的。
+    * 第三次握手，客户端发包，服务端接收，也就代表这个流程已经是ok的。
+    * 半连接队列。当服务器第一次接收到SYN的时候，就处于SYN_RCVD状态，此时双方还没有完全建立连接。
+    服务器会把此种状态下请求连接放在一个队列中，我们称此队列为半连接队列。<br>
+    那么全连接队列就是已经完成了三次握手的socket存放地方。当队列满了就可能出现丢包的现象。
+    * SYN_ACK重传次数，服务器当发送完SYN_ACK包后，如果未收到客户端的确认包，服务器会进行第二次
+    重传，周而复始，知道重连次数超过最大重传次数，此时会将该连接信息从队列中删除。
+* INS（Initial Sequence Number）
+    * 当一段建立连接而发送他的SYN时，他为连接选择一个初始序号。ISN随时间而变化，因此每一个ISN都将
+    具备不同的ISN。ISN可以看作是一个32比特的计数器，没4ms加一。这样选择序号的目的在于防止网络延迟导致的错误。
+    * 三次握手的一个重要功能就是客户端和服务端交换ISN，以便让对方知道接下来接收数据的时候如何按序号组装数据。
+    如果ISN是固定的，攻击者很容易猜出后续的确认号。
+    * 三次握手中只有最后一次客户端的ACK可以携带数据，其他两次握手不可以携带数据，否则会让服务器更容易被攻击。
+    比如在第一次连接中放入大量数据，则会增加服务器的处理时间。
+* SYN攻击
+    * 服务端的资源分配是在二次握手时分配的，而客户端的资源分配实在完成三次握手时分配的。SYN攻击就是Client
+    在短时间内伪造大量不存在的IP地址，并访问Server端，也就是不断的向Server发送SYN包，Server则不停的
+    回复确认包，并等待连接。由于源地址不存在，因此Server的确认包不会有响应，但Server仍会不断的重试直至删除。
+    这些伪造的SYN长时间的占用未连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络阻塞甚至系统瘫痪。
+    * 检查方法就是，在服务器中看到大量的半连接状态，且IP源是随机的时候，基本可以断定是被SYN攻击。
+    * 防御方法：1、缩短超时时间。2、增加最大连接数。3、过滤网关防御。4、SYN cookies技术
+* 四次挥手
+    * 是由TCP的半关闭特性导致的。半关闭的意思就是TCP提供了连接的一端在结束他的发送后还能接收来自另一端
+    数据的能力。
+    * 四次挥手，也就是总计需要交互四个数据包。双方均可主动发起关闭请求/挥手动作。
+    * 第一次挥手，客户端发送一个FIN报文，报文会指定一个序列号。此时客户端处于FIN_WAIT1状态。
+    即发出连接释放报文段（FIN=1，序号seq=u），并停止在发送数据，主动关闭TCP连接，进入FIN_WAIT1（终止等待1）
+    状态，等待服务端确认。
+    * 第二次挥手，服务端接收到FIN之后，会发送ACK报文，吧客户端的序列号+1作为ACK报文的序列号值，表明已经
+    接收到客户端的报文了，此时服务端处于CLOSE_WAIT状态。
+    此时TCP处于半连接状态。客户端收到服务端的确认后，进入FIN_WAIT2状态，等待服务端发出的连接释放报文段。
+    * 第三次挥手，服务端准备好了断开连接了，和客户端一样，发送FIN报文，且指定序列号，此时服务端处于LAST_ACK状态。
+    此时序列号为seq=w，确认号为ack=u+1，等待客户端的确认。
+    * 第四次挥手，客户端收到FIN之后，一样发送ACK作为应答，吧服务端的序列号+1作为自己ACK报文，此时
+    服务端处于TIME_WAIT状态，需要过一阵子以确保服务端接收到自己的ACK报文。服务端接收到后就处于CLOSED状态了。
+    * 为什么需要四次。在三次握手中，服务端响应时可以直接发送SYN+ACK报文，其中ACK时用来应答，
+    而SYN报文则是用来同步的。
+    但是关闭连接，也就是服务端接收到FIN的时候时不会立即关闭socket，所以只能先回复一个ACK报文，告诉客户端，你的FIN
+    我收到了。只有等到我服务端处理完了socket，才能发送FIN报文。应此不能一起发送。
+* 2MSL等待状态
+    * TIME_WAIT状态也是2MSL等待状态。每一个TCP实现需要选择一个报文最大生存时间MSL（Maximum Segment Lifetime）
+    他是任何报文被丢弃前在网络内的最长时间
+    * 目的有两个：
+        * 1、保证客户端发送的最后一个ACK报文能够达到服务端。
+        * 2、防止已失效连接请求报文出现在本连接中。
 
 #### Session/Cookie/Token
-* Session����һ���������Ϣ�洢�ڿͻ��ˡ���Flask��session�Ǵ洢�ڿͻ��˵ģ�
-* Cookie���Ƕ�Session��һ��ʵ�֣���Ϣ�洢�ڿͻ��ˡ�
-* ����HTTPЭ�����״̬�ԣ���Ҫʶ���û�����ʱ������ʹ�õ�Cookie/Token
+* Session：是一个概念，即信息存储在客户端。（Flask的session是存储在客户端的）
+* Cookie：是对Session的一种实现，信息存储在客户端。
+* 由于HTTP协议的无状态性，需要识别用户身份时，可以使用到Cookie/Token
 
 
 #### HTTP
-HTTP��һ���ı�Э�飬Ҳ�ǳ��õ�����ͨ��Э�顣
+HTTP是一种文本协议，也是常用的网络通信协议。
 
-һ��HTTP�¼�������Header��Body���¼�ͨ����Ϊ�����¼�����Ӧ�¼���
+一次HTTP事件，包含Header和Body。事件通常分为请求事件和响应事件。
 
-�����¼�Header�У���Ҫ��ͷ�ͱ��ġ�Body�Ǹ�������ʽ�Ŀ�ѡ�¼�
-* **GET / HTTP/1.1** ��ͷ��������ʽ������·����Э��汾
-* **Host: www.google.com** ��������Key:Value�Ľṹ���
+请求事件Header中，主要报头和报文。Body是根据请求方式的可选事件
+* **GET / HTTP/1.1** 报头包含请求方式、请求路径、协议版本
+* **Host: www.google.com** 报文则由Key:Value的结构组成
 
-��Ӧ�¼�Header�У�Ҳ������ͷ�ͱ��ģ�Body������������������ܿ���������
-* **HTTP/1.1 200 OK** ��Ӧ��ͷ�а���Э��汾����Ӧ״̬�롢��Ϣ˵��
-* **X-Powered-By: Express** ������һ������Key:Value�Ľṹ���
+响应事件Header中，也包括报头和报文，Body就是我们在浏览器中能看到的内容
+* **HTTP/1.1 200 OK** 响应报头中包含协议版本、响应状态码、信息说明
+* **X-Powered-By: Express** 报文则一样，由Key:Value的结构组成
 
-Header֮����\r\n���л��֣���������\r\n\r\n������������ȫΪbody��
+Header之间以\r\n进行划分，出现两个\r\n\r\n，则后面的数据全为body。
 
-200�ɹ���3xx�ض���4xx�ͻ����쳣��5xx������쳣
+200成功、3xx重定向、4xx客户端异常、5xx服务端异常
 
 
 #### WSGI
-**Web-Server-Gateway-Interface** web���������ؽӿ�
+**Web-Server-Gateway-Interface** web服务器网关接口
 
-��򵥵�webӦ�þ����Ȱ�html�ļ�����ã������е�HTTP�����������û�����Ȼ��ֱ�ӷ������е�html�ļ���
-��������ǳ�˵�ľ�̬����������Nginx�ȡ�
+最简单的web应用就是先把html文件保存好，用先有的HTTP服务器接受用户请求，然后直接返回已有的html文件。
+这就是我们常说的静态服务器，如Nginx等。
 
-��ʵ����һ��webӦ�ÿ��ܸ��ӵĶ࣬��Ҫ���ǻ�ȡHTTP������Ϣ��������Ȼ��������Ӧ�Ĵ����ٴ�����ء�
-��Ϊ�˼򻯿�����WSGI�ӿڳ����ˡ���ʵ���˶�HTTP����ĳ�����װ���Ա�webӦ�ý��к����Ĵ�����
+而实际上一个web应用可能复杂的多，需要我们获取HTTP请求信息并解析，然后做出对应的处理再打包返回。
+故为了简化开发，WSGI接口出现了。他实现了对HTTP请求的初步包装，以便web应用进行后续的处理。
 
-һ��WSGI�ӿڣ���װHTTP����󣬻�ΪwebӦ���ṩ�����������ֱ�Ϊenviron��start_response��
-* **environ** �˲�����һ��dict���󣬰�����������HTTP������Ϣ
-* **start_response** �˲�����һ���������������ڷ���HTTP��Ӧ���ĵĺ���
+一个WSGI接口，封装HTTP请求后，会为web应用提供两个参数，分别为environ和start_response。
+* **environ** 此参数是一个dict对象，包含有完整的HTTP请求信息
+* **start_response** 此参数是一个函数对象，是用于发送HTTP响应报文的函数
 
-webӦ�ã���WSGI�ӿ��л�ȡ���������������к����Ĵ�����ҵ���߼���ɺ�
-�����ҽ��ܵ���һ��start_response���������ڷ�����Ӧ����
-```start_response("200 fucking", [("Content-Type", "this/is/a/joking")])```��
-�˺�������������������һ������Ӧ��ͷ���������״̬�����Ϣ˵�����ڶ�������Ӧ���ģ���һ��list��
-��Ԫ����tuple��tuple�ڲ�Ϊ����string���ֱ��Ӧ�ű����е�Key:Value
+web应用，从WSGI接口中获取这两个参数并进行后续的处理，业务逻辑完成后。
+调用且仅能调用一次start_response函数，用于返回响应报文
+```start_response("200 fucking", [("Content-Type", "this/is/a/joking")])```，
+此函数接受两个参数，第一个是响应报头，里面包含状态码和信息说明。第二个是响应报文，是一个list，
+子元素是tuple，tuple内部为两个string，分别对应着报文中的Key:Value
 ```
 from wsgiref.simple_server import make_server
 def test_app(environ, start_response):
@@ -152,17 +152,17 @@ web.serve_forever()
 
 
 #### MVC
-Model-View-Controller ���� ģ��-��ͼ-������
+Model-View-Controller —— 模型-视图-控制器
 
-python��˴����У�������·�ɵĺ��������࣬���ǿ���������Ҫ����ҵ���߼�
+python后端代码中，负责处理路由的函数或者类，就是控制器，主要负责业务逻辑
 
-����jinjia2��Django�Դ�ģ���ܣ�����һЩ����{{}}����������ļ���������ͼ����Ҫ������ʾ�߼���
-Ҳ����ͨ��һЩ�򵥵��滻���������յ���ʾҳ�档
+而像jinjia2或Django自带模板框架，里面一些带有{{}}特殊变量的文件，就是视图，主要负责显示逻辑。
+也就是通过一些简单的替换，生成最终的显示页面。
 
-��ҵ���߼� ���ݸ� ��ʾ�߼� �Ĳ��֣�����Modelģ�塣��������һ���ֵ䣬Ҳ��һ��ӳ�����
-���û���Ϊ����Ⱦ��ͼ������Ŀ��ģ��
+而业务逻辑 传递给 显示逻辑 的部分，即是Model模板。本质上是一个字典，也是一个映射表。
+作用还是为了渲染视图，生成目标模板
 
-MVC�ܹ�������������ҵ���߼�����ʾ�߼���
+MVC架构，初步拆离了业务逻辑与显示逻辑。
 
 
 #### Flask

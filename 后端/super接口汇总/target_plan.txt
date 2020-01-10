@@ -1,26 +1,26 @@
 GET/POST/OPTIONS/multi_path/args/form/json/cookie/session/return_404/return_template/template_drawing/return_json/return_str/redirect
-01¡¢ÆÕÍ¨GETÇëÇó -> ·µ»Østr
-02¡¢¶àÂ·¾¶GETÇëÇó -> ·µ»Ø¶¯Ì¬Â·¾¶
-03¡¢´ø²ÎÊýµÄGETÇëÇó -> ·µ»Ø×éºÏ²ÎÊýµÄstr
+01ã€æ™®é€šGETè¯·æ±‚ -> è¿”å›žstr
+02ã€å¤šè·¯å¾„GETè¯·æ±‚ -> è¿”å›žåŠ¨æ€è·¯å¾„
+03ã€å¸¦å‚æ•°çš„GETè¯·æ±‚ -> è¿”å›žç»„åˆå‚æ•°çš„str
 
-04¡¢POSTÇëÇó -> Ð¯´øform -> ·µ»Øform-dataµÄjsonÊý¾Ý
-05¡¢POSTÇëÇó -> Ð¯´øjson -> ·µ»ØÄ¿±êjsonµÄjsonÊý¾Ý
+04ã€POSTè¯·æ±‚ -> æºå¸¦form -> è¿”å›žform-dataçš„jsonæ•°æ®
+05ã€POSTè¯·æ±‚ -> æºå¸¦json -> è¿”å›žç›®æ ‡jsonçš„jsonæ•°æ®
 
-06¡¢GETÇëÇó -> Ð¯´øcookie -> »ñÈ¡cookie²¢·µ»ØÖ¸¶¨jsonÊý¾Ý
-07¡¢POSTÇëÇó -> Ð¯´øcookie -> »ñÈ¡cookie²¢·µ»ØÖ¸¶¨jsonÊý¾Ý
+06ã€GETè¯·æ±‚ -> æºå¸¦cookie -> èŽ·å–cookieå¹¶è¿”å›žæŒ‡å®šjsonæ•°æ®
+07ã€POSTè¯·æ±‚ -> æºå¸¦cookie -> èŽ·å–cookieå¹¶è¿”å›žæŒ‡å®šjsonæ•°æ®
 
-08¡¢GETÇëÇó -> ·µ»Ø404 ÎÞÄ£°åäÖÈ¾
-09¡¢GETÇëÇó -> ·µ»Ø404 ¸½´øÄ£°åäÖÈ¾
-10¡¢POSTÇëÇó -> ·µ»Ø404 ÎÞÄ£°åäÖÈ¾
-11¡¢POSTÇëÇó -> ·µ»Ø404 ¸½´øÖ¸¶¨ÖØ¶¨Ïò´úÂë
+08ã€GETè¯·æ±‚ -> è¿”å›ž404 æ— æ¨¡æ¿æ¸²æŸ“
+09ã€GETè¯·æ±‚ -> è¿”å›ž404 é™„å¸¦æ¨¡æ¿æ¸²æŸ“
+10ã€POSTè¯·æ±‚ -> è¿”å›ž404 æ— æ¨¡æ¿æ¸²æŸ“
+11ã€POSTè¯·æ±‚ -> è¿”å›ž404 é™„å¸¦æŒ‡å®šé‡å®šå‘ä»£ç 
 
-12¡¢GETÇëÇó -> ·µ»ØÄ£°åÇÒäÖÈ¾, °üÀ¨js/cssµÈÎÄ¼þµÄ¼ÓÔØ
-13¡¢GETÇëÇó -> ÖØ¶¨Ïòµ½Ä¿±êÍøÒ³Ä£°åÇÒäÖÈ¾
+12ã€GETè¯·æ±‚ -> è¿”å›žæ¨¡æ¿ä¸”æ¸²æŸ“, åŒ…æ‹¬js/cssç­‰æ–‡ä»¶çš„åŠ è½½
+13ã€GETè¯·æ±‚ -> é‡å®šå‘åˆ°ç›®æ ‡ç½‘é¡µæ¨¡æ¿ä¸”æ¸²æŸ“
 
-14¡¢POSTÇëÇó -> ÉÏ´«Ä³¸ö¸½¼þ, Ö¸¶¨Ãû×Ö¿ÉÒÔÖ±½Ó±£´æ
+14ã€POSTè¯·æ±‚ -> ä¸Šä¼ æŸä¸ªé™„ä»¶, æŒ‡å®šåå­—å¯ä»¥ç›´æŽ¥ä¿å­˜
 
-15¡¢session»á»°, ÔÚ²»Í¬ÇëÇóÖ®¼ä´æ´¢ÐÅÏ¢
+15ã€sessionä¼šè¯, åœ¨ä¸åŒè¯·æ±‚ä¹‹é—´å­˜å‚¨ä¿¡æ¯
 
-16¡¢ÖÐ¼ä¼þ -> ¹ýÂËÃ»ÓÐÐ¯´øcookieµÄÇëÇó, ·µ»Ø404
+16ã€ä¸­é—´ä»¶ -> è¿‡æ»¤æ²¡æœ‰æºå¸¦cookieçš„è¯·æ±‚, è¿”å›ž404
 
-17¡¢¿çÓòÇëÇóOPTIONS
+17ã€è·¨åŸŸè¯·æ±‚OPTIONS

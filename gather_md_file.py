@@ -12,7 +12,7 @@ if __name__ == '__main__':
     article_content = []
 
     for md_file in filter(lambda x: x.startswith(aim_files_prefix) and x.endswith(".md"), os.listdir(md_directory)):
-        with open(to_path(md_directory, md_file), 'r') as r_f:
+        with open(to_path(md_directory, md_file), 'r', encoding='utf-8') as r_f:
             directories, content = r_f.read().split(feature_to_split, maxsplit=1)
             article_directories.append(directories)
             article_content.append(content)
