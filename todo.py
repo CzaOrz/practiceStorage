@@ -303,6 +303,7 @@ JS前端              https://github.com/phodal/sherlock
 查看下载量          https://pepy.tech/project/pywss
 OSI七层协议         https://baijiahao.baidu.com/s?id=1623342279899809678&wfr=spider&for=pc
 协议好文            https://blog.csdn.net/qq_33616529/article/details/78288883
+四、七层负载均衡     https://www.jianshu.com/p/fa937b8e6712
 """
 
 """不错的个人网站
