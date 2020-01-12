@@ -9,7 +9,7 @@ class RPCServer(RPC):
 
     def serving(self):
         sch_host = socket.socket()
-        sch_host.bind(("0.0.0.0", FlaskConfig.port + 1))
+        sch_host.bind(("0.0.0.0", self.port))
         sch_host.listen(3)
         while True:
             try:
