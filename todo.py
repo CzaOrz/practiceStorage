@@ -2,23 +2,6 @@ __FILE__ = "Unfinished Schedule"
 
 # todo
 """
-2019.07.16 - 各种后端知识，如缓存、优化之路，太多了，学不完啊都不会啊
-2019.08.27 - mysql好文：https://blog.csdn.net/hw478983/article/details/78813938
-2019.08.28 - https://github.com/FanhuaandLuomu 这个人的爬虫确实可以啊
-2019.08.28 - https://keras-cn.readthedocs.io/en/latest/  不错的中文学习文档
-2019.10.09 - pip install graphviz 画流程图还挺不错的，很nice很棒
-2019.10.15 - 协议好文https://blog.csdn.net/qq_33616529/article/details/78288883
-2019.10.17 - python好文 https://docs.python.org/3/reference/datamodel.html
-2019.10.17 - asyncio好文 https://docs.python.org/zh-cn/3/library/asyncio-task.html
-2019.10.21 - aiohttp好文 https://www.bookstack.cn/read/aiohttp-chinese-documentation/aiohttp%E6%96%87%E6%A1%A3-ClientUsage.md
-2019.11.03 - https://setuptools.readthedocs.io/en/latest/setuptools.html
-2019.11.08 - 工具中方便解析的还是要好好添加一些呀，比如页面dom解析，table之类的，还有excel或者是word之类的解析。pdf转码的呢，这个是否需要好好写一个
-2019.11.08 - https://zh.d2l.ai/chapter_preface/preface.html  学习好文
-2019.11.08 - https://github.com/apachecn/AiLearning  超级学习好文
-2019.11.15 - https://www.jiqizhixin.com/articles/2018-10-17-20 好文
-2019.11.19 - https://zh.d2l.ai/chapter_preface/preface.html 二次强调好文
-2019.11.29 - 前端确实是博大精深。echarts还是叼
-2019.12.06 - 58同城的房价, 自如的房价, 就房价而言, 做一个回归预测分析模型, 我去, 那这个数据不得要近几个月的才行吗, 可以可以, 要尽快加入开发了, 不慌, 这个项目还是可以的
 2019.12.13 - 感觉可以自己实现一个rabbit mq的逻辑，结合python实现分布式 - 主要是为了web-driver的里面的selenium如何自动分配任务，而不会被干掉，如何自动化添加新节点
 2019.12.13 - 需要重写一个schedule，持久化数据用的。本来是默认使用disk，但是必须是爬虫自动断开才能够使用
 2019.12.17 - scrapy里面是否可独立出爬虫对象，爬虫共享?
@@ -38,9 +21,31 @@ __FILE__ = "Unfinished Schedule"
 2020.01.10 - mongodb集群是一个问题，redis集群也是一个问题。这两个是直接连接呢，还是可以集群在一起呢，怎么实现的集群啊，内部逻辑?
 2020.01.10 - 什么是回滚，数据库中好像有这个概念。节点看下数据库中的各种什么缓存穿透？mysql和redis，还有mongodb的基础操作也可以开一个项目了。顺便查下相关概念，redis哨兵是什么玩意
 2020.01.11 - redis单进程单线程是什么意思? memcache单进程多线程啥意思? Nginx多进程?
+2020.01.12 - 规模大了以后 nginx 也可能成为瓶颈。但处理同样数量的并发，uwsgi 消耗的资源要比简单做转发的 nginx 多，
+            所以一台 nginx 机器可以给多台 uwsgi 机器做均衡负载。
+            规模更大的情况下，会在 nginx 前再加 LVS, 这个就只做网络层的转发，
+            不做缓冲和协议转换了，还可以通过改包，让回包不经过 LVS.
+            更大的规模下，网络链路都可能成为瓶颈了。
+            这时就会从 anycast 和域名解析上做负载均衡了。
 """
 
 """DONE!
+2019.12.06 - 58同城的房价, 自如的房价, 就房价而言, 做一个回归预测分析模型, 我去, 那这个数据不得要近几个月的才行吗, 可以可以, 要尽快加入开发了, 不慌, 这个项目还是可以的
+2019.11.29 - 前端确实是博大精深。echarts还是叼
+2019.08.27 - mysql好文：https://blog.csdn.net/hw478983/article/details/788139382019.11.08 - 工具中方便解析的还是要好好添加一些呀，比如页面dom解析，table之类的，还有excel或者是word之类的解析。pdf转码的呢，这个是否需要好好写一个
+2019.07.16 - 各种后端知识，如缓存、优化之路，太多了，学不完啊都不会啊
+2019.11.08 - https://zh.d2l.ai/chapter_preface/preface.html  学习好文
+2019.11.08 - https://github.com/apachecn/AiLearning  超级学习好文
+2019.11.15 - https://www.jiqizhixin.com/articles/2018-10-17-20 好文
+2019.11.19 - https://zh.d2l.ai/chapter_preface/preface.html 二次强调好文
+2019.10.17 - python好文 https://docs.python.org/3/reference/datamodel.html
+2019.10.17 - asyncio好文 https://docs.python.org/zh-cn/3/library/asyncio-task.html
+2019.10.21 - aiohttp好文 https://www.bookstack.cn/read/aiohttp-chinese-documentation/aiohttp%E6%96%87%E6%A1%A3-ClientUsage.md
+2019.11.03 - https://setuptools.readthedocs.io/en/latest/setuptools.html
+2019.08.28 - https://github.com/FanhuaandLuomu 这个人的爬虫确实可以啊
+2019.08.28 - https://keras-cn.readthedocs.io/en/latest/  不错的中文学习文档
+2019.10.09 - pip install graphviz 画流程图还挺不错的，很nice很棒
+2019.10.15 - 协议好文https://blog.csdn.net/qq_33616529/article/details/78288883
 2019.12.24 - 新版本项目的展示。太简单也确实没有什么意思。
             * 爬虫调度如何设计，
             * 如何实现并发，数据存储，我写的太low了啊，没有任何精彩的地方
@@ -296,6 +301,8 @@ JS                  https://github.com/SUNNERCMS/30daysJavascript
 17素材网            https://www.17sucai.com/
 JS前端              https://github.com/phodal/sherlock
 查看下载量          https://pepy.tech/project/pywss
+OSI七层协议         https://baijiahao.baidu.com/s?id=1623342279899809678&wfr=spider&for=pc
+协议好文            https://blog.csdn.net/qq_33616529/article/details/78288883
 """
 
 """不错的个人网站
