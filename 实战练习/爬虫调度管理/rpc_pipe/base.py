@@ -11,6 +11,7 @@ class RPC:
     port = FlaskConfig.port + 1
     node_id = ConsumerConfig.node_id
     redis_node_pool_tasks = ConsumerConfig.redis_node_pool_tasks
+    consumerConfig = ConsumerConfig
 
     def serving(self):
         raise NotImplementedError

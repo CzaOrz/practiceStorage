@@ -1,5 +1,4 @@
 import socket
-from setting import FlaskConfig
 from .base import RPC
 
 nodes = {}
@@ -18,7 +17,3 @@ class RPCServer(RPC):
                 nodes[node_id] = soc
             except:
                 pass
-
-
-
-
