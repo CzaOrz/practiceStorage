@@ -17,6 +17,6 @@ class RPC:
         raise NotImplementedError
 
     def run(self):
-        thread = threading.Thread(target=lambda: None)
+        thread = threading.Thread(target=self.serving)
         thread.setDaemon(True)
         thread.start()
