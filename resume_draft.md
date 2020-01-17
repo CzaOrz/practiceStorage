@@ -5,11 +5,11 @@
     * 籍贯：湖北咸宁
     * 现居地：武汉
     * 工作状态：在职
-    * 当前薪资：税后5k
+    * 当前薪资：56iO5ZCONWsK
 * 求职意愿
     * 职位：python后端 / python相关
     * 城市：武汉 / 深圳
-    * 薪资：武汉8k / 深圳10k
+    * 薪资：5q2m5rGJOGsgLyDmt7HlnLMxMGsK
 <hr>
 
 #### 技能专长
@@ -32,7 +32,7 @@
         3、舆情数据分析与汇总
     * 其他说明：
         * 工作情况：四月进公司实习，七月领毕业证后正式进入试用期，八月因日常工作积极，总体表现优秀而提前转正。<br>
-        * 辞职原因：华为外包总体来说偏业务，难度不大，但工作强度高，对自己提升不大。
+        * 辞职原因：5Y2O5Li65aSW5YyF5oC75L2T5p2l6K+05YGP5Lia5Yqh77yM6Zq+5bqm5LiN5aSn77yM5L2G5bel5L2c5by65bqm6auY77yM5a+56Ieq5bex5o+Q5Y2H5LiN5aSn44CCCg==
 * 2019.03-至今 / 武汉****有限公司 / 爬虫开发工程师
     * 工作说明：<br>
         1、基于公司现有的爬虫框架，负责政府公开信息领域的爬虫开发<br> 
@@ -40,8 +40,8 @@
         3、组内业务流程优化分析<br>
         4、组内数据消费（新闻分类、统计）
     * 其他说明：
-        * 工作情况：整体工作表现优异，有责任心，由基础爬虫开发到承接特殊爬虫、pdf转码、数据分析等任务
-        * 辞职原因：由于业务及人员安排原因，本人在公司跑过一段时间业务，后希望我长期负责该业务，交谈无果。
+        * 工作情况：整体工作表现优异，有责任心，由基础爬虫开发到承接特殊爬虫、pdf转码、数据分析等任务。
+        * 辞职原因：MTnlubTlupXvvIznlLHkuo7kuJrliqHlj4rkurrlkZjlronmjpLljp/lm6DvvIzmnKzkurrlnKjlhazlj7jot5Hov4fnn63mnJ/kuJrliqHvvIzlkI7luIzmnJvmiJHplb/mnJ/otJ/otKPor6XkuJrliqHvvIzkuqTosIjml6DmnpzjgIIK
 <hr>
 
 #### 项目经验
