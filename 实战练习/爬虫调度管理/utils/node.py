@@ -64,7 +64,7 @@ def check_dir(dir_path, by_git=None):
         else:
             dir_path = os.path.dirname(dir_path)
             os.makedirs(dir_path, exist_ok=True)
-            subprocess.run(f"cd dir_path && git clone {by_git} >/dev/null 2>&1", shell=True)
+            subprocess.run(f"cd {dir_path} && git clone {by_git} >/dev/null 2>&1", shell=True)
     else:
         os.makedirs(dir_path, exist_ok=True)
         os.chmod(dir_path, 0o777)
