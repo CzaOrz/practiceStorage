@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 import json
-import time
-import socket
 import logging
-import threading
 import subprocess
 
-from utils.node import decode_node_task, encode_node_task, email, \
-    timekiller, kill_pid, check_pid
+from rpc_pipe.client import RPCClient
+from utils.node import decode_node_task, encode_node_task, email, timekiller
 from concurrent.futures import ProcessPoolExecutor
 from minitools import init_logging_format
 from minitools.db.redisdb import get_redis_client
@@ -94,37 +91,5 @@ class ConsumerProcess:
 
 
 if __name__ == '__main__':
-    def scheduler_socket():
-        while True:
-            try:
-                sch_node = socket.socket()
-                sch_node.connect((FlaskConfig.host, FlaskConfig.port + 1))
-                sch_node.send(ConsumerConfig.node_id.encode())
-            except:
-                time.sleep(10)
-                continue
-            while True:
-                try:
-                    master_command = sch_node.recv(1024).decode()
-                    if "_" in master_command:  # kill node process
-                        pid, node = master_command.split("_", 1)
-                        print(f"kill {kill_pid(pid)} success")
-                        get_redis_client().hdel(ConsumerConfig.redis_node_pool_tasks, node)
-                    elif "DirtyProcessClear" == master_command:
-                        all_node_info = get_redis_client().hgetall(ConsumerConfig.redis_node_pool_tasks)
-                        dirty_process = []
-                        for key, value in all_node_info.items():
-                            if key.decode().endswith(ConsumerConfig.node_id) and \
-                                    not check_pid(eval(value.decode())["pid"]):
-                                dirty_process.append(key)
-                        if dirty_process:
-                            get_redis_client().hdel(ConsumerConfig.redis_node_pool_tasks, *dirty_process)
-                except:
-                    break
-            sch_node.close()
-
-
-    thread = threading.Thread(target=scheduler_socket)
-    thread.setDaemon(True)
-    thread.start()
+    RPCClient().run()
     ConsumerProcess.run()

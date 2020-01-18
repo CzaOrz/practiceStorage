@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import threading
 from minitools import to_md5
-from flask import Flask, render_template, request, abort, make_response, redirect
+from flask import Flask, request, abort, make_response, redirect
 from crawler import bp_crawler
 from other import bp_other
 from setting import FlaskConfig
-from node_scheduler import scheduler, scheduler_socket, all_online_nodes, close_node_process, clear_dirty_node_process
+from rpc_pipe.server import RPCServer
+from node_scheduler import scheduler, all_online_nodes, close_node_process
 
 # for flask
 app = Flask(__name__)
@@ -41,14 +42,10 @@ def api_authentication():
         return abort(403)
 
 
-scheduler._add_url_route("clear_dirty_node_process", '/jobs/nodes/dirty/process/clear',
-                         clear_dirty_node_process, 'POST')
 scheduler._add_url_route("close_node_process", '/jobs/<node>/<process_id>/close', close_node_process, 'POST')
 scheduler._add_url_route("all_online_nodes", '/jobs/online/nodes', all_online_nodes, 'GET')
 
 if __name__ == '__main__':
-    thread = threading.Thread(target=scheduler_socket)
-    thread.setDaemon(True)
-    thread.start()
+    RPCServer().run()
     app.jinja_env.auto_reload = True  # debug
     app.run(host="0.0.0.0", port=cfg.port)

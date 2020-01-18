@@ -48,7 +48,6 @@ $(function(){
 
         api_data_for_nodes = () => axios.get('/scheduler/jobs/online/nodes'),  // for page-3
         api_data_for_close_node = (nodeID, pid) => axios.post(`/scheduler/jobs/${nodeID}/${pid}/close`),  // for page-3
-        api_data_for_clear_dirty_process = () => axios.post(`/scheduler/jobs/nodes/dirty/process/clear`),  // for page-3
 
         api_data_for_scheduler_tasks = () => axios.get('/scheduler/jobs'),  // for page-4
         api_data_for_add_task = (data) => axios.post('/scheduler/jobs', data),  // for page-4
@@ -446,18 +445,12 @@ $(function(){
                 api_data_for_nodes().then((api_result) => {
                     this.nodes = api_result.data.nodes;
                     this.node_tasks = api_result.data.tasks;
+                    success_prompt('update nodes info successful~', 500);
                 })
             },
             close_node: function(task) {
                 if (confirm('close this node-process?')){
                     api_data_for_close_node(task[0], task[1].pid).then(() => this.init_api()).catch((e) => {
-                        danger_prompt(e, 1000);
-                    });
-                }
-            },
-            clear_dirty_process: function() {
-                if (confirm('clear the dirty node process?')){
-                    api_data_for_clear_dirty_process().then(() => this.init_api()).catch((e) => {
                         danger_prompt(e, 1000);
                     });
                 }
