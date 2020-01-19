@@ -26,8 +26,10 @@ class BaseTask(ConsumerConfig):
 class ZiRuSpider(BaseTask):
     name = "ZiruHousePrice"
     spider = "ziru_spider"
+    project_git = "czaorz@47.101.42.79:/gits/spiders.git"
 
 
 class LagouSpider(BaseTask):
     name = "LagouJob"
-    spider = "ziru_spider"
+    spider = "lagou_spider"
+    project_git = "czaorz@47.101.42.79:/gits/spiders.git"
