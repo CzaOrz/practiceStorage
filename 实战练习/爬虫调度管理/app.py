@@ -31,10 +31,7 @@ def index():
 
 @app.before_request
 def api_authentication():
-    if str(request.url_rule).startswith((
-            '/scheduler/jobs/nodes',
-            '/scheduler/jobs/<node>',
-            '/scheduler/jobs/<job_id>')):
+    if request.method != "GET" and str(request.url_rule).startswith('/scheduler/jobs'):
         token = request.cookies.get('token')
         if token and to_md5(token) == 'e67224f2f17d8a4c2327f6f05cbb4ab7':
             return
