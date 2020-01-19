@@ -47,7 +47,4 @@ scheduler._add_url_route("all_online_nodes", '/jobs/online/nodes', all_online_no
 if __name__ == '__main__':
     RPCServer().run()
     app.jinja_env.auto_reload = True  # debug
-    app.run(host="0.0.0.0", port=cfg.port, ssl_context=(
-        "www.czasg.xyz.pem",
-        "www.czasg.xyz.key",
-    ))
+    app.run(host="0.0.0.0", port=cfg.port)
