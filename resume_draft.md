@@ -57,7 +57,7 @@
         任务状态保存于redis中，日志和数据则存入mongodb。<br>
         针对某些异常情况（强制杀进程、task/salve crash）产生的脏数据，引入定时回查机制，确保redis中任务状态的一致性。<br> 
     * 项目链接：
-    * demo：
+    * demo：https://czaorz.github.io/ioco/open_source_project/spider_scheduler/scheduler.html
 * 开源项目Pywss
     * 项目说明：
         * 基于socket编写，旨在快速搭建简易websocket服务端
