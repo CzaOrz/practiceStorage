@@ -28,7 +28,10 @@ class ConsumerConfig:
     log_max_rows = 1024  # read max string from one row
 
     # redis config
+    redis_host = "localhost"
+    redis_pawd = None
     redis_node_pool_tasks = "spider:scheduler:node:pool:tasks"
+    redis_node_info_keys = "spider:scheduler:node:info:keys"
 
     # mongodb config
     mongodb_dbs_task = "scheduler"
@@ -36,6 +39,8 @@ class ConsumerConfig:
 
     # flag for clear dirty node process
     CLEAR_DIRTY_NODE_PROCESS = b"DirtyProcessClear"
+    # get node percent info
+    NODE_PERCENT_INFO = b"NodePercentInfo"
 
 
 class RabbitMQConfig:
