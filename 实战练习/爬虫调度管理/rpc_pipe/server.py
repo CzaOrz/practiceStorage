@@ -2,7 +2,6 @@ import time
 import socket
 import logging
 import threading
-from minitools.db.redisdb import get_redis_client
 from .base import RPC
 
 logger = logging.getLogger(__name__)
@@ -25,12 +24,12 @@ class RPCServer(RPC):
 
     def checking(self, abnormal_nodes: tuple):  # todo, how to back to check
         del_tasks = []
-        for task in get_redis_client().hgetall(self.consumerConfig.redis_node_pool_tasks):
+        for task in self.redis_client.hgetall(self.consumerConfig.redis_node_pool_tasks):
             if task.decode().endswith(abnormal_nodes):
                 del_tasks.append(task)
         if del_tasks:
             logger.warning(f"delete {del_tasks}")
-            get_redis_client().hdel(self.consumerConfig.redis_node_pool_tasks, *del_tasks)
+            self.redis_client.hdel(self.consumerConfig.redis_node_pool_tasks, *del_tasks)
 
     def loop_checking(self):
         old_nodes = set()

@@ -1,6 +1,6 @@
 import time
+import psutil
 import socket
-from minitools.db.redisdb import get_redis_client
 from utils.node import kill_pid, check_pid
 from .base import RPC
 
@@ -32,17 +32,21 @@ class RPCCommand:
 
     @staticmethod
     def clear_dirty_node_process(client):
-        all_node_info = get_redis_client().hgetall(client.redis_node_pool_tasks)
+        all_node_info = client.redis_client.hgetall(client.redis_node_pool_tasks)
         dirty_process = []
         for key, value in all_node_info.items():
             if key.decode().endswith(client.node_id) and \
                     not check_pid(eval(value.decode())["pid"]):
                 dirty_process.append(key)
         if dirty_process:
-            get_redis_client().hdel(client.redis_node_pool_tasks, *dirty_process)
+            client.redis_client.hdel(client.redis_node_pool_tasks, *dirty_process)
 
     @staticmethod
     def kill_pid(client, master_command):
         pid, node = master_command.split("_", 1)
         print(f"kill {kill_pid(pid)} success")
-        get_redis_client().hdel(client.redis_node_pool_tasks, node)
+        client.redis_client.hdel(client.redis_node_pool_tasks, node)
+
+    @staticmethod
+    def get_node_percent_info(client):
+        client.redis_client.hset(client.redis_node_info_keys, client.node_id, psutil.virtual_memory().percent)
