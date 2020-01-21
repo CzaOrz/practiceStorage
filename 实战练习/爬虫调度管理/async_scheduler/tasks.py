@@ -23,6 +23,12 @@ class BaseTask(ConsumerConfig):
         self.command = f"python {to_path(self.project_dir, self.spider)}.py >{self.log_file} 2>&1"  # todo, add source environment
 
 
+class TestSpider(BaseTask):
+    name = "TestSpider"
+    spider = "test_spider"
+    project_git = "czaorz@47.101.42.79:/gits/spiders.git"
+
+
 class ZiRuSpider(BaseTask):
     name = "ZiruHousePrice"
     spider = "ziru_spider"
