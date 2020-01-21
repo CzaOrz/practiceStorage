@@ -42,6 +42,8 @@ __FILE__ = "Unfinished Schedule"
             rabbitmq老是挂掉。这到底是是什么原因导致的，是我的retry有问题嘛，还是不能这样使用。
 2020.01.20 - 两个setting有点搞混了，相互之间的作用域没有理清楚。谁到底负责谁，能不能垮调用。
 2020.01.20 - three.js前端真是一个大坑啊，天坑
+2020.01.21 - 1、mongodb报错== MongoClient opened before fork
+            2、redis数据清不掉，bug
 """
 
 """DONE!
