@@ -17,5 +17,5 @@ if __name__ == '__main__':
             article_directories.append(directories)
             article_content.append(content)
     new = "".join(article_directories + article_content)
-    with open(save_file_name, 'w') as w_f:
+    with open(save_file_name, 'w', encoding="utf-8") as w_f:
         w_f.write(new)
