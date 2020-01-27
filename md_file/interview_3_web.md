@@ -2,6 +2,7 @@
 * [OSI](#OSI)
 * [正向代理和反向代理](#正向代理和反向代理)
 * [TCP握手协议](#TCP握手协议)
+* [TCP和UDP有什么不同](#TCP和UDP有什么不同)
 * [GET/POST](#GET/POST)
 * [Session、Cookie、Token](#Session/Cookie/Token)
 * [HTTP](#HTTP)
@@ -132,6 +133,8 @@ web应用的本质。客户端发起HTTP请求，服务端接收请求作出回�
     * 目的有两个：
         * 1、保证客户端发送的最后一个ACK报文能够达到服务端。
         * 2、防止已失效连接请求报文出现在本连接中。
+
+#### TCP和UDP有什么不同
 
 #### Session/Cookie/Token
 * Session：是一个概念，即信息存储在客户端。（Flask的session是存储在客户端的）

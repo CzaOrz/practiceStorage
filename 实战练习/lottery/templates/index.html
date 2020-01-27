@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lottery Index</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=6cIzNbg5BuMGOGc6TECDSkFoC3Mgvly9"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>-->
+</head>
+<body>
+<nav class="navbar navbar-default" id="nav-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-body" aria-expanded="false">
+				<span class="sr-only">Lottery</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Lottery</a>
+		</div>
+		<div class="collapse navbar-collapse" id="nav-body">
+			<ul class="nav navbar-nav">
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container" id="show-lottery">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="height:65px;">
+                <a role="button" data-toggle="collapse" href="#test" aria-expanded="false" style="font-size:30px;">特码: <strong>1</strong></a>
+                <span class="badge pull-right" style="font-size:35px">100</span>
+            </div>
+            <div class="collapse" id="test">
+                <div class="panel-body">
+                    <p>记录：</p>
+                    <p>+ 100</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        历史记录
+        <div class="list-group">
+            <a href="#" class="list-group-item" v-for="his in history_data">
+                [[ his ]]
+            </a>
+        </div>
+<!--        <div class="list-group">-->
+<!--            <a href="#" class="list-group-item" v-for="(value,lottery_index) in lottery_count">-->
+<!--                <span class="badge">[[ value ]]</span>-->
+<!--                [[ lottery_index + 1 ]]-->
+<!--            </a>-->
+<!--        </div>-->
+    </div>
+    <div class="col-sm-4">
+        <form>
+            <div class="form-group">
+                <label>购买者</label>
+                <input class="form-control" v-model="lottery_username" placeholder="默认无">
+            </div>
+            <div class="form-group">
+                <label>特码</label>
+                <select class="form-control" v-model="lottery_num">
+                    <option v-for="i in fix_data">[[ i ]]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>价格</label>
+                <input class="form-control" v-model="lottery_price">
+            </div>
+            <button type="submit" class="btn btn-default" @click="add_data">增加</button>
+            <button type="submit" class="btn btn-default" @click="add_data">减少</button>
+        </form>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label>中奖特码</label>
+                <select class="form-control" v-model="tema_num">
+                    <option v-for="i in fix_data">[[ i ]]</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default" @click="add_data">确认</button>
+        </form>
+    </div>
+</div>
+<script src="../static/js/public.js"></script>
+</body>
+</html>
