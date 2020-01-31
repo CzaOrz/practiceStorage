@@ -13,6 +13,15 @@
     * 薪资：5q2m5rGJOGsgLyDmt7HlnLMxMGsK
 <hr>
 
+#### 技能专长
+* 熟悉Python，了解HTML/CSS/JavaScript/Bootstrap/Vue等Web前端技术。
+* 熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。
+* 熟悉Flask/Django等后端框架。
+* 熟悉TCP/IP、HTTP协议和WebSocket通信，有开源项目Pywss用于快速搭建WebSocket服务端。
+* 了解基础机器学习算法。有过自如房价的图像识别，政府新闻分类，房价预测等项目经验。
+* 了解MySQL、Redis、Mongodb等数据库的基本使用。
+<hr>
+
 #### 工作经历
 * 2018.04-2019.03 / 武汉****有限公司 / 驱动开发工程师
     * 工作说明：
@@ -52,15 +61,6 @@
         * 基于socket编写，旨在快速搭建简易websocket服务端。详情见项目链接。
     * 项目链接： https://github.com/CzaOrz/Pywss
     * demo： https://czaorz.github.io/Pywss/client
-<hr>
-
-#### 技能专长
-* 熟悉Python，了解HTML/CSS/JavaScript/Bootstrap/Vue等Web前端技术。
-* 熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。
-* 熟悉Flask/Django等后端框架。
-* 熟悉TCP/IP、HTTP协议和WebSocket通信，开源项目Pywss用于快速搭建WebSocket服务端。
-* 了解基础机器学习算法。有过自如房价的图像识别，政府新闻分类，房价预测等项目经验。
-* 了解MySQL、Redis、Mongodb等数据库的基本使用。
 <hr>
 
 #### 自我评价
