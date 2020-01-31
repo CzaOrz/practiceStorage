@@ -15,7 +15,7 @@
 
 #### 技能专长
 * 熟悉Python，了解HTML/CSS/JavaScript/Bootstrap/Vue等Web前端技术。
-* 熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。
+* 熟悉Scrapy框架，熟悉正则与Xpath的使用，配套有自己的爬虫工具包。
 * 熟悉Flask/Django等后端框架。
 * 熟悉TCP/IP、HTTP协议和WebSocket通信，有开源项目Pywss用于快速搭建WebSocket服务端。
 * 了解基础机器学习算法。有过自如房价的图像识别，政府新闻分类，房价预测等项目经验。
@@ -28,7 +28,6 @@
         * 业务性质为华为外包，虽职务为驱动开发，但甲方制度严格，基本没机会接触硬件。日常主要工作为:<br>
         1、荣耀系列产品性能测试，需求配置，beta问题处理<br>
         2、海外定制需求的配置<br>
-        3、舆情数据分析与汇总
     * 其他说明：
         * 工作情况：四月进公司实习，七月领毕业证后正式进入试用期，八月因日常工作积极，总体表现优秀而提前转正。<br>
         * 辞职原因：5Y2O5Li65aSW5YyF5oC75L2T5p2l6K+05YGP5Lia5Yqh77yM6Zq+5bqm5LiN5aSn77yM5L2G5bel5L2c5by65bqm6auY77yM5a+56Ieq5bex5o+Q5Y2H5LiN5aSn44CCCg==
