@@ -13,15 +13,6 @@
     * 薪资：5q2m5rGJOGsgLyDmt7HlnLMxMGsK
 <hr>
 
-#### 技能专长
-* 熟悉Python，了解HTML/CSS/JavaScript/Bootstrap/Vue等Web前端技术。
-* 熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。
-* 熟悉Flask等后端框架。有独立项目经验。
-* 熟悉TCP/IP、HTTP协议和Socket通信。
-* 了解基础机器学习算法，knn实现了图像识别，实现了新闻分类，实现了房价预测。
-* 了解mysql、redis、mongodb等数据库的基本使用。
-<hr>
-
 #### 工作经历
 * 2018.04-2019.03 / 武汉****有限公司 / 驱动开发工程师
     * 工作说明：
@@ -48,20 +39,28 @@
     * 项目说明：
         * 基于Flask、Flask-Apscheduler、Scrapy、RabbitMQ、Redis、Mongodb等搭建的分布式爬虫调度系统。并提供一定数据分析服务<br>
         提供线上爬虫调度管理，服务端以RabbitMQ作为broker，发布调度任务，消费节点则订阅并执行调度任务。支持多节点并行处理任务。<br>
-        架构图见：（画一个图?）<br>
         整体上大致由server、salve、task三个模块组成。 
         server提供后端接口服务，调度任务仅需指定任务名。salve配置有具体的调度规则，是命令的执行者。
         task（爬虫）独立于系统外，单独有git维护，salve调度时自更新。
         在发布订阅基础上，建立 RPC 通道，提供Server管理与收录各节点状态的能力。<br>
         任务状态保存于redis中，日志和数据则存入mongodb。<br>
         针对某些异常情况（强制杀进程、task/salve crash）产生的脏数据，引入定时回查机制，确保redis中任务状态的一致性。<br> 
-    * 项目链接：
+    * 项目架构图：http://www.czasg.xyz/static/img/spider_scheduler.jpg
     * demo：https://czaorz.github.io/ioco/open_source_project/spider_scheduler/scheduler.html
 * 开源项目Pywss
     * 项目说明：
-        * 基于socket编写，旨在快速搭建简易websocket服务端
+        * 基于socket编写，旨在快速搭建简易websocket服务端。详情见项目链接。
     * 项目链接： https://github.com/CzaOrz/Pywss
     * demo： https://czaorz.github.io/Pywss/client
+
+#### 技能专长
+* 熟悉Python，了解HTML/CSS/JavaScript/Bootstrap/Vue等Web前端技术。
+* 熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。
+* 熟悉Flask/Django等后端框架。
+* 熟悉TCP/IP、HTTP协议和WebSocket通信，开源项目Pywss用于快速搭建WebSocket服务端。
+* 了解基础机器学习算法。实现过自如房价图像识别，政府新闻分类，房价预测等。
+* 了解MySQL、Redis、Mongodb等数据库的基本使用。
+<hr>
 
 #### 自我评价
 * 有较强的学习能力和接受能力。钟爱python，愿意接受任何python相关知识。<br>
