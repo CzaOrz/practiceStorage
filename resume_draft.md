@@ -31,7 +31,7 @@
         4、组内数据消费（新闻分类、统计）
     * 其他说明：
         * 工作情况：整体工作表现优异，有责任心，由基础爬虫开发到承接特殊爬虫、pdf转码、数据分析等任务。
-        * 辞职原因：MTnlubTlupXvvIznlLHkuo7kuJrliqHlj4rkurrlkZjlronmjpLljp/lm6DvvIzmnKzkurrlnKjlhazlj7jot5Hov4fnn63mnJ/kuJrliqHvvIzlkI7luIzmnJvmiJHplb/mnJ/otJ/otKPor6XkuJrliqHvvIzkuqTosIjml6DmnpzjgIIK
+        * 辞职原因：MTnlubTlupXvvIznlLHkuo7kuJrliqHlj4rkurrlkZjlronmjpLljp/lm6DvvIzmnKzkurrlnKjlhazlj7jpmarpooblr7zot5Hov4fnn63mnJ/kuJrliqHvvIzlkI7pooblr7zluIzmnJvln7nlhbvmiJHplb/mnJ/otJ/otKPor6XkuJrliqHvvIzkuqTosIjml6DmnpzjgII=
 <hr>
 
 #### 项目经验
