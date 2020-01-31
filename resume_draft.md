@@ -6,6 +6,7 @@
     * 现居地：武汉
     * 工作状态：在职
     * 当前薪资：56iO5ZCONWsK
+    * Github: https://github.com/CzaOrz
 * 求职意愿
     * 职位：python后端 / python相关
     * 城市：武汉 / 深圳
@@ -13,13 +14,11 @@
 <hr>
 
 #### 技能专长
-* 熟悉Python，有过开源项目经验（ https://github.com/CzaOrz/Pywss ）
+* 熟悉Python，了解HTML/CSS/JavaScript/Bootstrap/Vue等Web前端技术。
 * 熟悉Scrapy框架，熟悉正则与xpath的使用，配套有自己的爬虫工具包。
 * 熟悉Flask等后端框架。有独立项目经验。
-* 了解Web前端技术，包括HTML/CSS/JavaScript/Vue等。
-    * 了解Tornado。有异步编程能力
-* 熟悉TCP/IP、HTTP协议。
-* 了解基础机器学习算法，knn实现了图像识别，实现了新闻分类，实现了房价预测
+* 熟悉TCP/IP、HTTP协议和Socket通信。
+* 了解基础机器学习算法，knn实现了图像识别，实现了新闻分类，实现了房价预测。
 * 了解mysql、redis、mongodb等数据库的基本使用。
 <hr>
 
