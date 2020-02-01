@@ -8,7 +8,7 @@
     * 当前薪资：56iO5ZCONWsK
     * Github: https://github.com/CzaOrz
 * 求职意愿
-    * 职位：python后端 / python相关
+    * 职位：Python后端 / Python相关
     * 城市：武汉 / 深圳
     * 薪资：5q2m5rGJOGsgLyDmt7HlnLMxMGsK
 <hr>
@@ -59,7 +59,7 @@
     * 项目说明：
         * 基于socket编写，旨在快速搭建简易websocket服务端。详情见项目链接。
     * 项目链接： https://github.com/CzaOrz/Pywss
-    * demo： https://czaorz.github.io/Pywss/client
+    * Demo： https://czaorz.github.io/Pywss/client
 <hr>
 
 #### 自我评价
