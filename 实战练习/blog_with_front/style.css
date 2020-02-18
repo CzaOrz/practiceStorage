@@ -262,7 +262,7 @@ body{
     max-height: 0;
     transition: max-height 0.5s;
 }
-.son-menu > a{
+.son-menu > *{
     display: block;
     text-decoration: none;
     color: #fff;
@@ -273,7 +273,7 @@ body{
     box-sizing: border-box;
     margin: 10px 0;
 }
-.son-menu a:before{
+.son-menu > .son-menu-item:before{
     content: "";
     position: absolute;
     height: 100%;
@@ -283,14 +283,14 @@ body{
     top: 0;
     background-color: skyblue;
 }
-.son-menu a:hover{
+.son-menu > .son-menu-item:hover{
     color: skyblue;
 }
-.son-menu a:hover:before{
+.son-menu > .son-menu-item:hover:before{
     width: 10px;
 }
 .menu-item:hover > .son-menu{
-    max-height: 15em;
+    max-height: 10em;
 }
 .loading-box{
     width: 100%;
