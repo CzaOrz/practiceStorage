@@ -1,16 +1,24 @@
-$(window).scroll(function(){
-　　var scrollTop = $(this).scrollTop();
-　　var scrollHeight = $(document).height();
-　　var windowHeight = $(this).height();
-　　if(scrollTop + windowHeight + 1 > scrollHeight){
-　　　　app.loading_blog();
-　　}
-});
-
+//$(window).scroll(function(){
+//　　var scrollTop = $(this).scrollTop();
+//　　var scrollHeight = $(document).height();
+//　　var windowHeight = $(this).height();
+//　　if(scrollTop + windowHeight + 1 > scrollHeight){
+//　　　　app.loading_blog();
+//　　}
+//});
+function sleep(delay) {
+  var start = (new Date()).getTime();
+  while ((new Date()).getTime() - start < delay) {
+    continue;
+  }
+}
 var app = new Vue({
     el: '#app',
     created(){
-        this.loading_settings()
+        this.$nextTick(() => {
+            this.loading_settings()
+            addEventListener('scroll', this.scroll_watching)
+        })
     },
     mounted(){
         this.$refs.search_box.onfocus = () => { this.search_flag = true; }
@@ -24,16 +32,58 @@ var app = new Vue({
         settings: {},
         search_flag: false,
         search_content: '',
-        all_blogs: []
+        all_blogs: [],
+        blog_obj: {},
+        loading_flag: true,
     },
     methods: {
         async loading_settings(){
-            let json_data = await axios.get('./settings.json')
-            this.settings = json_data.data
+            let settings = await axios.get('./settings.json')
+            this.settings = settings.data
+            let blog_obj = await axios.get(this.settings.blog_url)
+            this.blog_obj = blog_obj.data
+            this.all_blogs = this.blog_obj.blogs
+            this.$nextTick(() => {
+                this.scroll_watching_animation()
+            })
         },
         async loading_blog(){
-            let json_data = await axios.get(this.settings.blog_url)
-            this.all_blogs = json_data.data
+            this.loading_flag = true
+            if (this.blog_obj.next_url && this.all_blogs.length < this.settings.blog_total){
+                let blog_obj = await axios.get(this.blog_obj.next_url)
+                this.blog_obj = blog_obj.data
+                this.all_blogs = this.all_blogs.concat(this.blog_obj.blogs)
+            }
+            this.loading_flag = false
         },
-    },
+        scroll_watching: function(){
+            this.scroll_watching_loading()
+            this.scroll_watching_animation()
+        },
+        scroll_watching_loading: function(){
+            var
+                win = $(window),
+                doc = $(document),
+                scrollTop = win.scrollTop(),
+                scrollHeight = doc.height(),
+                windowHeight = win.height();
+            if(scrollTop + windowHeight + 1 > scrollHeight){
+        　　　　this.loading_blog();
+        　　}
+        },
+        scroll_watching_animation: function(){
+            let top = pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+	  		let vh = document.documentElement.clientHeight
+	  		let dom = document.querySelectorAll(".blog-row")
+	  		dom.forEach(v => {
+	  		    if(top + vh > v.offsetTop){
+                    v.style.opacity = 1
+                    v.style.top = 0
+	  		    } else{
+	  		        v.style.opacity = 0
+                    v.style.top = '100px'
+	  		    }
+	  		})
+        }
+    }
 })
