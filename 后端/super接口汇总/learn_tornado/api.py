@@ -16,13 +16,14 @@ class API01(tornado.web.RequestHandler):
 
 
 class API02(tornado.web.RequestHandler):
-    def get(self, pathname): self.write(f"Hello, this is api-02, and pathname is {pathname or None}")
+    def get(self, pathname=None):
+        self.write(f"Hello, this is api-02, and pathname is {pathname or None}")
 
 
 class API03(tornado.web.RequestHandler):
     def get(self):
         params = self.request.query_arguments  # all params, type is list
-        cz = self.get_argument('cza')  # type: str
+        cz = self.get_argument('cza', None)  # type: str
         cza = self.get_arguments('cza')  # type: list
         self.write(f"Hello, this is api-03, and params is {params}. and cz is {cz}, cza is {cza}")
 
@@ -50,6 +51,7 @@ class API06(tornado.web.RequestHandler):
 
 class API07(tornado.web.RequestHandler):
     def post(self):
+        print(self.request.cookies)
         cookie = self.get_cookie('cza')
         self.write({'status': 1, 'cookies': f"{cookie}"})
 
@@ -91,6 +93,15 @@ class API14(tornado.web.RequestHandler):
             with open(filename, 'wb') as f:
                 f.write(file['body'])
 
+
+class API15(tornado.web.RequestHandler):
+    def set_default_headers(self) -> None:
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Headers', 'x-requested-with')
+        self.set_header('Access-Control-Allow-Methods', 'GET')
+
+    def get(self):
+        self.write('hello world')
 
 
 if __name__ == '__main__':

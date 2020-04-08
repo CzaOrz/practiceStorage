@@ -145,5 +145,16 @@ def api_17():
     return make_response((jsonify({'error_code': 0}), 200, headers))
 
 
+@app.after_request
+def add_default_headers(response):
+    response.header.extend({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST'
+    })
+    return response
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8888, debug=False)
