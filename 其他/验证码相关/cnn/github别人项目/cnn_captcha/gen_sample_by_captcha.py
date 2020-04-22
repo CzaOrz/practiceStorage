@@ -16,6 +16,8 @@ def gen_special_img(text, file_path, width, height):
     img.save(file_path)  # 保存图片
 
 
+
+
 def gen_ima_by_batch(root_dir, image_suffix, characters, count, char_count, width, height):
     # 判断文件夹是否存在
     if not os.path.exists(root_dir):
